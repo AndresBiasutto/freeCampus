@@ -1,0 +1,40 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Regular";
+  src: local("Ubuntu-Regular"),
+       url('/src/assets/fonts/Ubuntu-Regular.ttf') format("truetype");
+}
+@font-face {
+  font-family: "Medium";
+  src: local("Ubuntu-Medium"),
+       url('/src/assets/fonts/Ubuntu-Medium.ttf') format("truetype");
+}
+@font-face {
+  font-family: "Bold";
+  src: local("Ubuntu-Bold"),
+       url('/src/assets/fonts/Ubuntu-Bold.ttf') format("truetype");
+}
+@font-face {
+  font-family: "Italic";
+  src: local("Ubuntu-Italic"),
+       url('/src/assets/fonts/Ubuntu-Italic.ttf') format("truetype");
+}
+@font-face {
+  font-family: "Light";
+  src: local("Ubuntu-Light"),
+       url('/src/assets/fonts/Ubuntu-Light.ttf') format("truetype");
+}
+/* <h1 className="font-primaryBold">titulo</h1>
+<h2 className="font-Italic">subTitulo</h2>
+<p className="font-Regular">parrafo</p>
+<p className="font-Light">parrafo</p> */
