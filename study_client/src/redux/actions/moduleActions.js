@@ -1,6 +1,8 @@
 export const CREATE_MODULE = "CREATE_MODULE";
 export const GET_MODULES = "GET_MODULES";
 export const GET_MODULE = "GET_MODULE";
+export const ADD_MODULE_SUCCESS = "ADD_MODULE_SUCCESS";
+export const ADD_MODULE_FAILURE = "ADD_MODULE_FAILURE";
 import axios from "../../api/axios";
 
 export const createModule = (subject) => ({
@@ -20,3 +22,12 @@ export const getOneModule = (id)=> {
       dispatch({type: GET_MODULE, payload: apiData})
   }
 }
+export const addModule = (moduleData) => async (dispatch) => {
+  try {
+    const response = await axios.post('http://localhost:3001/modules', moduleData);
+    dispatch({ type: ADD_MODULE_SUCCESS, payload: response.data });
+    dispatch(getModules());
+  } catch (error) {
+    dispatch({ type: ADD_MODULE_FAILURE, payload: error });
+  }
+};

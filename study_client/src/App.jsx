@@ -22,6 +22,7 @@ import AdminModuleDetail from "./Views/AdminModuleDetail";
 import TeacherHome from "./Views/TeachersPage/TeacherHome";
 import TeacherSubjectDetail from "./Views/TeachersPage/TeacherSubjectDetail";
 import TeacherModuleDetail from "./Views/TeachersPage/TeacherModuleDetail";
+import TeacherSubjects from "./Views/TeachersPage/teacherSubjects";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -130,6 +131,14 @@ const App = () => {
           element={
             <PrivateRoute roles={["teacher"]}>
               <TeacherHome />
+            </PrivateRoute>
+          }
+        />
+                <Route
+          path="/teacher/subjects"
+          element={
+            <PrivateRoute roles={["teacher"]}>
+              <TeacherSubjects />
             </PrivateRoute>
           }
         />

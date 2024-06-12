@@ -35,8 +35,11 @@ User.belongsTo(Role, { foreignKey: "role" });
 User.belongsToMany(Subject, { through: "UserSubject" });
 Subject.belongsToMany(User, { through: "UserSubject" });
 
-File.belongsToMany(Module, { through: "FileModule" });
-Module.belongsToMany(File, { through: "FileModule" });
+// File.belongsToMany(Module, { through: "FileModule" });
+// Module.belongsToMany(File, { through: "FileModule" });
+
+File.belongsTo(Module, { foreignKey: "moduleId", as: "Module" });
+Module.hasMany(File, { foreignKey: 'moduleId', as: 'Files' });
 
 Subject.hasMany(Module, { foreignKey: 'subjectId' });
 Module.belongsTo(Subject, { foreignKey: 'subjectId' });

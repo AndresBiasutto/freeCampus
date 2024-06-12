@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 const ModuleCard = (props) => {
   const module = props.module;
   const number = props.number;
+  const moduleId= module.id
 
   return (
     <Link
-      to={`/teacher/subjects/module/${module.id}`}
+      to={`/teacher/subjects/module/${moduleId}`}
       className=" w-full col-span-12 sm:col-span-6 md:col-span-3"
+      moduleId={moduleId}
     >
       <div className="flex flex-row bg-sky-800 shadow-sm rounded p-4">
         <div className="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-sky-300 text-sky-800">

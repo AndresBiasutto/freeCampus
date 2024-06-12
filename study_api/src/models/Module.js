@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
   }, { timestamps: true });
 
   Module.associate = (models) => {
-    Module.belongsTo(models.Subject, { foreignKey: 'subjectId', as: 'Subject' });
+    Module.hasMany(models.File, { foreignKey: 'moduleId', as: 'Files' });
   };
 
   return Module;

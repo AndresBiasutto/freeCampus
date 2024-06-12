@@ -2,7 +2,7 @@ import { LOGIN_SUCCESS, LOGOUT, LOAD_USER_FROM_STORAGE, } from "./actions/action
 import { NAVIGATION_ROUTE } from "./actions/navActions";
 import { UPLODAD_FILE, GET_FILES } from "./actions/fileActions";
 import { CREATE_SUBJECT, GET_SUBJECTS, GET_SUBJECT } from "./actions/subjectActions";
-import {CREATE_MODULE, GET_MODULES, GET_MODULE } from "./actions/moduleActions"
+import {CREATE_MODULE, GET_MODULES, GET_MODULE, ADD_MODULE_SUCCESS } from "./actions/moduleActions"
 
 const initialState = {
   auth: {
@@ -13,6 +13,7 @@ const initialState = {
   },
   route: "home",
   file: null,
+  files: null,
   subjects: [],
   subject: {},
   module: {}
@@ -91,6 +92,11 @@ const authReducer = (state = initialState, action) => {
             module: action.payload,
           };
       case GET_MODULE:
+        return {
+          ...state,
+          module: action.payload,
+        };
+      case ADD_MODULE_SUCCESS:
         return {
           ...state,
           module: action.payload,

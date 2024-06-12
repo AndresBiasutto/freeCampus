@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getFiles } from "../redux/actions/fileActions";
 
-const UploadFile = () => {
+const UploadFile = (props) => {
+  // eslint-disable-next-line react/prop-types
+  const moduleId = props.moduleId;
   const dispatch = useDispatch();
   const [fileValue, setFileValue] = useState(null);
   const [errorMessage, seterrorMessage] = useState("");
@@ -21,9 +23,10 @@ const UploadFile = () => {
 
     const formData = new FormData();
     formData.append("file", fileValue);
+    formData.append("moduleId", moduleId); // Añadir el moduleId al FormData
 
     try {
-      await axios.post("subjects/upload", formData, {
+      await axios.post("files/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -32,7 +35,7 @@ const UploadFile = () => {
       console.log(fileValue);
       dispatch(uploadFile(fileValue));
       alert("pdf subido correctamente");
-      setFileValue("");
+      setFileValue(null); // Asegúrate de resetear a null para evitar warnings
       dispatch(getFiles());
     } catch (error) {
       console.error("Error uploading file:", error);

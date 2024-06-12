@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useDispatch } from "react-redux";
-import { getSubjects } from "../redux/actions/subjectActions";
 import { FaBookMedical } from "react-icons/fa";
-
+import { addModule } from "../redux/actions/moduleActions";
 
 const ModuleForm = (props) => {
   // eslint-disable-next-line react/prop-types
@@ -36,25 +34,24 @@ const ModuleForm = (props) => {
       formErrors.description = "Description is required";
     return formErrors;
   };
-
   const handleSubmit = (e) => {
-    console.log(formData);
     e.preventDefault();
     const formErrors = validate();
     if (Object.keys(formErrors).length === 0) {
-      console.log("Sending data:", formData); // Imprimir los datos antes de enviarlos
-      axios
-        .post("http://localhost:3001/modules", formData)
-        .then((response) => {
-          console.log("Success:", response.data);
+      dispatch(addModule(formData))
+
+        .then(() => {
           setNotification({
             type: "success",
             message: "Form submitted successfully!",
           });
-          dispatch(getSubjects());
+          setFormData({
+            name: "",
+            description: "",
+            subjectId: id,
+          });
         })
-        .catch((error) => {
-          console.error("Error:", error);
+        .catch(() => {
           setNotification({
             type: "error",
             message: "Failed to submit the form.",
@@ -68,13 +65,47 @@ const ModuleForm = (props) => {
       });
     }
     setTimeout(() => {
-      setNotification("");
-      setFormData({
-        name: "",
-        description: "",
-      });
+      setNotification(null);
     }, 2000);
   };
+  // const handleSubmit = (e) => {
+  //   console.log(formData);
+  //   e.preventDefault();
+  //   const formErrors = validate();
+  //   if (Object.keys(formErrors).length === 0) {
+  //     console.log("Sending data:", formData); // Imprimir los datos antes de enviarlos
+  //     axios
+  //       .post("http://localhost:3001/modules", formData)
+  //       .then((response) => {
+  //         console.log("Success:", response.data);
+  //         setNotification({
+  //           type: "success",
+  //           message: "Form submitted successfully!",
+  //         });
+  //         dispatch(getModules());
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error:", error);
+  //         setNotification({
+  //           type: "error",
+  //           message: "Failed to submit the form.",
+  //         });
+  //       });
+  //   } else {
+  //     setErrors(formErrors);
+  //     setNotification({
+  //       type: "error",
+  //       message: "Please fix the errors in the form.",
+  //     });
+  //   }
+  //   setTimeout(() => {
+  //     setNotification("");
+  //     setFormData({
+  //       name: "",
+  //       description: "",
+  //     });
+  //   }, 2000);
+  // };
 
   return (
       <form

@@ -5,32 +5,18 @@ const postModule = async (moduleData) => {
     const newModule = await Module.create({
       name: moduleData.name,
       description: moduleData.description,
-      subjectId: moduleData.subjectId, // Set subjectId here
+      subjectId: moduleData.subjectId,
     });
-
-    // Relacionar los archivos, si se proporcionan
-    if (moduleData.fileId) {
-      const files = await File.findAll({
-        where: {
-          id: moduleData.fileId,
-        },
-      });
-      await newModule.addFiles(files);
-    }
 
     // Obtener el nuevo módulo con los archivos relacionados
     const moduleWithFiles = await Module.findByPk(newModule.id, {
-      include: [
-        {
-          model: File,
-          attributes: ["id", "data"],
-        },
+      include: 
         {
           model: Subject,
           as: "Subject",
           attributes: ["id", "name"],
         },
-      ],
+
     });
 
     return moduleWithFiles;

@@ -1,41 +1,51 @@
-const { File } = require("../../db");
-const  bucket  = require("../../firebaseConfig");
-const { v4: uuidv4 } = require('uuid');
+const { File, Module } = require("../../db");
+const bucket = require("../../firebaseConfig");
+const { v4: uuidv4 } = require("uuid");
 
-const postFiles = async (file) => {
-  console.log(file);
+const postFiles = async (file, moduleId) => {
   try {
     const fileName = `${uuidv4()}.pdf`;
-    const originalName= file.originalname;
     const fileUpload = bucket.file(fileName);
-    console.log("Uploading file to Firebase Storage: ", fileName);
 
     const stream = fileUpload.createWriteStream({
       metadata: {
         contentType: file.mimetype,
       },
     });
-console.log(fileUpload);
+
     return new Promise((resolve, reject) => {
-      stream.on('error', (error) => {
-        console.error("Error during file upload: ", error);
+      stream.on("error", (error) => {
         reject(error);
       });
 
-      stream.on('finish', async () => {
+      stream.on("finish", async () => {
         try {
           await fileUpload.makePublic();
           const publicUrl = `https://storage.googleapis.com/${bucket.name}/${fileUpload.name}`;
-          console.log("File uploaded and made public at URL: ", publicUrl);
-          const createdFile = await File.create({ data: {
-            fieldname: file.fieldname,
-            originalname: file.originalname,
-            publicurl: publicUrl,
 
-          } });
+          const createdFile = await File.create({
+            data: {
+              fieldname: file.fieldname,
+              originalname: file.originalname,
+              publicurl: publicUrl,
+            },
+            moduleId: moduleId,
+          });
+
+          const module = await Module.findByPk(moduleId);
+
+          if (!module) {
+            throw new Error("Module not found");
+          }
+
+          createdFile.Module = {
+            id: module.id,
+            name: module.name,
+            description: module.description,
+          };
+
           resolve(createdFile);
         } catch (error) {
-          console.error("Error making file public: ", error);
           reject(error);
         }
       });

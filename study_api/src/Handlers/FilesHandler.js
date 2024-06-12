@@ -15,16 +15,19 @@ const getFilesHandler = async (req, res) => {
 
 const postFileHandler = async (req, res) => {
   const file = req.file;
+  const { moduleId } = req.body;
+
   if (!file) {
-    console.log("No file provided");
     return res.status(400).json({ error: "No file provided" });
   }
-  console.log("File received: ", file);
+  if (!moduleId) {
+    return res.status(400).json({ error: "No module ID provided" });
+  }
+
   try {
-    const response = await postFiles(file);
+    const response = await postFiles(file, moduleId);
     res.status(200).json(response);
   } catch (error) {
-    console.error("Error uploading file: ", error);
     return res.status(500).json({ error: error.message });
   }
 };

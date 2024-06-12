@@ -7,22 +7,25 @@ import UploadFile from "../../components/UploadFile";
 
 const TeacherModuleDetail = () => {
   const module = useSelector((state) => state.module);
-  const moduleFiles= module.Files;
+  const files = useSelector((state) => state.files);
+  const moduleFiles = module.Files;
   const dispatch = useDispatch();
   const { id } = useParams();
+
   useEffect(() => {
     dispatch(getOneModule(id));
-  }, [dispatch, id]);
+  }, [dispatch, id, files]);
+
   return (
-    <div className=" flex items-start min-h-screen bg-gray-50 text-gray-800 relative pt-6 2xl:container ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
+    <div className="flex items-start min-h-screen bg-gray-50 text-gray-800 relative pt-6 2xl:container ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
       <div className="container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px] nanum2">
         <h2>{module.name}</h2>
-        <h3>{module.description} </h3>
-        <UploadFile />
+        <h3>{module.description}</h3>
+        <UploadFile moduleId={module.id} />
         <div>
           {moduleFiles &&
             moduleFiles.map((file) => (
-              <FileCard key={moduleFiles.id} file={file} />
+              <FileCard key={file.id} file={file} />
             ))}
         </div>
       </div>

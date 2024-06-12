@@ -10,7 +10,7 @@ const postSubject = async (subjectData) => {
       credits: subjectData.credits,
       semester: subjectData.semester,
       department: subjectData.department,
-      creatorId: subjectData.creatorId, // Añadir el creatorId aquí
+      creatorId: subjectData.creatorId,
     });
 
     if (subjectData.moduleId && subjectData.moduleId.length > 0) {
