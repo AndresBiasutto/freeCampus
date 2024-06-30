@@ -6,8 +6,6 @@ const postSubject = async (subjectData) => {
       id: subjectData.id,
       name: subjectData.name,
       description: subjectData.description,
-      code: subjectData.code,
-      credits: subjectData.credits,
       semester: subjectData.semester,
       department: subjectData.department,
       creatorId: subjectData.creatorId,

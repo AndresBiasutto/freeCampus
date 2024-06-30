@@ -12,7 +12,6 @@ export const createModule = (subject) => ({
 export const getModules = () => {
   return async (dispatch) => {
     const apiData = (await axios.get(`${"modules"}`)).data;
-    console.log(apiData);
     dispatch({ type: GET_MODULES, payload: apiData });
   };
 };

@@ -1,4 +1,4 @@
-const { User, Role } = require("../../db");
+const { User, Role, Subject } = require("../../db");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const comparePassword = require("../../libs/comparePassword");
@@ -8,7 +8,14 @@ const signIn = async (email, password) => {
 
   const userFound = await User.findOne({
     where: { email },
-    include: [{ model: Role, as: "Role" }],
+    include: [
+      { model: Role, as: "Role" },
+      {
+        model: Subject,
+        as: "enrolledSubjects",
+        attributes: ["name", "id", "creatorId", "description", "department"],
+      },
+    ],
   });
 
   if (!userFound) {
@@ -29,7 +36,13 @@ const signIn = async (email, password) => {
     email: userFound.email,
     role: userFound.Role.name,
     token: token,
-    image: userFound.image
+    image: userFound.image,
+    enrolledSubjects: userFound.enrolledSubjects,
+    description: userFound.description,
+    department: userFound.department,
+    creator: userFound.creator
+
+    
   };
   console.log(response);
   return response;

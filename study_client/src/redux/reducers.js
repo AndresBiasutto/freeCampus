@@ -1,22 +1,45 @@
-import { LOGIN_SUCCESS, LOGOUT, LOAD_USER_FROM_STORAGE, } from "./actions/actions";
+import {
+  LOGIN_SUCCESS,
+  LOGOUT,
+  LOAD_USER_FROM_STORAGE,
+} from "./actions/actions";
+import { GET_ALL_USERS, GET_USER_BY_NAME, CLEAR_SEARCH, GET_USER } from "./actions/userActions";
 import { NAVIGATION_ROUTE } from "./actions/navActions";
 import { UPLODAD_FILE, GET_FILES } from "./actions/fileActions";
-import { CREATE_SUBJECT, GET_SUBJECTS, GET_SUBJECT } from "./actions/subjectActions";
-import {CREATE_MODULE, GET_MODULES, GET_MODULE, ADD_MODULE_SUCCESS } from "./actions/moduleActions"
+import {
+  CREATE_SUBJECT,
+  GET_SUBJECTS,
+  GET_SUBJECT,
+  DELETE_SUBJECT,
+  GET_SUBJECT_BY_NAME,
+  ADD_STUDENT
+} from "./actions/subjectActions";
+import {
+  CREATE_MODULE,
+  GET_MODULES,
+  GET_MODULE,
+  ADD_MODULE_SUCCESS,
+} from "./actions/moduleActions";
 
 const initialState = {
   auth: {
     isAuthenticated: false,
     user: null,
     role: null,
-    id: null
+    id: null,
+    enrolledSubjects:[]
   },
   route: "home",
   file: null,
   files: null,
   subjects: [],
   subject: {},
-  module: {}
+  subjectSearch: [],
+  module: {},
+  users: [],
+  user:{},
+  studentSearch: [],
+  students: []
 };
 
 const authReducer = (state = initialState, action) => {
@@ -32,6 +55,7 @@ const authReducer = (state = initialState, action) => {
           name: action.payload.name,
           image: action.payload.image,
           token: action.payload.token,
+          enrolledSubjects:action.payload.enrolledSubjects
         },
       };
     case LOGOUT:
@@ -71,37 +95,72 @@ const authReducer = (state = initialState, action) => {
         ...state,
         subjects: action.payload,
       };
+    case GET_SUBJECT_BY_NAME:
+      return {
+        ...state,
+        subjectSearch: action.payload,
+      };
     case CREATE_SUBJECT:
       return {
         ...state,
         subject: action.payload,
       };
-      case GET_SUBJECT:
+    case GET_SUBJECT:
+      return {
+        ...state,
+        subject: action.payload,
+      };
+      case ADD_STUDENT:
         return {
           ...state,
-          subject: action.payload,
+          students: action.payload,
         };
-        case GET_MODULES:
+    case DELETE_SUBJECT:
+      return {
+        ...state,
+        subject: action.payload,
+      };
+    case GET_MODULES:
+      return {
+        ...state,
+        modules: action.payload,
+      };
+    case CREATE_MODULE:
+      return {
+        ...state,
+        module: action.payload,
+      };
+    case GET_MODULE:
+      return {
+        ...state,
+        module: action.payload,
+      };
+    case ADD_MODULE_SUCCESS:
+      return {
+        ...state,
+        module: action.payload,
+      };
+    case GET_ALL_USERS:
+      return {
+        ...state,
+        users: action.payload,
+      };
+    case GET_USER:
+      return {
+        ...state,
+        user: action.payload,
+      };
+      case GET_USER_BY_NAME:
+        return {
+          ...state,
+          studentSearch: action.payload,
+        };
+        case CLEAR_SEARCH:
           return {
             ...state,
-            modules: action.payload,
+            studentSearch: action.payload,
           };
-        case CREATE_MODULE:
-          return {
-            ...state,
-            module: action.payload,
-          };
-      case GET_MODULE:
-        return {
-          ...state,
-          module: action.payload,
-        };
-      case ADD_MODULE_SUCCESS:
-        return {
-          ...state,
-          module: action.payload,
-        };
-    default:
+      default:
       return state;
   }
 };

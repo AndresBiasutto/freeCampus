@@ -13,6 +13,7 @@ const basename = path.basename(__filename);
 
 const modelDefiners = [];
 
+// Read all files in the models directory and require them
 fs.readdirSync(path.join(__dirname, "/models"))
   .filter(
     (file) =>
@@ -21,6 +22,7 @@ fs.readdirSync(path.join(__dirname, "/models"))
   .forEach((file) => {
     modelDefiners.push(require(path.join(__dirname, "/models", file)));
   });
+
 modelDefiners.forEach((model) => model(sequelize));
 let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [
@@ -31,12 +33,10 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 const { User, Subject, File, Role, Module } = sequelize.models;
 
+// Define associations
 User.belongsTo(Role, { foreignKey: "role" });
-User.belongsToMany(Subject, { through: "UserSubject" });
-Subject.belongsToMany(User, { through: "UserSubject" });
-
-// File.belongsToMany(Module, { through: "FileModule" });
-// Module.belongsToMany(File, { through: "FileModule" });
+User.belongsToMany(Subject, { through: 'UserSubject', as: 'enrolledSubjects' });
+Subject.belongsToMany(User, { through: 'UserSubject', as: 'students' });
 
 File.belongsTo(Module, { foreignKey: "moduleId", as: "Module" });
 Module.hasMany(File, { foreignKey: 'moduleId', as: 'Files' });
@@ -46,7 +46,6 @@ Module.belongsTo(Subject, { foreignKey: 'subjectId' });
 
 User.hasMany(Subject, { as: 'createdSubjects', foreignKey: 'creatorId' });
 Subject.belongsTo(User, { as: 'creator', foreignKey: 'creatorId' });
-
 
 module.exports = {
   ...sequelize.models,

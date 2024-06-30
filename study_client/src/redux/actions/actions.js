@@ -18,6 +18,7 @@ export const loadUserFromStorage = () => {
     const role = window.localStorage.getItem('role');
     const image = window.localStorage.getItem('image');
     const id= window.localStorage.getItem('id')
+    const enrolledSubjects= window.localStorage.getItem('enrolledSubjects')
 
     if (token) {
       const user = {
@@ -25,7 +26,8 @@ export const loadUserFromStorage = () => {
         name,
         role,
         image,
-        id
+        id,
+        enrolledSubjects
       };
       dispatch(loginSuccess(user));
     }

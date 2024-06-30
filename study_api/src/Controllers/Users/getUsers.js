@@ -1,10 +1,20 @@
-const { User, Role } = require("../../db");
-const formatUser = require("../../libs/formatUser");
+const { User, Role, Subject } = require("../../db");
 
 const getUsers = async () => {
   try {
-    const users = await User.findAll({ include: Role });
-    //const formatedUsers = users.map((usr) => formatUser(usr));
+    const users = await User.findAll({ 
+      include: [
+        {
+          model: Role,
+          attributes: ["name", "id"],
+        },
+        {
+          model: Subject,
+          as: "enrolledSubjects",
+          attributes: ["name", "id", "creatorId"],
+        },
+      ],
+    });
     return users;
   } catch (error) {
     console.error("Error al obtener la lista de usuarios:", error);

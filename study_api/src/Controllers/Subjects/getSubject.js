@@ -12,6 +12,11 @@ const getSubject = async (id) => {
         as: 'creator',
         attributes: ["id", "name"],
       },
+      {
+        model: User,
+        as: 'students',
+        attributes: ["id", "name", "email", "image"],
+      },
     ],
   });
 

@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginSuccess } from "../redux/actions/actions";
-import axios from "../api/axios";
+import { loginSuccess } from "../../redux/actions/actions";
+import axios from "../../api/axios";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
@@ -16,11 +16,11 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const { role, name, image, id } = useSelector((store) => store.auth);
+  const { role, name, image, id, enrolledSubjects } = useSelector((store) => store.auth);
 
   useEffect(() => {
-    console.log(role, name, image, id);
-  }, [role, name, image, id]);
+    console.log(role, name, image, id, enrolledSubjects);
+  }, [role, name, image, id, enrolledSubjects]);
 
   useEffect(() => {
     userRef.current.focus();
@@ -45,13 +45,14 @@ const Login = () => {
       if (response.data.message) {
         setErrMsg(response.data.message);
       } else {
-        const { role, name, image, token, id } = response.data;
+        const { role, name, image, token, id, enrolledSubjects } = response.data;
         window.localStorage.setItem("token", token);
         window.localStorage.setItem("name", name);
         window.localStorage.setItem("role", role);
         window.localStorage.setItem("image", image);
         window.localStorage.setItem("id", id);
-        dispatch(loginSuccess({ name, role, image, token, id }));
+        window.localStorage.setItem("enrolledSubjects", enrolledSubjects);
+        dispatch(loginSuccess({ name, role, image, token, id, enrolledSubjects }));
         let redirectPath = "/";
         if (role === "Manager") {
           redirectPath = "/manager";
@@ -60,9 +61,7 @@ const Login = () => {
         } else if (role === "teacher") {
           redirectPath = "/teacher/home";
         } else if (role === "student") {
-          redirectPath = "/student";
-        } else if (role === "Clevel") {
-          redirectPath = "/clevel";
+          redirectPath = "/student/home";
         }
         navigate(redirectPath, { replace: true });
       }

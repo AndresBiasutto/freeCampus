@@ -54,18 +54,18 @@ const UploadFile = (props) => {
       <div className="flex w-full justify-start">
         <div
           id="multi-upload-button"
-          className="inline-flex items-center px-4 py-2 bg-sky-800 border border-sky-800 rounded-l font-semibold cursor-pointer text-sm text-white tracking-widest hover:bg-sky-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition"
+          className="inline-flex items-center px-4 py-2 bg-sky-700 border border-sky-800 rounded-l font-semibold cursor-pointer text-sm text-white tracking-widest hover:bg-sky-300 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition"
           onClick={handleBrowseClick}
         >
           Buscar pdf
         </div>
-        <div className="w-4/12 lg:w-3/12 border border-gray-300 flex items-center justify-between">
+        <div className="w-4/12 lg:w-3/12 border border-gray-300 flex items-center justify-between  bg-sky-100">
           <span id="multi-upload-text" className="p-2"></span>
           <p>{fileValue ? fileValue.name : errorMessage} </p>
         </div>
         <button
           type="submit"
-          className="inline-flex items-center px-4 py-2 bg-sky-800 border border-sky-300 rounded-r-lg font-semibold cursor-pointer text-sm text-white tracking-widest hover:bg-sky-300 active:bg-sky-300 focus:outline-none focus:border-sky-300 focus:ring focus:ring-gray-300 disabled:opacity-25 transition"
+          className="inline-flex items-center px-4 py-2 bg-sky-700 border border-sky-300 rounded-r-lg font-semibold cursor-pointer text-sm text-white tracking-widest hover:bg-sky-300 active:bg-sky-300 focus:outline-none focus:border-sky-300 focus:ring focus:ring-gray-300 disabled:opacity-25 transition"
         >
           LISTO!
         </button>

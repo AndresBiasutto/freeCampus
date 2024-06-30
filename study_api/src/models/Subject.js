@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
   }, { timestamps: true });
 
   Subject.associate = (models) => {
-    Subject.belongsToMany(models.User, { through: 'UserSubject' });
+    Subject.belongsToMany(models.User, { through: 'UserSubject', as: 'students' });
     Subject.belongsTo(models.User, { as: 'creator', foreignKey: 'creatorId' });
     Subject.hasMany(models.Module, { foreignKey: 'subjectId' });
   };

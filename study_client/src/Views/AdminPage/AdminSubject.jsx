@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSubjects } from "../redux/actions/subjectActions";
-import SubjectForm from "../components/SubjectForm";
-import SubjectCard from "../components/SubjectCard";
+import { getSubjects } from "../../redux/actions/subjectActions";
+import SubjectForm from "../../components/SubjectComponents/SubjectForm";
+import SubjectCard from "../../components/SubjectComponents/SubjectCard";
 
 const AdminSubject = () => {
   const subjects = useSelector((state) => state.subjects);

@@ -68,44 +68,6 @@ const ModuleForm = (props) => {
       setNotification(null);
     }, 2000);
   };
-  // const handleSubmit = (e) => {
-  //   console.log(formData);
-  //   e.preventDefault();
-  //   const formErrors = validate();
-  //   if (Object.keys(formErrors).length === 0) {
-  //     console.log("Sending data:", formData); // Imprimir los datos antes de enviarlos
-  //     axios
-  //       .post("http://localhost:3001/modules", formData)
-  //       .then((response) => {
-  //         console.log("Success:", response.data);
-  //         setNotification({
-  //           type: "success",
-  //           message: "Form submitted successfully!",
-  //         });
-  //         dispatch(getModules());
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error:", error);
-  //         setNotification({
-  //           type: "error",
-  //           message: "Failed to submit the form.",
-  //         });
-  //       });
-  //   } else {
-  //     setErrors(formErrors);
-  //     setNotification({
-  //       type: "error",
-  //       message: "Please fix the errors in the form.",
-  //     });
-  //   }
-  //   setTimeout(() => {
-  //     setNotification("");
-  //     setFormData({
-  //       name: "",
-  //       description: "",
-  //     });
-  //   }, 2000);
-  // };
 
   return (
       <form

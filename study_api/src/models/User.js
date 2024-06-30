@@ -34,8 +34,8 @@ module.exports = (sequelize) => {
   }, { timestamps: false });
 
   User.associate = (models) => {
-    User.belongsTo(models.Role, { foreignKey: 'role' });
-    User.belongsToMany(models.Subject, { through: 'UserSubject' });
+    User.belongsTo(models.Role, { foreignKey: 'role', as: 'role' }); // Added alias
+    User.belongsToMany(models.Subject, { through: 'UserSubject', as: 'enrolledSubjects' });
     User.hasMany(models.Subject, { as: 'createdSubjects', foreignKey: 'creatorId' });
   };
 

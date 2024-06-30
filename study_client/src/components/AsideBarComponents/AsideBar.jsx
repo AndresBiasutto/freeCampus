@@ -1,13 +1,13 @@
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import Logo from "../assets/img/logo.svg";
+import Logo from "../../assets/img/logo.svg";
 import LogOut from "./LogOut";
+import { Link } from "react-router-dom";
 
 const AsideBar = () => {
   const { role, name, image } = useSelector((store) => store.auth);
 
   return (
-    <aside className=" z-50 ml-[-100%] fixed top-10 pb-3 px-6 w-full flex flex-col justify-between h-auto border-r bg-white transition duration-300 md:w-[25%] md:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
+    <aside className=" z-50 ml-[-100%] fixed top-10 lg:top-0 pb-3 px-6 w-full flex flex-col justify-between h-auto lg:h-screen border-r bg-white transition duration-300 md:w-[25%] md:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
       <div>
         <div className="-mx-6 px-6 py-4">
           <a href="#" title="home">
@@ -26,11 +26,10 @@ const AsideBar = () => {
           </h5>
           <span className="hidden text-gray-400 lg:block">{role}</span>
         </div>
-
         <ul className="space-y-2 tracking-wide mt-8">
           <li>
             <Link
-              to="teacher/home"
+              to={`${role}/home`}
               aria-label="Home"
               name="home"
               className="relative px-4 py-3 flex items-center space-x-4 rounded-xl text-gray-600"
@@ -52,12 +51,13 @@ const AsideBar = () => {
               <span className="-mr-1 font-medium">Home</span>
             </Link>
           </li>
+          {role === "teacher" && (
           <li>
             <Link
               href="#"
               className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group"
               name="Materias"
-              to="teacher/subjects"
+              to={`${role}/subjects`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +78,9 @@ const AsideBar = () => {
               </svg>
               <span className="group-hover:text-gray-700">Materias</span>
             </Link>
-          </li>
+          </li>            
+          )}
+
         </ul>
       </div>
 

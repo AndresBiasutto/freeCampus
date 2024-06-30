@@ -1,29 +1,32 @@
 const getUsers = require("../Controllers/Users/getUsers");
+const getUserByName = require("../Controllers/Users/getUserByName");
 const postUser = require("../Controllers/Users/postUser");
 const signUp = require("../Controllers/Users/signUp");
 const signIn = require("../Controllers/Users/signIn");
-const findUser= require("../Controllers/Users/findUser")
+const findUser = require("../Controllers/Users/findUser");
 
 const getUsersHandler = async (req, res) => {
+  const searchName = req.query.name;
   try {
-    const response = await getUsers(); // Usar User directamente aquí
+    const response = searchName ? await getUserByName(searchName) : await getUsers();
     res.status(200).json(response);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
 };
+
 const postUserHandler = async (req, res) => {
   const { image, name, created } = req.body;
   try {
-    const response = await postUser(image, name, created); // Usar User directamente aquí
+    const response = await postUser(image, name, created);
     res.status(200).json(response);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
 };
-const signUpUserHandler = async (req, res) => {
-  const { name, email, password, image, roles } = await req.body;
 
+const signUpUserHandler = async (req, res) => {
+  const { name, email, password, image, roles } = req.body;
   try {
     const signup = await signUp(name, email, password, image, roles);
     res.status(200).json(signup);
@@ -45,7 +48,7 @@ const signInUserHandler = async (req, res) => {
 const getUserHandler = async (req, res) => {
   const { id } = req.params;
   try {
-    const response = await findUser( id );
+    const response = await findUser(id);
     res.status(200).json(response);
   } catch (error) {
     return res.status(500).json({ error: error.message });

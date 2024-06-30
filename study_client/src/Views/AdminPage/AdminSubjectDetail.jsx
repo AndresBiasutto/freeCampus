@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getOneSubject } from "../redux/actions/subjectActions";
-import ModuleCard from "../components/ModuleCard";
-import UserCard from "../components/UserCard";
+import { getOneSubject } from "../../redux/actions/subjectActions";
+import ModuleCard from "../../components/ModuleComponents/ModuleCard";
+import UserCard from "../../components/UserComponents/UserCard";
 
 const AdminSubjectDetail = () => {
   const dispatch = useDispatch();

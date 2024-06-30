@@ -1,28 +1,26 @@
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import AdminPage from "./Views/AdminPage";
-import LoginPage from "./Views/Login";
-import UnauthorizedPage from "./Views/UnauthorizedPage";
+import AdminPage from "./Views/AdminPage/AdminPage";
+import LoginPage from "./Views/PublicPages/Login";
+import UnauthorizedPage from "./Views/PublicPages/UnauthorizedPage";
 import PrivateRoute from "./components/PrivateRoute";
-import StudentPage from "./Views/StudentPage";
-import ManagerPage from "./Views/ManagerPage";
-import ClevelPage from "./Views/ClevelPage";
 import { loadUserFromStorage } from "./redux/actions/actions";
 import usePreserveRoute from "./hooks/usePreserveRoute";
-import ClevelSchools from "./Views/ClevelSchools";
-import ClevelSubjects from "./Views/ClevelSubjects";
-import AsideBar from "./components/AsideBar";
-import AdminHome from "./Views/AdminHome";
-import AdminSubject from "./Views/AdminSubject";
-import Files from "./Views/Files";
-import TopBar from "./components/TopBar";
-import AdminSubjectDetail from "./Views/AdminSubjectDetail";
-import AdminModuleDetail from "./Views/AdminModuleDetail";
+import AsideBar from "./components/AsideBarComponents/AsideBar";
+import AdminHome from "./Views/AdminPage/AdminHome";
+import AdminSubject from "./Views/AdminPage/AdminSubject";
+import TopBar from "./components/AsideBarComponents/TopBar";
+import AdminSubjectDetail from "./Views/AdminPage/AdminSubjectDetail";
+import AdminModuleDetail from "./Views/AdminPage/AdminModuleDetail";
 import TeacherHome from "./Views/TeachersPage/TeacherHome";
 import TeacherSubjectDetail from "./Views/TeachersPage/TeacherSubjectDetail";
 import TeacherModuleDetail from "./Views/TeachersPage/TeacherModuleDetail";
 import TeacherSubjects from "./Views/TeachersPage/teacherSubjects";
+import StudentHome from "./Views/StudentsPage/StudentHome";
+import StudentSubjectDetail from "./Views/StudentsPage/StudentSubjectDetail";
+import StudentModuleDetail from "./Views/StudentsPage/StudentModuleDetail";
+import HomePage from "./Views/PublicPages/HomePage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -41,37 +39,17 @@ const App = () => {
 
   return (
     <div>
-      {location.pathname !== "/" && <TopBar />}
-      {location.pathname !== "/" && <AsideBar />}
+      {location.pathname !== "/" && location.pathname !== "/login" && (
+        <TopBar />
+      )}
+      {location.pathname !== "/" && location.pathname !== "/login" && (
+        <AsideBar />
+      )}
 
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/*" element={<UnauthorizedPage />} />
-        <Route path="/" element={<LoginPage />} />
-        <Route
-          path="/clevel"
-          element={
-            <PrivateRoute roles={["Clevel"]}>
-              <ClevelPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="clevel/schools"
-          element={
-            <PrivateRoute roles={["Clevel"]}>
-              <ClevelSchools />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="clevel/subjects"
-          element={
-            <PrivateRoute roles={["Clevel"]}>
-              <ClevelSubjects />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/" element={<HomePage />} />
 
         {/* ----------Admin routes---------- */}
 
@@ -88,14 +66,6 @@ const App = () => {
           element={
             <PrivateRoute roles={["Admin"]}>
               <AdminHome />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/admin/files"
-          element={
-            <PrivateRoute roles={["Admin"]}>
-              <Files />
             </PrivateRoute>
           }
         />
@@ -134,7 +104,7 @@ const App = () => {
             </PrivateRoute>
           }
         />
-                <Route
+        <Route
           path="/teacher/subjects"
           element={
             <PrivateRoute roles={["teacher"]}>
@@ -159,19 +129,29 @@ const App = () => {
           }
         />
 
+        {/* ----------Student routes---------- */}
+
         <Route
-          path="/manager"
+          path="/student/home"
           element={
-            <PrivateRoute roles={["Manager"]}>
-              <ManagerPage />
+            <PrivateRoute roles={["student"]}>
+              <StudentHome />
             </PrivateRoute>
           }
         />
         <Route
-          path="/student"
+          path="/student/subjects/:id"
           element={
-            <PrivateRoute roles={["Student"]}>
-              <StudentPage />
+            <PrivateRoute roles={["student"]}>
+              <StudentSubjectDetail />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/student/subjects/module/:id"
+          element={
+            <PrivateRoute roles={["student"]}>
+              <StudentModuleDetail />
             </PrivateRoute>
           }
         />
