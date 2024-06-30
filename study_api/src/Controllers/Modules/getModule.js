@@ -1,15 +1,21 @@
-const { Module, File } = require("../../db");
+const { Module, File, Video } = require("../../db");
 
-const getSubject = async (id) => {
+const getModule = async (id) => {
   const module = await Module.findByPk(id, {
-    include: {
-      model: File,
-      as: "Files",
-      attributes: ["data"],
-    },
+    include: [
+      {
+        model: File,
+        as: "Files",
+        attributes: ["data"],
+      },
+      {
+        model: Video,
+        attributes: ["id", "videoUrl"],
+      },
+    ],
   });
 
   return module;
 };
 
-module.exports = getSubject;
+module.exports = getModule;

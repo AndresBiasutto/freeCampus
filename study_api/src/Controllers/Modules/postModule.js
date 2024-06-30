@@ -9,7 +9,7 @@ const postModule = async (moduleData) => {
     });
 
     // Obtener el nuevo módulo con los archivos relacionados
-    const moduleWithFiles = await Module.findByPk(newModule.id, {
+    const moduleAndFiles = await Module.findByPk(newModule.id, {
       include: 
         {
           model: Subject,
@@ -19,7 +19,7 @@ const postModule = async (moduleData) => {
 
     });
 
-    return moduleWithFiles;
+    return moduleAndFiles;
   } catch (error) {
     throw new Error("Error creating module: " + error.message);
   }

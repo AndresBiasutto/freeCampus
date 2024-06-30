@@ -5,6 +5,7 @@ import { getOneModule } from "../../redux/actions/moduleActions";
 import FileCard from "../../components/FileCard";
 import UploadFile from "../../components/UploadFile";
 import Video from "../../components/Video";
+import AddVideo from "../../components/ModuleComponents/AddVideo";
 
 const TeacherModuleDetail = () => {
   const module = useSelector((state) => state.module);
@@ -53,6 +54,7 @@ const TeacherModuleDetail = () => {
         {activeTab === 1 && (
           <div className=" bg-sky-800 rounded pt-4">
             <p className=" text-sky-100">{module.description}</p>
+            <AddVideo />
             <Video />
           </div>
         )}

@@ -1,13 +1,14 @@
 const { Router } = require("express");
 
-const { getModulesHandler, postModulesHandler, DeleteSubectHandler, getOneModuleHandler, putSubjectHandler } = require("../Handlers/ModulesHandler");
+const { getModulesHandler, postModulesHandler, DeleteSubectHandler, getOneModuleHandler, putSubjectHandler, postVideosHandler } = require("../Handlers/ModulesHandler");
 
-const subjectsRouter = Router();
+const modulesRouter = Router();
 
-subjectsRouter.get("/", getModulesHandler);
-subjectsRouter.post("/",  postModulesHandler);
-// subjectsRouter.delete("/:id", DeleteSubectHandler); 
-// subjectsRouter.put("/id", putSubjectHandler)
-subjectsRouter.get("/:id", getOneModuleHandler); 
+modulesRouter.get("/", getModulesHandler);
+modulesRouter.post("/",  postModulesHandler);
+modulesRouter.post("/videos", postVideosHandler)
+// modulesRouter.delete("/:id", DeleteSubectHandler); 
+// modulesRouter.put("/id", putSubjectHandler)
+modulesRouter.get("/:id", getOneModuleHandler); 
 
-module.exports = subjectsRouter;
+module.exports = modulesRouter;
