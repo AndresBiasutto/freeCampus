@@ -3,7 +3,7 @@ import {
   LOGOUT,
   LOAD_USER_FROM_STORAGE,
 } from "./actions/actions";
-import { GET_ALL_USERS, GET_USER_BY_NAME, CLEAR_SEARCH, GET_USER } from "./actions/userActions";
+import {UPDATE_USER, GET_ALL_USERS, GET_USER_BY_NAME, CLEAR_SEARCH, GET_USER } from "./actions/userActions";
 import { NAVIGATION_ROUTE } from "./actions/navActions";
 import { UPLODAD_FILE, GET_FILES } from "./actions/fileActions";
 import {
@@ -19,6 +19,8 @@ import {
   GET_MODULES,
   GET_MODULE,
   ADD_MODULE_SUCCESS,
+  ADD_VIDEO_SUCCESS,
+  ADD_VIDEO_FAILURE
 } from "./actions/moduleActions";
 
 const initialState = {
@@ -27,7 +29,8 @@ const initialState = {
     user: null,
     role: null,
     id: null,
-    enrolledSubjects:[]
+    enrolledSubjects: []
+    
   },
   route: "home",
   file: null,
@@ -37,7 +40,7 @@ const initialState = {
   subjectSearch: [],
   module: {},
   users: [],
-  user:{},
+  user: {},
   studentSearch: [],
   students: []
 };
@@ -55,7 +58,10 @@ const authReducer = (state = initialState, action) => {
           name: action.payload.name,
           image: action.payload.image,
           token: action.payload.token,
-          enrolledSubjects:action.payload.enrolledSubjects
+          email: action.payload.email,
+          enrolledSubjects: action.payload.enrolledSubjects,
+          description: action.payload.description,
+          contactNumber: action.payload.contactNumber
         },
       };
     case LOGOUT:
@@ -110,11 +116,11 @@ const authReducer = (state = initialState, action) => {
         ...state,
         subject: action.payload,
       };
-      case ADD_STUDENT:
-        return {
-          ...state,
-          students: action.payload,
-        };
+    case ADD_STUDENT:
+      return {
+        ...state,
+        students: action.payload,
+      };
     case DELETE_SUBJECT:
       return {
         ...state,
@@ -140,6 +146,16 @@ const authReducer = (state = initialState, action) => {
         ...state,
         module: action.payload,
       };
+    case ADD_VIDEO_SUCCESS:
+      return {
+        ...state,
+        module: action.payload,
+      };
+    case ADD_VIDEO_FAILURE:
+      return {
+        ...state,
+        module: action.payload,
+      };
     case GET_ALL_USERS:
       return {
         ...state,
@@ -150,17 +166,22 @@ const authReducer = (state = initialState, action) => {
         ...state,
         user: action.payload,
       };
-      case GET_USER_BY_NAME:
-        return {
-          ...state,
-          studentSearch: action.payload,
-        };
-        case CLEAR_SEARCH:
-          return {
-            ...state,
-            studentSearch: action.payload,
-          };
-      default:
+    case UPDATE_USER:
+      return {
+        ...state,
+        user: action.payload,
+      };
+    case GET_USER_BY_NAME:
+      return {
+        ...state,
+        studentSearch: action.payload,
+      };
+    case CLEAR_SEARCH:
+      return {
+        ...state,
+        studentSearch: action.payload,
+      };
+    default:
       return state;
   }
 };

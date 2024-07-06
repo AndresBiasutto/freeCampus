@@ -21,6 +21,9 @@ import StudentHome from "./Views/StudentsPage/StudentHome";
 import StudentSubjectDetail from "./Views/StudentsPage/StudentSubjectDetail";
 import StudentModuleDetail from "./Views/StudentsPage/StudentModuleDetail";
 import HomePage from "./Views/PublicPages/HomePage";
+import UsersCPannel from "./Views/PublicPages/UsersCPannel";
+import UserDetail from "./Views/PublicPages/UserDetail";
+import UserSettings from "./Views/PublicPages/UserSettings";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -128,7 +131,30 @@ const App = () => {
             </PrivateRoute>
           }
         />
-
+        <Route
+          path="/teacher/users"
+          element={
+            <PrivateRoute roles={["teacher"]}>
+              <UsersCPannel />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/users/:id"
+          element={
+            <PrivateRoute roles={["teacher", "student"]}>
+              <UserDetail />
+            </PrivateRoute>
+          }
+        />
+                <Route
+          path="/settings"
+          element={
+            <PrivateRoute roles={["teacher", "student"]}>
+              <UserSettings />
+            </PrivateRoute>
+          }
+        />
         {/* ----------Student routes---------- */}
 
         <Route

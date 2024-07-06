@@ -13,14 +13,14 @@ const Login = () => {
   const errRef = useRef();
   const dispatch = useDispatch();
 
-  const [email, setEmail] = useState("");
+  const [e_mail, setE_mail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const { role, name, image, id, enrolledSubjects } = useSelector((store) => store.auth);
+  const { role, name, image, id, enrolledSubjects, description, contactNumber, email } = useSelector((store) => store.auth);
 
   useEffect(() => {
-    console.log(role, name, image, id, enrolledSubjects);
-  }, [role, name, image, id, enrolledSubjects]);
+    console.log(role, name, image, id, enrolledSubjects, description, contactNumber, email);
+  }, [role, name, image, id, enrolledSubjects, description, contactNumber, email]);
 
   useEffect(() => {
     userRef.current.focus();
@@ -28,7 +28,7 @@ const Login = () => {
 
   useEffect(() => {
     setErrMsg("");
-  }, [email, password]);
+  }, [e_mail, password]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,7 +36,7 @@ const Login = () => {
     try {
       const response = await axios.post(
         LOGIN_URL,
-        JSON.stringify({ email, password }),
+        JSON.stringify({ e_mail, password }),
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
@@ -44,15 +44,19 @@ const Login = () => {
       );
       if (response.data.message) {
         setErrMsg(response.data.message);
+
       } else {
-        const { role, name, image, token, id, enrolledSubjects } = response.data;
+        const { role, name, image, token, id, enrolledSubjects, description, contactNumber, email } = response.data;
         window.localStorage.setItem("token", token);
         window.localStorage.setItem("name", name);
         window.localStorage.setItem("role", role);
         window.localStorage.setItem("image", image);
         window.localStorage.setItem("id", id);
         window.localStorage.setItem("enrolledSubjects", enrolledSubjects);
-        dispatch(loginSuccess({ name, role, image, token, id, enrolledSubjects }));
+        window.localStorage.setItem("description", description);
+        window.localStorage.setItem("email", email);
+        window.localStorage.setItem("contactNumber", contactNumber);
+        dispatch(loginSuccess({ name, role, image, token, id, enrolledSubjects, description, contactNumber, email }));
         let redirectPath = "/";
         if (role === "Manager") {
           redirectPath = "/manager";
@@ -77,6 +81,7 @@ const Login = () => {
       }
       errRef.current.focus();
     }
+    
   };
 
   return (
@@ -87,13 +92,13 @@ const Login = () => {
         <div className="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-indigo-500">
           <input
             type="text"
-            placeholder="Email"
+            placeholder="E_mail"
             className="w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none"
-            id="email"
+            id="e_mail"
             ref={userRef}
             autoComplete="on"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
+            onChange={(e) => setE_mail(e.target.value)}
+            value={e_mail}
             required
           />
         </div>

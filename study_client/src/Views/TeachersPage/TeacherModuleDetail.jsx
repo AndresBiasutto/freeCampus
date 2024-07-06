@@ -12,12 +12,15 @@ const TeacherModuleDetail = () => {
   const files = useSelector((state) => state.files);
   const [activeTab, setActiveTab] = useState(1);
   const moduleFiles = module.Files;
+  const moduleVideo = module?.Video?.videoUrl ? module?.Video?.videoUrl : "sinVideo";
   const dispatch = useDispatch();
   const { id } = useParams();
 
   useEffect(() => {
     dispatch(getOneModule(id));
   }, [dispatch, id, files]);
+useEffect(() => {
+}, [module])
 
   const showTab = (num) => {
     setActiveTab(num);
@@ -41,21 +44,29 @@ const TeacherModuleDetail = () => {
             </button>
           </li>
           <li onClick={() => showTab(2)} className="me-2">
-            <a
+            <button
               href="#"
               className={`inline-block p-4 bg-gray-100 ${
                 activeTab === 2 && "active bg-sky-800 text-sky-100"
               } rounded-t-lg hover:bg-sky-800 hover:text-sky-100`}
             >
               Material adicional
-            </a>
+            </button>
           </li>
         </ul>
         {activeTab === 1 && (
           <div className=" bg-sky-800 rounded pt-4">
             <p className=" text-sky-100">{module.description}</p>
-            <AddVideo />
-            <Video />
+            <AddVideo moduleId={id} />
+            
+            <textarea
+          // value={description}
+          // onChange={handleDescriptionChange}
+          placeholder="Agregar descripción del video"
+          rows="5"
+          className="w-full h-28 bg-sky-700 text-white p-4 border border-gray-300 rounded resize-none"
+        />            <p></p>
+            <Video videoUrl={moduleVideo} />
           </div>
         )}
 

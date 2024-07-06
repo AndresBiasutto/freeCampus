@@ -8,11 +8,9 @@ import { useEffect } from "react";
 const SubjectCard = (props) => {
   const { subject, img, role } = props;
   // eslint-disable-next-line react/prop-types
-  const subjectCreator= subject.creator.name;
-  useEffect(() => {
-  
-  }, [subject])
-  
+  const subjectCreator = subject.creator.name;
+  useEffect(() => {}, [subject]);
+
   return (
     <div className=" w-[250px] h-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-sky-800 dark:border-gray-700">
       <Link to={`/${role}/subjects/${subject.id}`}>
@@ -38,14 +36,15 @@ const SubjectCard = (props) => {
         </p>
         <div className="flex flex-row items-center justify-between">
           {role === "teacher" && <DeleteSubjectBtn subjectId={subject.id} />}
-          {role === "teacher" &&           <Link
-            to={`/${role}/subjects/${subject.id}`}
-            className=" gap-2 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Ver curso
-            <FaArrowRight />
-          </Link>}
-
+          {role === "teacher" && (
+            <Link
+              to={`/${role}/subjects/${subject.id}`}
+              className=" gap-2 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Ver curso
+              <FaArrowRight />
+            </Link>
+          )}
         </div>
       </div>
     </div>

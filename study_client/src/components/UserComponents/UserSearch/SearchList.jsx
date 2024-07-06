@@ -24,12 +24,12 @@ const SearchList = (props) => {
         <p className="text-gray-400">{user.email}</p>
       </div>
 
-      <button
+     {subjectId && <button
         onClick={() => plusUser(subjectId, user.id)}
         className="w-10 h-10 rounded-full bg-sky-700 text-white text-2xl flex items-center justify-center hover:bg-sky-600"
       >
         <AiOutlineUserAdd />
-      </button>
+      </button>}
     </li>
   );
 };

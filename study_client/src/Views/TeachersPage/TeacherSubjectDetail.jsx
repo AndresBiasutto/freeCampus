@@ -35,7 +35,7 @@ const TeacherSubjectDetail = () => {
       <div className="container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px] nanum2">
         <div className="flex flex-row justify-between">
           <div
-            className={`z-30 fixed top-16 transition-all  ${
+            className={`z-30 fixed bottom-0 transition-all  ${
               showModal ? "right-0" : "-right-80"
             }`}
           >

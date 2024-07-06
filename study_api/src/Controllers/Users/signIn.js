@@ -3,11 +3,11 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const comparePassword = require("../../libs/comparePassword");
 
-const signIn = async (email, password) => {
+const signIn = async (e_mail, password) => {
   const SECRET = process.env.SECRET;
 
   const userFound = await User.findOne({
-    where: { email },
+    where: { email: e_mail },
     include: [
       { model: Role, as: "Role" },
       {
@@ -38,6 +38,7 @@ const signIn = async (email, password) => {
     token: token,
     image: userFound.image,
     enrolledSubjects: userFound.enrolledSubjects,
+    contactNumber: userFound.contactNumber,
     description: userFound.description,
     department: userFound.department,
     creator: userFound.creator

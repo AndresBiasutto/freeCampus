@@ -4,6 +4,7 @@ const postUser = require("../Controllers/Users/postUser");
 const signUp = require("../Controllers/Users/signUp");
 const signIn = require("../Controllers/Users/signIn");
 const findUser = require("../Controllers/Users/findUser");
+const patchUser = require("../Controllers/Users/patchUser");
 
 const getUsersHandler = async (req, res) => {
   const searchName = req.query.name;
@@ -24,11 +25,21 @@ const postUserHandler = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 };
+const patchtUserHandler = async (req, res) => {
+  const { id } = req.params;
+  const { name, contactNumber, image, description } = req.body;
+  try {
+    const response = await patchUser(id, name, contactNumber, image, description );
+    res.status(200).json(response);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
 
 const signUpUserHandler = async (req, res) => {
-  const { name, email, password, image, roles } = req.body;
+  const { name, e_mail, password, image, roles } = req.body;
   try {
-    const signup = await signUp(name, email, password, image, roles);
+    const signup = await signUp(name, e_mail, password, image, roles);
     res.status(200).json(signup);
   } catch (error) {
     res.status(404).json({ error: error.message });
@@ -36,9 +47,9 @@ const signUpUserHandler = async (req, res) => {
 };
 
 const signInUserHandler = async (req, res) => {
-  const { email, password } = req.body;
+  const { e_mail, password } = req.body;
   try {
-    const signin = await signIn(email, password);
+    const signin = await signIn(e_mail, password);
     res.status(200).json(signin);
   } catch (error) {
     res.status(404).json({ error: error.message });
@@ -60,5 +71,6 @@ module.exports = {
   postUserHandler,
   signUpUserHandler,
   signInUserHandler,
-  getUserHandler
+  getUserHandler,
+  patchtUserHandler
 };

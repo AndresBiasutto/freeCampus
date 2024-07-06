@@ -19,7 +19,10 @@ export const loadUserFromStorage = () => {
     const image = window.localStorage.getItem('image');
     const id= window.localStorage.getItem('id')
     const enrolledSubjects= window.localStorage.getItem('enrolledSubjects')
-
+    const description= window.localStorage.getItem('description')
+    const contactNumber= window.localStorage.getItem('contactNumber')
+    const email= window.localStorage.getItem('email')
+    console.log(enrolledSubjects);
     if (token) {
       const user = {
         token,
@@ -27,7 +30,10 @@ export const loadUserFromStorage = () => {
         role,
         image,
         id,
-        enrolledSubjects
+        enrolledSubjects,
+        description,
+        contactNumber,
+        email
       };
       dispatch(loginSuccess(user));
     }

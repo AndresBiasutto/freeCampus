@@ -3,12 +3,12 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const hashPassword = require("../../libs/hashPassword");
 
-const signUp = async (name, email, password, image, roles) => {
+const signUp = async (name, e_mail, password, image, roles) => {
   const SECRET = process.env.SECRET;
 
   try {
     const encriptedPassword = await hashPassword(password);
-    const existingUser = await User.findOne({ where: { email: email } });
+    const existingUser = await User.findOne({ where: { email: e_mail } });
 
     if (existingUser) {
       return "El usuario ya existe";
@@ -16,7 +16,7 @@ const signUp = async (name, email, password, image, roles) => {
 
     const newUser = await User.create({
       name,
-      email,
+      e_mail,
       password: encriptedPassword,
       image,
     });

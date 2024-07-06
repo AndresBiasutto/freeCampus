@@ -10,20 +10,14 @@ const StudentHome = () => {
   const subjects = useSelector((state) => state.subjects);
   const dispatch = useDispatch();
   const { role, id } = useSelector((store) => store.auth);
-  const enrolledSubjects = useSelector((store) => store.user.enrolledSubjects);
+   const user = useSelector((store) => store?.user);
+   const enrolledSubjects= user?.enrolledSubjects
 
   useEffect(() => {
     dispatch(getSubjects());
     dispatch(getOneUser(id));
   }, [dispatch, id]);
 
-  useEffect(() => {
-    console.log(subjects);
-  }, [subjects]);
-
-  useEffect(() => {
-    console.log(enrolledSubjects);
-  }, [enrolledSubjects]);
 
   return (
     <div className="flex items-start min-h-screen bg-gray-50 text-gray-800 relative pt-6 2xl:container ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
@@ -41,9 +35,11 @@ const StudentHome = () => {
                   role={role}
                 />
               ))}
-          </div>
+          </div> 
         </div>
+        <h2 className="pl-4 pt-4 text-sky-600 text-lg font-bold">Tódos los cursos</h2>
         <div className="flex align-top flex-wrap justify-start gap-4">
+
           {subjects &&
             subjects.map((subject) => (
               <SubjectCard
