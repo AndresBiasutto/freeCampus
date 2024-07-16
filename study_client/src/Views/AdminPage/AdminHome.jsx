@@ -1,7 +1,14 @@
-
+import { useDispatch, useSelector } from "react-redux";
+import { getOneUser } from "../../redux/actions/userActions";
+import { useEffect } from "react";
 
 const AdminHome = () => {
-
+  const { id } = useSelector((store) => store.auth);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getOneUser(id));
+    console.log(id);
+  }, [dispatch, id]);
   return (
     <div className="flex items-start min-h-screen bg-gray-50 text-gray-800 pt-6 2xl:container ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
     <div className="p-4 w-full">

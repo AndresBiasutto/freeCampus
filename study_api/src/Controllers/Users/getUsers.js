@@ -11,7 +11,7 @@ const getUsers = async () => {
         {
           model: Subject,
           as: "enrolledSubjects",
-          attributes: ["name", "id", "creatorId"],
+          attributes: ["name", "id", "creatorId", "image"],
         },
       ],
     });

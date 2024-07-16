@@ -60,7 +60,7 @@ const Login = () => {
         let redirectPath = "/";
         if (role === "Manager") {
           redirectPath = "/manager";
-        } else if (role === "Admin") {
+        } else if (role === "admin") {
           redirectPath = "/admin/home";
         } else if (role === "teacher") {
           redirectPath = "/teacher/home";

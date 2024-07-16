@@ -48,31 +48,12 @@ const UserForm = () => {
       setErrors(errors);
       return;
     }
-    dispatch(getOneUser(id))
     dispatch(updateUser(id, data))
-
-
-    // // Replace with your server endpoint
-    // const serverEndpoint = 'https://your-server-endpoint.com/api/user';
-
-    // fetch(serverEndpoint, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(data),
-    // })
-    // .then((response) => response.json())
-    // .then((data) => {
-    //   console.log('Success:', data);
-    // })
-    // .catch((error) => {
-    //   console.error('Error:', error);
-    // });
+    dispatch(getOneUser(id))
   };
 
   return (
-    <form className="max-w-sm mx-auto" onSubmit={handleSubmit}>
+    <form className=" w-full max-w-sm mx-auto" onSubmit={handleSubmit}>
       <div className="mb-5">
         <label
           htmlFor="name"
@@ -85,7 +66,7 @@ const UserForm = () => {
           id="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+          className=" shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
           placeholder="Ej: Jon Snow"
           required
         />
@@ -103,7 +84,7 @@ const UserForm = () => {
           id="contactNumber"
           value={contactNumber}
           onChange={(e) => setContactNumber(e.target.value)}
-          className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+          className=" shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
           placeholder="Ej: 22-3344-5555"
           required
         />
@@ -121,7 +102,7 @@ const UserForm = () => {
           id="image"
           value={image}
           onChange={(e) => setImage(e.target.value)}
-          className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+          className=" shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
           placeholder="Ej: http://fb.com/jonTheChoosen"
           required
         />

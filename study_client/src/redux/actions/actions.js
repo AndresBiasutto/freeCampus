@@ -22,7 +22,6 @@ export const loadUserFromStorage = () => {
     const description= window.localStorage.getItem('description')
     const contactNumber= window.localStorage.getItem('contactNumber')
     const email= window.localStorage.getItem('email')
-    console.log(enrolledSubjects);
     if (token) {
       const user = {
         token,

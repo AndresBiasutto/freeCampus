@@ -4,6 +4,7 @@ export const GET_USER_BY_NAME = "GET_USER_BY_NAME";
 export const CLEAR_SEARCH = "CLEAR_SEARCH";
 export const GET_USER = "GET_USER";
 export const UPDATE_USER = "UPDATE_USER";
+export const CREATE_USER = "CREATE_USER";
 
 export const getAllUsers = () => {
   return async (dispatch) => {
@@ -44,6 +45,17 @@ export const updateUser= (userId, update)=>{
       dispatch({ type: UPDATE_USER, payload: apiData });
     } catch (error) {
       console.error(`Error fetching user with ID ${userId}:`, error);
+    }
+  };
+}
+
+export const createUser = (newUser)=>{
+  return async (dispatch) => {
+    try {
+      const apiData = (await axios.post("/users/signUp", newUser)).data;
+      dispatch({ type: CREATE_USER, payload: apiData });
+    } catch (error) {
+      console.error(error);
     }
   };
 }

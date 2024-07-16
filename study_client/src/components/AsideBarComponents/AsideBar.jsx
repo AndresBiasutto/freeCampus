@@ -2,12 +2,18 @@ import { useSelector } from "react-redux";
 import Logo from "../../assets/img/logo.svg";
 import LogOut from "./LogOut";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { FaHome } from "react-icons/fa";
+import { IoMdSettings } from "react-icons/io";
+import { FaUsers } from "react-icons/fa";
+import { FaGraduationCap } from "react-icons/fa";
 
 const AsideBar = () => {
   const { role, name, image } = useSelector((store) => store.auth);
+  useEffect(() => {}, [image]);
 
   return (
-    <aside className=" z-50 ml-[-100%] fixed top-10 lg:top-0 pb-3 px-6 w-full flex flex-col justify-between h-auto lg:h-screen border-r bg-white transition duration-300 md:w-[25%] md:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
+    <aside className="z-50 ml-[-100%] fixed top-10 lg:top-0 pb-3 px-6 w-full flex flex-col justify-between h-auto lg:h-screen border-r bg-white transition duration-300 md:w-[25%] md:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
       <div>
         <div className="-mx-6 px-6 py-4">
           <a href="#" title="home">
@@ -26,108 +32,71 @@ const AsideBar = () => {
           </h5>
           <span className="hidden text-gray-400 lg:block">{role}</span>
         </div>
+
         <ul className="space-y-2 tracking-wide mt-8">
           <li>
             <Link
               to={`${role}/home`}
               aria-label="Home"
               name="home"
-              className="relative px-4 py-3 flex items-center space-x-4 rounded-xl text-gray-600"
+              className="relative px-4 py-3 flex items-center space-x-4 rounded-xl text-gray-600 hover:text-sky-300 group"
             >
-              <svg className="-ml-1 h-6 w-6" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M6 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8ZM6 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-1Z"
-                  className="fill-current text-cyan-400 dark:fill-slate-600"
-                ></path>
-                <path
-                  d="M13 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2V8Z"
-                  className="fill-current text-cyan-200 group-hover:text-cyan-300"
-                ></path>
-                <path
-                  d="M13 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-1Z"
-                  className="fill-current group-hover:text-sky-300"
-                ></path>
-              </svg>
-              <span className="-mr-1 font-medium">Home</span>
+              <i className="-ml-1 h-6 w-6 flex items-center justify-center group-hover:text-sky-300">
+                <FaHome />
+              </i>
+              <span className="-mr-1 font-medium group-hover:text-sky-300">
+                Home
+              </span>
             </Link>
           </li>
           {role === "teacher" && (
-            
-          <li>
-            <Link
-              href="#"
-              className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group"
-              name="Materias"
-              to={`${role}/subjects`}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
+            <li>
+              <Link
+                to={`${role}/subjects`}
+                aria-label="Materias"
+                name="Materias"
+                className="relative px-4 py-3 flex items-center space-x-4 rounded-xl text-gray-600 hover:text-sky-300 group"
               >
-                <path
-                  className="fill-current text-gray-600 group-hover:text-cyan-600"
-                  fillRule="evenodd"
-                  d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
-                  clipRule="evenodd"
-                />
-                <path
-                  className="fill-current text-gray-300 group-hover:text-cyan-300"
-                  d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z"
-                />
-              </svg>
-              <span className="group-hover:text-gray-700">Materias</span>
-            </Link>
-          </li>       
-               
+                <i className="-ml-1 h-6 w-6 flex items-center justify-center group-hover:text-sky-300">
+                  <FaGraduationCap />
+                </i>
+                <span className="-mr-1 font-medium group-hover:text-sky-300">
+                  Materias
+                </span>
+              </Link>
+            </li>
           )}
-          <li>
-            <Link
-              to={`${role}/users`}
-              aria-label="cpannel"
-              name="cpannel"
-              className="relative px-4 py-3 flex items-center space-x-4 rounded-xl text-gray-600"
-            >
-              <svg className="-ml-1 h-6 w-6" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M6 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8ZM6 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-1Z"
-                  className="fill-current text-cyan-400 dark:fill-slate-600"
-                ></path>
-                <path
-                  d="M13 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2V8Z"
-                  className="fill-current text-cyan-200 group-hover:text-cyan-300"
-                ></path>
-                <path
-                  d="M13 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-1Z"
-                  className="fill-current group-hover:text-sky-300"
-                ></path>
-              </svg>
-              <span className="-mr-1 font-medium">Usuarios</span>
-            </Link>
-          </li>
+          {role === "teacher" && (
+            <li>
+              <Link
+                to={`${role}/users`}
+                aria-label="cpannel"
+                name="cpannel"
+                className="relative px-4 py-3 flex items-center space-x-4 rounded-xl text-gray-600 hover:text-sky-300 group"
+              >
+                <i className="-ml-1 h-6 w-6 flex items-center justify-center group-hover:text-sky-300">
+                  <FaUsers />
+                </i>
+                <span className="-mr-1 font-medium group-hover:text-sky-300">
+                  Usuarios
+                </span>
+              </Link>
+            </li>
+          )}
+
           <li>
             <Link
               to={`/settings`}
-              aria-label="cpannel"
-              name="cpannel"
-              className="relative px-4 py-3 flex items-center space-x-4 rounded-xl text-gray-600"
+              aria-label="settings"
+              name="settings"
+              className="relative px-4 py-3 flex items-center space-x-4 rounded-xl text-gray-600 hover:text-sky-300 group"
             >
-              <svg className="-ml-1 h-6 w-6" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M6 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8ZM6 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-1Z"
-                  className="fill-current text-cyan-400 dark:fill-slate-600"
-                ></path>
-                <path
-                  d="M13 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2V8Z"
-                  className="fill-current text-cyan-200 group-hover:text-cyan-300"
-                ></path>
-                <path
-                  d="M13 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-1Z"
-                  className="fill-current group-hover:text-sky-300"
-                ></path>
-              </svg>
-              <span className="-mr-1 font-medium">settings</span>
+              <i className="-ml-1 h-6 w-6 flex items-center justify-center group-hover:text-sky-300">
+                <IoMdSettings />
+              </i>
+              <span className="-mr-1 font-medium group-hover:text-sky-300">
+                Settings
+              </span>
             </Link>
           </li>
         </ul>

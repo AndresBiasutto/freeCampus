@@ -16,7 +16,7 @@ const signUp = async (name, e_mail, password, image, roles) => {
 
     const newUser = await User.create({
       name,
-      e_mail,
+      email: e_mail,
       password: encriptedPassword,
       image,
     });

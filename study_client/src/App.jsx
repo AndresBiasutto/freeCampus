@@ -24,6 +24,7 @@ import HomePage from "./Views/PublicPages/HomePage";
 import UsersCPannel from "./Views/PublicPages/UsersCPannel";
 import UserDetail from "./Views/PublicPages/UserDetail";
 import UserSettings from "./Views/PublicPages/UserSettings";
+import Register from "./Views/PublicPages/Register";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -42,15 +43,16 @@ const App = () => {
 
   return (
     <div>
-      {location.pathname !== "/" && location.pathname !== "/login" && (
-        <TopBar />
-      )}
-      {location.pathname !== "/" && location.pathname !== "/login" && (
-        <AsideBar />
-      )}
+      {location.pathname !== "/" &&
+        location.pathname !== "/login" &&
+        location.pathname !== "/register" && <TopBar />}
+      {location.pathname !== "/" &&
+        location.pathname !== "/login" &&
+        location.pathname !== "/register" && <AsideBar />}
 
       <Routes>
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/*" element={<UnauthorizedPage />} />
         <Route path="/" element={<HomePage />} />
 
@@ -67,7 +69,7 @@ const App = () => {
         <Route
           path="/admin/home"
           element={
-            <PrivateRoute roles={["Admin"]}>
+            <PrivateRoute roles={["admin"]}>
               <AdminHome />
             </PrivateRoute>
           }
@@ -142,15 +144,15 @@ const App = () => {
         <Route
           path="/users/:id"
           element={
-            <PrivateRoute roles={["teacher", "student"]}>
+            <PrivateRoute roles={["teacher", "student", "admin"]}>
               <UserDetail />
             </PrivateRoute>
           }
         />
-                <Route
+        <Route
           path="/settings"
           element={
-            <PrivateRoute roles={["teacher", "student"]}>
+            <PrivateRoute roles={["teacher", "student", "admin"]}>
               <UserSettings />
             </PrivateRoute>
           }

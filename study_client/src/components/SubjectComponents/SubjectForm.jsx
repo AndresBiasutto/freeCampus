@@ -13,6 +13,7 @@ const SubjectForm = ({ turnModal, setTurnModal }) => {
     description: "",
     department: "",
     creatorId: id,
+    image: ""
   });
 
   const [errors, setErrors] = useState({});
@@ -82,7 +83,7 @@ const SubjectForm = ({ turnModal, setTurnModal }) => {
     <div className={`z-30 fixed top-16 transition-all ${turnModal ? "right-0" : "-right-80"}`}>
       <form
         onSubmit={handleSubmit}
-        className="bg-sky-700 px-10 py-8 rounded-xl shadow-md max-w-sm w-full"
+        className="bg-sky-700 px-10 py-8 rounded-l-xl shadow-md max-w-sm w-full"
       >
         <div className="space-y-4">
           <h1 className="text-center text-2xl font-semibold text-gray-100">
@@ -93,6 +94,7 @@ const SubjectForm = ({ turnModal, setTurnModal }) => {
               Nombre
             </label>
             <input
+              placeholder="Nombre de la materia."
               type="text"
               name="name"
               value={formData.name}
@@ -106,6 +108,7 @@ const SubjectForm = ({ turnModal, setTurnModal }) => {
               Descripción
             </label>
             <input
+              placeholder="breve descripción de la materia"
               type="text"
               name="description"
               value={formData.description}
@@ -119,6 +122,7 @@ const SubjectForm = ({ turnModal, setTurnModal }) => {
               Tema
             </label>
             <input
+              placeholder="Ej: Ciencias Naturales."
               type="text"
               name="department"
               value={formData.department}
@@ -127,6 +131,23 @@ const SubjectForm = ({ turnModal, setTurnModal }) => {
             />
             {errors.department && <p className="text-red-500">{errors.department}</p>}
           </div>
+
+
+          <div>
+            <label htmlFor="image" className="block mb-1 text-gray-50 font-semibold">
+              Imagen de portada
+            </label>
+            <input
+             placeholder="http://imageUrl.jpg/png/etc"
+              type="text"
+              name="image"
+              value={formData.image}
+              onChange={handleChange}
+              className="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full"
+            />
+            {errors.image && <p className="text-red-500">{errors.image}</p>}
+          </div>
+
         </div>
         <button
           type="submit"

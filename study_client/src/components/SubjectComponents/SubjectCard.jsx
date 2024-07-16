@@ -6,7 +6,7 @@ import DeleteSubjectBtn from "./DeleteSubjectBtn";
 import { useEffect } from "react";
 
 const SubjectCard = (props) => {
-  const { subject, img, role } = props;
+  const { subject, role } = props;
   // eslint-disable-next-line react/prop-types
   const subjectCreator = subject.creator.name;
   useEffect(() => {}, [subject]);
@@ -17,8 +17,8 @@ const SubjectCard = (props) => {
         <img
           className="w-full h-auto object-cover rounded-t-lg"
           src={
-            img
-              ? img
+            subject.image
+              ? subject.image
               : "https://static.vecteezy.com/system/resources/thumbnails/035/623/558/small_2x/2d-animated-book-free-video.jpg"
           }
           alt=""
@@ -57,9 +57,9 @@ SubjectCard.propTypes = {
     name: PropTypes.string.isRequired,
     description: PropTypes.string,
     department: PropTypes.string.isRequired,
+    image: PropTypes.string,
   }).isRequired,
   name: PropTypes.string.isRequired,
-  img: PropTypes.string,
   role: PropTypes.string.isRequired,
 };
 

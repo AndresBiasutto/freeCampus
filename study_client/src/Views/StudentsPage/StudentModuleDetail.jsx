@@ -1,13 +1,18 @@
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import { getOneModule } from "../../redux/actions/moduleActions";
-import FileCard from "../../components/FileCard";
+import ModuleHeader from "../../components/ModuleComponents/ModuleDetail/ModuleHeader";
+import TabMenu from "../../components/ModuleComponents/ModuleDetail/TabMenu";
+import LectureTab from "../../components/ModuleComponents/ModuleDetail/LectureTab";
+import MaterialTab from "../../components/ModuleComponents/ModuleDetail/MaterialTab";
 
 const StudentModuleDetail = () => {
   const module = useSelector((state) => state.module);
   const files = useSelector((state) => state.files);
-  const moduleFiles = module.Files;
+  const {role}= useSelector(state => state.auth)
+  const [activeTab, setActiveTab] = useState(1);
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -15,17 +20,17 @@ const StudentModuleDetail = () => {
     dispatch(getOneModule(id));
   }, [dispatch, id, files]);
 
+  const moduleFiles = module.Files || [];
+  const moduleVideo = module?.Video?.videoUrl || "sinVideo";
+
+  const showTab = (num) => setActiveTab(num);
   return (
     <div className="flex items-start min-h-screen bg-gray-50 text-gray-800 relative pt-6 2xl:container ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
       <div className="container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px] nanum2">
-        <h2>{module.name}</h2>
-        <h3>{module.description}</h3>
-        <div>
-          {moduleFiles &&
-            moduleFiles.map((file) => (
-              <FileCard key={file.id} file={file} />
-            ))}
-        </div>
+        <ModuleHeader module={module} />
+        <TabMenu activeTab={activeTab} showTab={showTab} />
+        {activeTab === 1 && <LectureTab role={role} module={module} moduleId={id} moduleVideo={moduleVideo} />}
+        {activeTab === 2 && <MaterialTab role={role} moduleFiles={moduleFiles} moduleId={module.id} />}
       </div>
     </div>
   );

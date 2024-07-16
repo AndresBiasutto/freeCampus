@@ -3,7 +3,7 @@ import {
   LOGOUT,
   LOAD_USER_FROM_STORAGE,
 } from "./actions/actions";
-import {UPDATE_USER, GET_ALL_USERS, GET_USER_BY_NAME, CLEAR_SEARCH, GET_USER } from "./actions/userActions";
+import {UPDATE_USER, GET_ALL_USERS, GET_USER_BY_NAME, CLEAR_SEARCH, GET_USER, CREATE_USER } from "./actions/userActions";
 import { NAVIGATION_ROUTE } from "./actions/navActions";
 import { UPLODAD_FILE, GET_FILES } from "./actions/fileActions";
 import {
@@ -30,8 +30,8 @@ const initialState = {
     role: null,
     id: null,
     enrolledSubjects: []
-    
   },
+  registerToken: null,
   route: "home",
   file: null,
   files: null,
@@ -170,6 +170,11 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload,
+      };
+    case CREATE_USER:
+      return {
+        ...state,
+        registerToken: action.payload,
       };
     case GET_USER_BY_NAME:
       return {

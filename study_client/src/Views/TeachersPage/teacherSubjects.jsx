@@ -11,7 +11,7 @@ const TeacherSubjects = () => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
 
-  const mySubjects = subjects?.filter(  (subject) =>  subject?.creator?.id ===  id);
+  const mySubjects = subjects?.filter((subject) => subject?.creator?.id === id);
 
   useEffect(() => {
     dispatch(getSubjects());
@@ -26,7 +26,9 @@ const TeacherSubjects = () => {
     <div className="flex items-start min-h-screen bg-gray-50 text-gray-800 relative pt-6 2xl:container ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
       <div className="container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px] nanum2">
         <div
-          className={`z-30 fixed top-16 transition-all ${showModal ? "right-0" : "-right-80"}`}
+          className={`z-30 fixed top-16 transition-all ${
+            showModal ? "right-0" : "-right-80"
+          }`}
         >
           <SubjectForm turnModal={showModal} setTurnModal={setShowModal} />
         </div>
@@ -42,7 +44,12 @@ const TeacherSubjects = () => {
           <div className="flex align-top flex-wrap justify-start gap-4">
             {mySubjects &&
               mySubjects.map((subject) => (
-                <SubjectCard key={subject.id} subject={subject} name={name} role={role} />
+                <SubjectCard
+                  key={subject.id}
+                  subject={subject}
+                  name={name}
+                  role={role}
+                />
               ))}
           </div>
         </div>

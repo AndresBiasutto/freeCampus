@@ -11,7 +11,7 @@ const getUserByName = async (searchName) => {
     include:{
     model: Subject,
     as: "enrolledSubjects",
-    attributes: ["name", "id", "creatorId"],
+    attributes: ["name", "id", "creatorId", "image"],
   },
   
 

@@ -11,7 +11,7 @@ const findUser = async (id) => {
       {
         model: Subject,
         as: "enrolledSubjects",
-        attributes: ["name", "id", "creatorId","description"],
+        attributes: ["name", "id", "creatorId", "description", "image"],
       },
     ],
   });

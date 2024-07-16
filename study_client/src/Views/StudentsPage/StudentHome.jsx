@@ -1,13 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSubjects } from "../../redux/actions/subjectActions";
-import SubjectCard from "../../components/SubjectComponents/SubjectCard";
 import SubjectSearch from "../../components/SubjectComponents/SubjectSearch";
 import { getOneUser } from "../../redux/actions/userActions";
 import MySubjects from "../../components/SubjectComponents/MySubjects";
 
 const StudentHome = () => {
-  const subjects = useSelector((state) => state.subjects);
   const dispatch = useDispatch();
   const { role, id } = useSelector((store) => store.auth);
    const user = useSelector((store) => store?.user);
@@ -25,7 +23,7 @@ const StudentHome = () => {
         <SubjectSearch />
         <div className="flex flex-col align-top justify-start gap-4 mt-4 mb-4 rounded-lg bg-sky-600">
           <h2 className="pl-4 pt-4 text-sky-50 text-lg font-bold">Mis cursos</h2>
-          <div className="flex align-top flex-wrap justify-start gap-4 mt-4 mb-4 pl-4 pr-4">
+          <div className="flex align-top flex-wrap justify-center gap-4 mt-4 mb-4 pl-4 pr-4">
             {enrolledSubjects &&
               enrolledSubjects.map((subject) => (
                 <MySubjects
@@ -37,9 +35,8 @@ const StudentHome = () => {
               ))}
           </div> 
         </div>
-        <h2 className="pl-4 pt-4 text-sky-600 text-lg font-bold">Tódos los cursos</h2>
+        {/* <h2 className="pl-4 pt-4 text-sky-600 text-lg font-bold">Tódos los cursos</h2>
         <div className="flex align-top flex-wrap justify-start gap-4">
-
           {subjects &&
             subjects.map((subject) => (
               <SubjectCard
@@ -50,7 +47,7 @@ const StudentHome = () => {
                 role={role}
               />
             ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

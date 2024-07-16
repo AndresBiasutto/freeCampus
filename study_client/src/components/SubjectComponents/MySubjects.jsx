@@ -5,8 +5,8 @@ import { FaArrowRight } from "react-icons/fa";
 import { useEffect } from "react";
 
 const SubjectCard = (props) => {
-  const { subject, img, role } = props;
-  useEffect(() => {}, [subject]);
+  const { subject, role } = props;
+  useEffect(() => {console.log(subject);}, [subject]);
 
   return (
     <div className=" w-[250px] h-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-sky-800 dark:border-gray-700">
@@ -14,8 +14,8 @@ const SubjectCard = (props) => {
         <img
           className="w-full h-auto object-cover rounded-t-lg"
           src={
-            img
-              ? img
+            subject.image
+              ? subject.image
               : "https://static.vecteezy.com/system/resources/thumbnails/035/623/558/small_2x/2d-animated-book-free-video.jpg"
           }
           alt=""
@@ -47,6 +47,7 @@ SubjectCard.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     description: PropTypes.string,
+    image: PropTypes.string
   }).isRequired,
   img: PropTypes.string,
   role: PropTypes.string.isRequired,

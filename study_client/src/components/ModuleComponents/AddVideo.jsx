@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getFiles } from "../../redux/actions/fileActions";
 import { addVideo } from "../../redux/actions/moduleActions";
+import PropTypes from 'prop-types';
 
 const AddVideo = ({ moduleId }) => {
   const dispatch = useDispatch();
@@ -14,7 +15,6 @@ const AddVideo = ({ moduleId }) => {
     e.preventDefault();
     if (!linkValue) {
       setErrorMessage("Añadir URL del video");
-      console.log("No se ha seleccionado ningún link");
       return;
     }
 
@@ -62,5 +62,7 @@ const AddVideo = ({ moduleId }) => {
     </form>
   );
 };
-
+AddVideo.propTypes = {
+  moduleId: PropTypes.string.isRequired,
+};
 export default AddVideo;
