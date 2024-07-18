@@ -44,7 +44,8 @@ const SubjectForm = ({ turnModal, setTurnModal }) => {
     const formErrors = validate();
     if (Object.keys(formErrors).length === 0) {
       axios
-      .post("http://localhost:3001/subjects", formData)
+      // .post("http://localhost:3001/subjects", formData)    post para local
+      .post("https://freecampus-back.onrender.com/subjects", formData)      //post para remoto
       .then((response) => {
         console.log("Success:", response.data);
         setNotification({
