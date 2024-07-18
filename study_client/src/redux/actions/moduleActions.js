@@ -34,7 +34,7 @@ export const addModule = (moduleData) => async (dispatch) => {
 };
 export const addVideo = (moduleData) => async (dispatch) => {
   try {
-    const response = await axios.post('https://freecampus-back.onrender.com/modules/modules/videos', moduleData);
+    const response = await axios.post('https://freecampus-back.onrender.com/modules/videos', moduleData);
     dispatch({ type: ADD_VIDEO_SUCCESS, payload: response.data });
     dispatch(getModules());
   } catch (error) {
