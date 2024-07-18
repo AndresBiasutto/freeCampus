@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import FileCard from '../../../components/FileCard';
 import UploadFile from '../../../components/UploadFile';
 
-const MaterialTab = ({ moduleFiles, moduleId, role }) => (
+const MaterialTab = ({ moduleFiles, moduleId }) => (
   <div className="bg-sky-800 rounded pt-4">
-    {role && role === "teacher" && <UploadFile moduleId={moduleId} />}
+   <UploadFile moduleId={moduleId} />
     <div>
       {moduleFiles.map((file) => (
         <FileCard key={file.id} file={file} />

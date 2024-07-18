@@ -2,10 +2,10 @@ import PropTypes from "prop-types";
 import AddVideo from "../../../components/ModuleComponents/AddVideo";
 import Video from "../../../components/Video";
 
-const LectureTab = ({ module, moduleId, moduleVideo, role }) => (
+const LectureTab = ({ module, moduleId, moduleVideo }) => (
   <div className="bg-sky-800 rounded pt-4">
     <p className="text-sky-100">{module.description}</p>
-    {role && role === "teacher" && <AddVideo moduleId={moduleId} />}
+    <AddVideo moduleId={moduleId} />
 
     <Video videoUrl={moduleVideo} />
   </div>
