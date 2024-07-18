@@ -12,7 +12,7 @@ server.name = "API";
 
 const corsOptions = {
   // origin: 'http://localhost:5173', //frontend local
-  origin: 'https://669850c6bd80c1b4ceffb1fd--lighthearted-flan-381c04.netlify.app', //frontend deploy
+  origin: 'https://classy-belekoy-2ec35b.netlify.app', //frontend deploy
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type'],
   credentials: true,
