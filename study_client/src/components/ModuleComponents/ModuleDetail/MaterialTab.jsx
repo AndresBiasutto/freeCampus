@@ -4,7 +4,7 @@ import UploadFile from '../../../components/UploadFile';
 
 const MaterialTab = ({ moduleFiles, moduleId, role }) => (
   <div className="bg-sky-800 rounded pt-4">
-    {role === "teacher" && <UploadFile moduleId={moduleId} />}
+    {role && role === "teacher" && <UploadFile moduleId={moduleId} />}
     <div>
       {moduleFiles.map((file) => (
         <FileCard key={file.id} file={file} />
