@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getSubjects } from "../../redux/actions/subjectActions";
-import { GrCertificate } from "react-icons/gr";
 import PropTypes from "prop-types";
 
 const SubjectForm = ({ turnModal, setTurnModal }) => {
@@ -13,7 +12,7 @@ const SubjectForm = ({ turnModal, setTurnModal }) => {
     description: "",
     department: "",
     creatorId: id,
-    image: ""
+    image: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -34,7 +33,8 @@ const SubjectForm = ({ turnModal, setTurnModal }) => {
   const validate = () => {
     let formErrors = {};
     if (!formData.name) formErrors.name = "Name is required";
-    if (!formData.description) formErrors.description = "Description is required";
+    if (!formData.description)
+      formErrors.description = "Description is required";
     if (!formData.department) formErrors.department = "Department is required";
     return formErrors;
   };
@@ -44,23 +44,23 @@ const SubjectForm = ({ turnModal, setTurnModal }) => {
     const formErrors = validate();
     if (Object.keys(formErrors).length === 0) {
       axios
-      // .post("http://localhost:3001/subjects", formData)    post para local
-      .post("https://freecampus-back.onrender.com/subjects", formData)      //post para remoto
-      .then((response) => {
-        console.log("Success:", response.data);
-        setNotification({
-          type: "success",
-          message: "Form submitted successfully!",
-        });
-        dispatch(getSubjects());
-        setTurnModal(false)
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        setNotification({
-          type: "error",
-          message: "Failed to submit the form.",
-        });
+        .post("http://localhost:3001/subjects", formData) // post para local
+        //.post("https://freecampus-back.onrender.com/subjects", formData)      //post para remoto
+        .then((response) => {
+          console.log("Success:", response.data);
+          setNotification({
+            type: "success",
+            message: "Form submitted successfully!",
+          });
+          dispatch(getSubjects());
+          setTurnModal(false);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          setNotification({
+            type: "error",
+            message: "Failed to submit the form.",
+          });
         });
     } else {
       setErrors(formErrors);
@@ -81,85 +81,75 @@ const SubjectForm = ({ turnModal, setTurnModal }) => {
   };
 
   return (
-    <div className={`z-30 fixed top-16 transition-all ${turnModal ? "right-0" : "-right-80"}`}>
+    <div
+      className={` h-full w-full`}
+    >
       <form
         onSubmit={handleSubmit}
-        className="bg-sky-700 px-10 py-8 rounded-l-xl shadow-md max-w-sm w-full"
+        className=" z-40 absolute top-14 left-4 h-auto flex flex-col items-center justify-center rounded-lg gap-1"
       >
-        <div className="space-y-4">
-          <h1 className="text-center text-2xl font-semibold text-gray-100">
-            Agregar materia
-          </h1>
+        <div className="space-y-2">
           <div>
-            <label htmlFor="name" className="block mb-1 text-gray-50 font-semibold">
-              Nombre
-            </label>
             <input
               placeholder="Nombre de la materia."
               type="text"
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full"
+              className="h-7 rounded-lg"
             />
             {errors.name && <p className="text-red-500">{errors.name}</p>}
           </div>
           <div>
-            <label htmlFor="description" className="block mb-1 text-gray-50 font-semibold">
-              Descripción
-            </label>
             <input
               placeholder="breve descripción de la materia"
               type="text"
               name="description"
               value={formData.description}
               onChange={handleChange}
-              className="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full"
+              className="h-7 rounded-lg"
             />
-            {errors.description && <p className="text-red-500">{errors.description}</p>}
+            {errors.description && (
+              <p className="text-red-500">{errors.description}</p>
+            )}
           </div>
           <div>
-            <label htmlFor="department" className="block mb-1 text-gray-50 font-semibold">
-              Tema
-            </label>
             <input
               placeholder="Ej: Ciencias Naturales."
               type="text"
               name="department"
               value={formData.department}
               onChange={handleChange}
-              className="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full"
+              className="h-7 rounded-lg"
             />
-            {errors.department && <p className="text-red-500">{errors.department}</p>}
+            {errors.department && (
+              <p className="text-red-500">{errors.department}</p>
+            )}
           </div>
 
-
           <div>
-            <label htmlFor="image" className="block mb-1 text-gray-50 font-semibold">
-              Imagen de portada
-            </label>
             <input
-             placeholder="http://imageUrl.jpg/png/etc"
+              placeholder="http://imageUrl.jpg/png/etc"
               type="text"
               name="image"
               value={formData.image}
               onChange={handleChange}
-              className="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full"
+              className="h-7 rounded-lg"
             />
             {errors.image && <p className="text-red-500">{errors.image}</p>}
           </div>
-
         </div>
         <button
           type="submit"
-          className="flex flex-row justify-center items-center gap-4 mt-4 px-3 md:px-4 py-1 md:py-2 bg-sky-600 border border-sky-600 text-white rounded-lg hover:bg-sky-700"
-        >
-          crear <GrCertificate className="text-gray-50 text-xl" />
+          className="w-full flex flex-row justify-center items-center border gap-4 border-dark-blueBtn hover:border-dark-blueBtnHvr bg-light-blueBtn hover:bg-light-blueBtnHvr dark:bg-dark-blueBtn dark:hover:bg-dark-blueBtnHvr rounded-lg text-light-text dark:text-dark-text">
+          crear
         </button>
         {notification && (
           <div
             className={`mt-4 text-center py-2 rounded-md ${
-              notification.type === "success" ? "bg-green-100 text-green-600" : "bg-red-100 text-red-600"
+              notification.type === "success"
+                ? "bg-green-100 text-green-600"
+                : "bg-red-100 text-red-600"
             }`}
           >
             {notification.message}

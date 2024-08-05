@@ -7,10 +7,10 @@ import UnauthorizedPage from "./Views/PublicPages/UnauthorizedPage";
 import PrivateRoute from "./components/PrivateRoute";
 import { loadUserFromStorage } from "./redux/actions/actions";
 import usePreserveRoute from "./hooks/usePreserveRoute";
-import AsideBar from "./components/AsideBarComponents/AsideBar";
+//import AsideBar from "./components/AsideBarComponents/AsideBar";
 import AdminHome from "./Views/AdminPage/AdminHome";
 import AdminSubject from "./Views/AdminPage/AdminSubject";
-import TopBar from "./components/AsideBarComponents/TopBar";
+//import TopBar from "./components/AsideBarComponents/TopBar";
 import AdminSubjectDetail from "./Views/AdminPage/AdminSubjectDetail";
 import AdminModuleDetail from "./Views/AdminPage/AdminModuleDetail";
 import TeacherHome from "./Views/TeachersPage/TeacherHome";
@@ -25,6 +25,8 @@ import UsersCPannel from "./Views/PublicPages/UsersCPannel";
 import UserDetail from "./Views/PublicPages/UserDetail";
 import UserSettings from "./Views/PublicPages/UserSettings";
 import Register from "./Views/PublicPages/Register";
+import NavBar from "./components/NavBarComponents/NavBar";
+import Dashboard from "./Views/TeachersPage/Dashboard";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -42,13 +44,16 @@ const App = () => {
   }, [dispatch, navigate]);
 
   return (
-    <div>
-      {location.pathname !== "/" &&
+    <div className="h-screen transition bg-light-lightBackground dark:bg-dark-darkBackground">
+      {/* {location.pathname !== "/" &&
         location.pathname !== "/login" &&
         location.pathname !== "/register" && <TopBar />}
       {location.pathname !== "/" &&
         location.pathname !== "/login" &&
-        location.pathname !== "/register" && <AsideBar />}
+        location.pathname !== "/register" && <AsideBar />} */}
+      {location.pathname !== "/" &&
+        location.pathname !== "/login" &&
+        location.pathname !== "/register" && <NavBar />}
 
       <Routes>
         <Route path="/login" element={<LoginPage />} />
@@ -106,6 +111,14 @@ const App = () => {
           element={
             <PrivateRoute roles={["teacher"]}>
               <TeacherHome />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/teacher/dashboard"
+          element={
+            <PrivateRoute roles={["teacher"]}>
+              <Dashboard />
             </PrivateRoute>
           }
         />

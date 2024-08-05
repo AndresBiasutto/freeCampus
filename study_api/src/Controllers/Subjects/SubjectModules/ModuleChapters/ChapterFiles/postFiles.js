@@ -1,8 +1,8 @@
-const { File, Module } = require("../../db");
-const bucket = require("../../firebaseConfig");
+const { File, Chapter } = require("../../../../../db");
+const bucket = require("../../../../../firebaseConfig");
 const { v4: uuidv4 } = require("uuid");
 
-const postFiles = async (file, moduleId) => {
+const postFiles = async (file, chapterId) => {
   try {
     const fileName = `${uuidv4()}.pdf`;
     const fileUpload = bucket.file(fileName);
@@ -22,26 +22,27 @@ const postFiles = async (file, moduleId) => {
         try {
           await fileUpload.makePublic();
           const publicUrl = `https://storage.googleapis.com/${bucket.name}/${fileUpload.name}`;
-
+          console.log(file);
           const createdFile = await File.create({
             data: {
+              id: uuidv4,
               fieldname: file.fieldname,
               originalname: file.originalname,
               publicurl: publicUrl,
             },
-            moduleId: moduleId,
+            chapterId: chapterId,
           });
 
-          const module = await Module.findByPk(moduleId);
+          const chapter = await Chapter.findByPk(chapterId);
 
-          if (!module) {
-            throw new Error("Module not found");
+          if (!chapter) {
+            throw new Error("Chapter not found");
           }
 
-          createdFile.Module = {
-            id: module.id,
-            name: module.name,
-            description: module.description,
+          createdFile.Chapter = {
+            id: chapter.id,
+            name: chapter.name,
+            description: chapter.description,
           };
 
           resolve(createdFile);

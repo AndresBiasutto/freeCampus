@@ -1,4 +1,4 @@
-const { Video, Module } = require("../../db");
+const { Video, Module } = require("../../../../../db");
 
 const postVideo = async (videoUrl, moduleId) => {
   const module = await Module.findByPk(moduleId);

@@ -1,17 +1,18 @@
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
+const chapter = require("./models/chapter");
 require("dotenv").config();
 const { DATABASE_URL, //local
         POSTGRE_DB  //deploy
    } = process.env;
 
-const sequelize = new Sequelize(POSTGRE_DB, {
-  dialectOptions: {
-    ssl:{require:true,
-         rejectUnauthorized: false,
-    },
-  },
+const sequelize = new Sequelize(DATABASE_URL, {
+  // dialectOptions: {
+  //   ssl:{require:true,
+  //        rejectUnauthorized: false,
+  //   },
+  // },
   logging: false,
   native: false,
 });
@@ -31,7 +32,7 @@ fs.readdirSync(path.join(__dirname, "/models"))
 
 modelDefiners.forEach((model) => model(sequelize));
 
-const { User, Subject, File, Role, Module, Video } = sequelize.models;
+const { User, Subject, File, Role, Module, Video, Chapter } = sequelize.models;
 
 // Associations
 User.belongsTo(Role, { foreignKey: "role" });
@@ -43,8 +44,12 @@ Subject.hasMany(Module, { foreignKey: "subjectId" });
 Module.belongsTo(Subject, { foreignKey: "subjectId" });
 User.hasMany(Subject, { as: "createdSubjects", foreignKey: "creatorId" });
 Subject.belongsTo(User, { as: "creator", foreignKey: "creatorId" });
-Module.belongsTo(Video, { foreignKey: "videoId" });
-Video.hasOne(Module, { foreignKey: "videoId" });
+Module.hasMany(Chapter, { foreignKey: "moduleId", as: "chapters" });
+Chapter.belongsTo(Module, { foreignKey: "moduleId", as: "module" });
+File.belongsTo(Chapter, { foreignKey: "chapterId", as: "Chapter" });
+Chapter.hasMany(File, { foreignKey: "chapterId", as: "Files" });
+Chapter.belongsTo(Video, { foreignKey: "videoId" });
+Video.hasOne(Chapter, { foreignKey: "videoId" });
 
 module.exports = {
   ...sequelize.models,

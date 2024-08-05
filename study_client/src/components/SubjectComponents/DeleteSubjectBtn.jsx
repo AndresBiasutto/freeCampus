@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { RiDeleteBin6Fill } from "react-icons/ri";
+import { MdDeleteOutline } from "react-icons/md";
+import { MdOutlineCancel } from "react-icons/md";
+
 import { useDispatch } from "react-redux";
 import { deleteSubject } from "../../redux/actions/subjectActions";
 import PropTypes from "prop-types"
@@ -26,28 +28,24 @@ const DeleteSubjectBtn = ( props ) => {
       <button
         onClick={toggleModal}
         type="button"
-        className="text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2"
-      >
-        <i className="text-gray-100 text-lg">
-          <RiDeleteBin6Fill />
-        </i>
+        className=" flex justify-center items-center h-6 w-6 rounded-xl bg-light-redBtn hover:bg-light-redBtnHvr dark:bg-dark-redBtn dark:hover:bg-dark-redBtnHvr text-light-text dark:text-dark-text"      >
+        <MdDeleteOutline />
       </button>
       {showModal && (
-        <div className=" z-50 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-4 rounded-lg shadow-lg flex justify-around items-center flex-col">
-            <h2>Are you sure you want to delete this subject?</h2>
+        <div className="absolute left-0 flex items-center justify-center">
+          <div className=" bg-light-lightBackground dark:bg-dark-darkBackground p-4 rounded-lg shadow-lg flex justify-around items-center flex-col">
+            <h2 className=" text-light-text dark:text-dark-text mb-2" >Todos los datos relacionados tambien seran borrados</h2>
             <div className=" w-auto flex flex-row items-center justify-between gap-4">
-              <button
-                onClick={() => deleteHandler(subjectId)}
-                className="bg-red-500 text-white p-2 rounded-lg w-auto"
-              >
-                Yes, Delete
-              </button>
+            <button
+            onClick={() => deleteHandler(subjectId)}
+             className=" flex justify-center items-center h-6 w-6 rounded-xl bg-red-300 hover:bg-red-400 text-dark-text dark:text-light-text">
+                <MdDeleteOutline />
+             </button>
               <button
                 onClick={toggleModal}
-                className="bg-gray-500 text-white p-2 rounded-lg w-25"
+                className=" flex justify-center items-center h-6 w-6 rounded-xl bg-gray-500 hover:bg-gray-600 text-dark-text dark:text-light-text"
               >
-                Cancel
+                <MdOutlineCancel />
               </button>
             </div>
           </div>

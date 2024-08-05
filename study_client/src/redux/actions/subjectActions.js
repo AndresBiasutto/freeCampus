@@ -2,6 +2,7 @@ export const CREATE_SUBJECT = "CREATE_SUBJECT";
 export const GET_SUBJECTS = "GET_SUBJECTS";
 export const GET_SUBJECT = "GET_SUBJECT";
 export const DELETE_SUBJECT = "DELETE_SUBJECT";
+export const UPDATE_SUBJECT = "UPDATE_SUBJECT";
 export const GET_SUBJECT_BY_NAME = "GET_SUBJECT_BY_NAME";
 export const ADD_STUDENT = "ADD_STUDENT";
 import axios from "../../api/axios";
@@ -35,6 +36,17 @@ export const getSubjectByName= (name)=>{
       const apidata= (await axios.get(`subjects/?name=${name}`)).data
       console.log(apidata);
       dispatch({type: GET_SUBJECT_BY_NAME, payload: apidata})
+  }
+}
+export const updateSubject= (subjectId, updateData)=>{
+  return async (dispatch) =>{
+    try {
+      const response = await axios.patch(`subjects/${subjectId}`, updateData)
+      dispatch({ type: UPDATE_SUBJECT, payload: response.data });
+      dispatch(getSubjects())
+    } catch (error) {
+      console.error("Error adding student:", error);
+    }
   }
 }
 export const addUser = (subjectId, student) => {

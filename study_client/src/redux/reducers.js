@@ -2,8 +2,16 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   LOAD_USER_FROM_STORAGE,
+  TOGGLE_THEME,
 } from "./actions/actions";
-import {UPDATE_USER, GET_ALL_USERS, GET_USER_BY_NAME, CLEAR_SEARCH, GET_USER, CREATE_USER } from "./actions/userActions";
+import {
+  UPDATE_USER,
+  GET_ALL_USERS,
+  GET_USER_BY_NAME,
+  CLEAR_SEARCH,
+  GET_USER,
+  CREATE_USER,
+} from "./actions/userActions";
 import { NAVIGATION_ROUTE } from "./actions/navActions";
 import { UPLODAD_FILE, GET_FILES } from "./actions/fileActions";
 import {
@@ -12,7 +20,8 @@ import {
   GET_SUBJECT,
   DELETE_SUBJECT,
   GET_SUBJECT_BY_NAME,
-  ADD_STUDENT
+  ADD_STUDENT,
+  UPDATE_SUBJECT
 } from "./actions/subjectActions";
 import {
   CREATE_MODULE,
@@ -20,7 +29,7 @@ import {
   GET_MODULE,
   ADD_MODULE_SUCCESS,
   ADD_VIDEO_SUCCESS,
-  ADD_VIDEO_FAILURE
+  ADD_VIDEO_FAILURE,
 } from "./actions/moduleActions";
 
 const initialState = {
@@ -29,8 +38,9 @@ const initialState = {
     user: null,
     role: null,
     id: null,
-    enrolledSubjects: []
+    enrolledSubjects: [],
   },
+  darkMode:false,
   registerToken: null,
   route: "home",
   file: null,
@@ -42,7 +52,7 @@ const initialState = {
   users: [],
   user: {},
   studentSearch: [],
-  students: []
+  students: [],
 };
 
 const authReducer = (state = initialState, action) => {
@@ -61,7 +71,7 @@ const authReducer = (state = initialState, action) => {
           email: action.payload.email,
           enrolledSubjects: action.payload.enrolledSubjects,
           description: action.payload.description,
-          contactNumber: action.payload.contactNumber
+          contactNumber: action.payload.contactNumber,
         },
       };
     case LOGOUT:
@@ -72,6 +82,11 @@ const authReducer = (state = initialState, action) => {
         role: null,
         name: null,
         image: null,
+      };
+    case TOGGLE_THEME:
+      return {
+        ...state,
+        darkMode: !state.darkMode,
       };
     case LOAD_USER_FROM_STORAGE:
       return {
@@ -107,6 +122,11 @@ const authReducer = (state = initialState, action) => {
         subjectSearch: action.payload,
       };
     case CREATE_SUBJECT:
+      return {
+        ...state,
+        subject: action.payload,
+      };
+    case UPDATE_SUBJECT:
       return {
         ...state,
         subject: action.payload,

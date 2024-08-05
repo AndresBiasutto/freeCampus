@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
   });
 
   File.associate = (models) => {
-    File.belongsTo(models.Module, { foreignKey: "moduleId", as: "Module" });
+    File.belongsTo(models.Module, { foreignKey: "chapterId", as: "Chapter" });
   };
 
   return File;

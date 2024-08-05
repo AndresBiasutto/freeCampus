@@ -6,6 +6,7 @@ const patchSubjectStudents = require("../Controllers/Subjects/patchSubjectStuden
 const removeSubjectStudent = require("../Controllers/Subjects/removeSubjectStudent");
 const getSubjectByName = require("../Controllers/Subjects/getSubjectByName");
 const getStudentSubjects = require("../Controllers/Subjects/getStudentSubjects");
+const updateSubject = require("../Controllers/Subjects/updateSubject");
 
 const getSubjectsHandler = async (req, res) => {
   const {name}= req.query;
@@ -56,7 +57,16 @@ const patchSubjectStudentsHandler = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 };
-
+const patchSubject = async (req, res)=>{
+  const { id } = req.params;
+  const subjectData = req.body;
+  try {
+    const updatedSubject= await updateSubject(id, subjectData);
+    return res.status(200).json(updatedSubject);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+}
 const removeSubjectStudentHandler = async (req, res) => {
   const { id, studentId } = req.params; // Get subjectId and studentId from the route parameters
 
@@ -100,5 +110,6 @@ module.exports = {
   getOneSubjectHandler,
   patchSubjectStudentsHandler,
   removeSubjectStudentHandler,
-  getStudentSubjectsHandler
+  getStudentSubjectsHandler,
+  patchSubject
 };

@@ -1,6 +1,7 @@
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGOUT = "LOGOUT";
 export const LOAD_USER_FROM_STORAGE = "LOAD_USER_FROM_STORAGE";
+export const TOGGLE_THEME = 'TOGGLE_THEME';
 
 export const loginSuccess = (user) => ({
   type: LOGIN_SUCCESS,
@@ -38,3 +39,6 @@ export const loadUserFromStorage = () => {
     }
   };
 };
+export const toggleTheme = () => ({
+  type: TOGGLE_THEME,
+});

@@ -1,5 +1,5 @@
-const { File } = require("../../db");
-const bucket = require('../../firebaseConfig'); 
+const { File } = require("../../../../../db");
+const bucket = require('../../../../../firebaseConfig'); 
 
 const downloadFile = async (id) => {
     const dFile = await File.findByPk(id);

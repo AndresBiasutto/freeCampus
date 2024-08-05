@@ -25,7 +25,8 @@ export const getOneModule = (id)=> {
 }
 export const addModule = (moduleData) => async (dispatch) => {
   try {
-    const response = await axios.post('https://freecampus-back.onrender.com/modules', moduleData);
+    // const response = await axios.post('https://freecampus-back.onrender.com/modules', moduleData);
+     const response = await axios.post('modules', moduleData);
     dispatch({ type: ADD_MODULE_SUCCESS, payload: response.data });
     dispatch(getModules());
   } catch (error) {
@@ -34,7 +35,8 @@ export const addModule = (moduleData) => async (dispatch) => {
 };
 export const addVideo = (moduleData) => async (dispatch) => {
   try {
-    const response = await axios.post('https://freecampus-back.onrender.com/modules/videos', moduleData);
+    const response = await axios.post('modules/videos', moduleData);
+    // const response = await axios.post('https://freecampus-back.onrender.com/modules/videos', moduleData);
     dispatch({ type: ADD_VIDEO_SUCCESS, payload: response.data });
     dispatch(getModules());
   } catch (error) {

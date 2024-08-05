@@ -1,8 +1,9 @@
-const getFiles = require("../Controllers/Files/getFiles");
-const postFiles = require("../Controllers/Files/postFiles");
-const listFiles = require("../Controllers/Files/downloadFile");
-const getOneFile = require("../Controllers/Files/getOneFile");
-const downloadFile = require("../Controllers/Files/downloadFile");
+const getFiles = require("../Controllers/Subjects/SubjectModules/ModuleChapters/ChapterFiles/getFiles");
+const postFiles = require("../Controllers/Subjects/SubjectModules/ModuleChapters/ChapterFiles/postFiles");
+const listFiles = require("../Controllers/Subjects/SubjectModules/ModuleChapters/ChapterFiles/downloadFile");
+const getOneFile = require("../Controllers/Subjects/SubjectModules/ModuleChapters/ChapterFiles/getOneFile");
+const downloadFile = require("../Controllers/Subjects/SubjectModules/ModuleChapters/ChapterFiles/downloadFile");
+const deleteFile = require("../Controllers/Subjects/SubjectModules/ModuleChapters/ChapterFiles/deleteFile")
 
 const getFilesHandler = async (req, res) => {
   try {
@@ -53,10 +54,27 @@ const getOneFileHandler = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+const deleteFileHandler = async (req, res) => {
+  const { fileId } = req.params;
+
+  if (!fileId) {
+    return res.status(400).json({ error: "No file ID provided" });
+  }
+
+  try {
+    const response = await deleteFile(fileId);
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = deleteFileHandler;
 
 module.exports = {
   getFilesHandler,
   postFileHandler,
   listFilseHandler,
   getOneFileHandler,
+  deleteFileHandler
 };

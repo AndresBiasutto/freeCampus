@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getSubjects } from "../../redux/actions/subjectActions";
-import SubjectForm from "../../components/SubjectComponents/SubjectForm";
-import SubjectCard from "../../components/SubjectComponents/SubjectCard";
-import { GrCertificate } from "react-icons/gr";
+// import SubjectForm from "../../components/SubjectComponents/SubjectForm";
+import SubjectsContainer from "../../components/SubjectComponents/SubjectsContainer";
 
 const TeacherSubjects = () => {
   const subjects = useSelector((state) => state.subjects);
@@ -23,36 +22,16 @@ const TeacherSubjects = () => {
   };
 
   return (
-    <div className="flex items-start min-h-screen bg-gray-50 text-gray-800 relative pt-6 2xl:container ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
-      <div className="container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px] nanum2">
+    <div className=" w-full pt-14 flex flex-row justify-center align-center transition bg-light-lightBackground dark:bg-dark-darkBackground">
+      <div className=" p-4 mt-4 mb-4 rounded-lg w-full md:w-3/5 bg-light-background dark:bg-dark-background flex flex-col items-center justify-start">
         <div
           className={`z-30 fixed top-16 transition-all ${
             showModal ? "right-0" : "-right-80"
           }`}
         >
-          <SubjectForm turnModal={showModal} setTurnModal={setShowModal} />
+          {/* <SubjectForm turnModal={showModal} setTurnModal={setShowModal} /> */}
         </div>
-        <button
-          onClick={toggleModal}
-          className="flex flex-row justify-center items-center gap-4 px-3 md:px-4 py-1 md:py-2 bg-sky-600 border border-sky-600 text-white rounded-lg hover:bg-sky-700"
-        >
-          agregar materia <GrCertificate className="text-gray-50 text-xl" />
-        </button>
-
-        <h2>mis cursos</h2>
-        <div>
-          <div className="flex align-top flex-wrap justify-start gap-4">
-            {mySubjects &&
-              mySubjects.map((subject) => (
-                <SubjectCard
-                  key={subject.id}
-                  subject={subject}
-                  name={name}
-                  role={role}
-                />
-              ))}
-          </div>
-        </div>
+        <SubjectsContainer toggleModal={toggleModal} mySubjects={mySubjects} name={name} role={role} />
       </div>
     </div>
   );

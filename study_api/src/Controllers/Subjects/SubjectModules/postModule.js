@@ -1,4 +1,4 @@
-const { Module, File, Subject } = require("../../db");
+const { Module, File, Subject } = require("../../../db");
 
 const postModule = async (moduleData) => {
   try {

@@ -24,7 +24,7 @@ const TeacherModuleDetail = () => {
   const showTab = (num) => setActiveTab(num);
 
   return (
-    <div className="flex items-start min-h-screen bg-gray-50 text-gray-800 relative pt-6 2xl:container ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
+    <div className="flex items-start min-h-screen  text-gray-800 relative pt-6 2xl:container ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
       <div className="container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px] nanum2">
         <ModuleHeader module={module} />
         <TabMenu activeTab={activeTab} showTab={showTab} />

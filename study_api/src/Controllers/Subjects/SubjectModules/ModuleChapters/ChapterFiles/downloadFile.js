@@ -1,4 +1,4 @@
-const { File } = require("../../db");
+const { File } = require("../../../../../db");
 
 const downloadFile = async (id) => {
   try {
