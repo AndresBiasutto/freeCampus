@@ -5,6 +5,8 @@ export const DELETE_SUBJECT = "DELETE_SUBJECT";
 export const UPDATE_SUBJECT = "UPDATE_SUBJECT";
 export const GET_SUBJECT_BY_NAME = "GET_SUBJECT_BY_NAME";
 export const ADD_STUDENT = "ADD_STUDENT";
+export const SET_EXAM_DATE= "SET_EXAM_DATE";
+export const SET_SCHEDULE_DATE= "SET_SCHEDULE_DATE";
 import axios from "../../api/axios";
 
 export const createSubject = (subject) => ({
@@ -20,7 +22,6 @@ export const getSubjects = () => {
 export const getOneSubject = (id)=> {
   return async (dispatch)=>{
       const apiData= (await axios.get(`subjects/${id}`)).data
-      console.log(apiData);
       dispatch({type: GET_SUBJECT, payload: apiData})
   }
 }
@@ -29,6 +30,20 @@ export const deleteSubject = (subjectId) => {
     const apiData = (await axios.delete(`subjects/${subjectId}`)).data;
     dispatch(getSubjects())
     dispatch({ type: GET_SUBJECTS, payload: apiData });
+  };
+};
+export const setExamDate = ( calendarData) => {
+  return async (dispatch) => {
+    const apiData = (await axios.post(`subjects/examdates`, calendarData)).data;
+    dispatch(getSubjects())
+    dispatch({ type: SET_EXAM_DATE, payload: apiData });
+  };
+};
+export const setScheduleTime = ( scheduleDates) => {
+  return async (dispatch) => {
+    const apiData = (await axios.post(`subjects/scheduledates`, scheduleDates)).data;
+    dispatch(getSubjects())
+    dispatch({ type: SET_SCHEDULE_DATE, payload: apiData });
   };
 };
 export const getSubjectByName= (name)=>{

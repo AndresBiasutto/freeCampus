@@ -1,5 +1,7 @@
 const getSubjects = require("../Controllers/Subjects/getSubjects");
 const postSubject = require("../Controllers/Subjects/postSubject");
+const postExam = require("../Controllers/Subjects/postExam");
+const postDate = require("../Controllers/Subjects/postDate");
 const getSubject = require("../Controllers/Subjects/getSubject");
 const deleteSubject = require("../Controllers/Subjects/deleteSubject");
 const patchSubjectStudents = require("../Controllers/Subjects/patchSubjectStudents");
@@ -38,6 +40,38 @@ const postSubjectHandler = async (req, res) => {
     res.status(200).json(response);
   } catch (error) {
     console.error("Error uploading subject: ", error);
+    return res.status(500).json({ error: error.message });
+  }
+};
+const postExamHandler = async (req, res) => {
+  const exam = req.body;
+  console.log(exam);
+  
+  if (!exam) {
+    console.log("No exam provided");
+    return res.status(400).json({ error: "No exam provided" });
+  }
+  try {
+    const response = await postExam(exam);
+    res.status(200).json(response);
+  } catch (error) {
+    console.error("Error uploading exam: ", error);
+    return res.status(500).json({ error: error.message });
+  }
+};
+const postScheduleDatesHandler = async (req, res) => {
+  const date = req.body;
+  console.log(date);
+  
+  if (!date) {
+    console.log("No date provided");
+    return res.status(400).json({ error: "No date provided" });
+  }
+  try {
+    const response = await postDate(date);
+    res.status(200).json(response);
+  } catch (error) {
+    console.error("Error uploading date: ", error);
     return res.status(500).json({ error: error.message });
   }
 };
@@ -111,5 +145,7 @@ module.exports = {
   patchSubjectStudentsHandler,
   removeSubjectStudentHandler,
   getStudentSubjectsHandler,
-  patchSubject
+  patchSubject,
+  postExamHandler,
+  postScheduleDatesHandler
 };

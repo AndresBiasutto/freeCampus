@@ -5,6 +5,8 @@ const postModule = async (moduleData) => {
     const newModule = await Module.create({
       name: moduleData.name,
       description: moduleData.description,
+      dateStart: moduleData.dateStart,
+      dateEnd: moduleData.dateEnd,
       subjectId: moduleData.subjectId,
     });
 

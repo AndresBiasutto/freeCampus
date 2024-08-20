@@ -21,7 +21,9 @@ import {
   DELETE_SUBJECT,
   GET_SUBJECT_BY_NAME,
   ADD_STUDENT,
-  UPDATE_SUBJECT
+  UPDATE_SUBJECT,
+  SET_EXAM_DATE,
+  SET_SCHEDULE_DATE
 } from "./actions/subjectActions";
 import {
   CREATE_MODULE,
@@ -30,6 +32,9 @@ import {
   ADD_MODULE_SUCCESS,
   ADD_VIDEO_SUCCESS,
   ADD_VIDEO_FAILURE,
+  ADD_CHAPTER_FAILURE,
+  ADD_CHAPTER_SUCCESS,
+  GET_CHAPTER
 } from "./actions/moduleActions";
 
 const initialState = {
@@ -53,6 +58,7 @@ const initialState = {
   user: {},
   studentSearch: [],
   students: [],
+  chapter:{}
 };
 
 const authReducer = (state = initialState, action) => {
@@ -121,12 +127,22 @@ const authReducer = (state = initialState, action) => {
         ...state,
         subjectSearch: action.payload,
       };
-    case CREATE_SUBJECT:
-      return {
-        ...state,
-        subject: action.payload,
-      };
-    case UPDATE_SUBJECT:
+      case CREATE_SUBJECT:
+        return {
+          ...state,
+          subject: action.payload,
+        };
+      case SET_EXAM_DATE:
+        return {
+          ...state,
+          subject: action.payload,
+        };
+      case SET_SCHEDULE_DATE:
+        return {
+          ...state,
+          subject: action.payload,
+        };
+      case UPDATE_SUBJECT:
       return {
         ...state,
         subject: action.payload,
@@ -161,10 +177,25 @@ const authReducer = (state = initialState, action) => {
         ...state,
         module: action.payload,
       };
+    case GET_CHAPTER:
+      return {
+        ...state,
+        chapter: action.payload,
+      };
     case ADD_MODULE_SUCCESS:
       return {
         ...state,
         module: action.payload,
+      };
+    case ADD_CHAPTER_SUCCESS:
+      return {
+        ...state,
+        chapter: action.payload,
+      };
+    case ADD_CHAPTER_FAILURE:
+      return {
+        ...state,
+        chapter: action.payload,
       };
     case ADD_VIDEO_SUCCESS:
       return {

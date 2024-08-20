@@ -1,4 +1,4 @@
-const { User, Role, Subject } = require("../../db");
+const { User, Role, Subject, Exam, ScheduleDate } = require("../../db");
 
 const getUsers = async () => {
   try {
@@ -11,7 +11,19 @@ const getUsers = async () => {
         {
           model: Subject,
           as: "enrolledSubjects",
-          attributes: ["name", "id", "creatorId", "image"],
+          attributes: ["name", "id", "creatorId", "image", "dateStart", "dateEnd"],
+          include:[
+            {
+              model: Exam,
+              as: "examDates",
+              attributes: ["id", "name", "date"]
+            },
+            {
+              model: ScheduleDate,
+              as: "scheduleDates",
+              attributes: ["id", "day", "hour", "subjectName"]
+            },
+          ]
         },
       ],
     });

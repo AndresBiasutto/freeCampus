@@ -1,3 +1,4 @@
+// models/File.js
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
@@ -14,7 +15,7 @@ module.exports = (sequelize) => {
   });
 
   File.associate = (models) => {
-    File.belongsTo(models.Module, { foreignKey: "chapterId", as: "Chapter" });
+    File.belongsTo(models.Chapter, { foreignKey: "chapterId", as: "Chapter" });
   };
 
   return File;

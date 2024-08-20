@@ -5,7 +5,7 @@ const UserCard = (props) => {
 
   const student = props.student;
   return (
-    <div className="flex items-center space-x-4">
+    <div className=" w-full flex items-center space-x-4">
       <div className="flex-shrink-0">
         <img
           className="w-8 h-8 rounded-full"

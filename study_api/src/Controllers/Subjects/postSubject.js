@@ -9,7 +9,9 @@ const postSubject = async (subjectData) => {
       semester: subjectData.semester,
       department: subjectData.department,
       creatorId: subjectData.creatorId,
-      image: subjectData.image
+      image: subjectData.image,
+      dateStart: subjectData.dateStart,
+      dateEnd: subjectData.dateEnd
     });
 
     if (subjectData.moduleId && subjectData.moduleId.length > 0) {

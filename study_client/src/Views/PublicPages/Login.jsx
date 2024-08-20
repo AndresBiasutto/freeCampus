@@ -63,9 +63,9 @@ const Login = () => {
         } else if (role === "admin") {
           redirectPath = "/admin/home";
         } else if (role === "teacher") {
-          redirectPath = "/teacher/home";
+          redirectPath = "/teacher/dashboard";
         } else if (role === "student") {
-          redirectPath = "/student/home";
+          redirectPath = "/student/dashboard";
         }
         navigate(redirectPath, { replace: true });
       }

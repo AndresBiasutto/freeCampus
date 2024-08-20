@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getFiles } from "../../redux/actions/fileActions";
 import { addVideo } from "../../redux/actions/moduleActions";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import { RiVideoAddLine } from "react-icons/ri";
+import Spinner from "../SistemComponents/Spinner";
 
-const AddVideo = ({ moduleId }) => {
+const AddVideo = ({ chapterId }) => {
   const dispatch = useDispatch();
   const [linkValue, setLinkValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
-  useEffect(() => {}, [linkValue]);
+  const [isUploading, setIsUploading] = useState(false); // Nuevo estado
 
   const submitLink = async (e) => {
     e.preventDefault();
@@ -20,16 +21,18 @@ const AddVideo = ({ moduleId }) => {
 
     const videoData = {
       videoUrl: linkValue,
-      moduleId: moduleId,
+      chapterId: chapterId,
     };
 
     try {
-      console.log(videoData);
-      dispatch(addVideo(videoData));
+      setIsUploading(true); // Empezar a cargar
+      dispatch(addVideo( videoData, chapterId));
+      await dispatch(getFiles());
       setLinkValue("");
-      dispatch(getFiles());
+      setIsUploading(false); // Terminar de cargar
     } catch (error) {
       console.error("Error uploading video:", error);
+      setIsUploading(false); // Terminar de cargar si hay error
     }
   };
 
@@ -40,7 +43,7 @@ const AddVideo = ({ moduleId }) => {
 
   return (
     <form
-      className="container mx-auto h-full flex flex-col justify-center items-center"
+      className="mb-2 mx-auto h-full flex flex-col justify-center items-center"
       onSubmit={submitLink}
     >
       <div className="flex w-full justify-start">
@@ -49,20 +52,25 @@ const AddVideo = ({ moduleId }) => {
           value={linkValue}
           onChange={handleLinkChange}
           placeholder="Agregar URL del video"
-          className="px-4 py-2 border border-gray-300 rounded-l"
+          className="px-4 py-2 border border-gray-300 rounded-l-lg bg-light-lightBackground dark:bg-dark-darkBackground"
         />
         <button
           type="submit"
-          className="inline-flex items-center px-4 py-2 bg-sky-700 border border-sky-300 rounded-r-lg font-semibold cursor-pointer text-sm text-white tracking-widest hover:bg-sky-300 active:bg-sky-300 focus:outline-none focus:border-sky-300 focus:ring focus:ring-gray-300 disabled:opacity-25 transition"
+          className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-light-blueBtn hover:bg-light-blueBtnHvr dark:bg-dark-blueBtn dark:hover:bg-dark-blueBtnHvr rounded-r-lg cursor-pointer text-light-text dark:text-dark-text tracking-wides disabled:opacity-25 transition"
+          disabled={isUploading} // Deshabilitar el botón durante la carga
         >
-          LISTO!
+          {!linkValue && !isUploading && <RiVideoAddLine />} {/* Icono */}
+          {linkValue && !isUploading && "Agregar video"} {/* Texto si hay link */}
+          {isUploading && <Spinner />} {/* Spinner durante la carga */}
         </button>
       </div>
       {errorMessage && <p className="text-red-500">{errorMessage}</p>}
     </form>
   );
 };
+
 AddVideo.propTypes = {
-  moduleId: PropTypes.string.isRequired,
+  chapterId: PropTypes.string.isRequired,
 };
+
 export default AddVideo;

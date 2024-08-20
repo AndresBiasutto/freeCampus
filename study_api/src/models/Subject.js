@@ -21,7 +21,14 @@ module.exports = (sequelize) => {
     },
     image:{
       type: DataTypes.STRING,
-    }
+    },
+    dateStart: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    dateEnd: {
+      type: DataTypes.STRING,
+    },
   }, { timestamps: true });
 
   Subject.associate = (models) => {

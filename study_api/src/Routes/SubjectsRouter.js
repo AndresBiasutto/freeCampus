@@ -8,7 +8,9 @@ const {
   patchSubjectStudentsHandler,
   removeSubjectStudentHandler,
   getStudentSubjectsHandler,
-  patchSubject
+  patchSubject,
+  postScheduleDatesHandler,
+  postExamHandler
 } = require("../Handlers/SubjectsHandler");
 
 const subjectsRouter = Router();
@@ -16,6 +18,8 @@ const subjectsRouter = Router();
 subjectsRouter.get("/", getSubjectsHandler);
 subjectsRouter.get("/StudentSubjects/:id", getStudentSubjectsHandler)
 subjectsRouter.post("/", postSubjectHandler);
+subjectsRouter.post("/examdates", postExamHandler);
+subjectsRouter.post("/scheduledates", postScheduleDatesHandler);
 subjectsRouter.delete("/:id", deleteSubectHandler);
 subjectsRouter.patch("/:id/students", patchSubjectStudentsHandler);
 subjectsRouter.patch("/:id", patchSubject);

@@ -6,7 +6,7 @@ import { getFiles } from "../redux/actions/fileActions";
 
 const UploadFile = (props) => {
   // eslint-disable-next-line react/prop-types
-  const moduleId = props.moduleId;
+  const chapterId = props.chapterId;
   const dispatch = useDispatch();
   const [fileValue, setFileValue] = useState(null);
   const [errorMessage, seterrorMessage] = useState("");
@@ -23,10 +23,10 @@ const UploadFile = (props) => {
 
     const formData = new FormData();
     formData.append("file", fileValue);
-    formData.append("moduleId", moduleId); // Añadir el moduleId al FormData
+    formData.append("chapterId", chapterId); // Añadir el chapterId al FormData
 
     try {
-      await axios.post("files/upload", formData, {
+      await axios.post("modules/chapters/files", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -36,7 +36,7 @@ const UploadFile = (props) => {
       dispatch(uploadFile(fileValue));
       alert("pdf subido correctamente");
       setFileValue(null); // Asegúrate de resetear a null para evitar warnings
-      dispatch(getFiles());
+      dispatch(getFiles(chapterId));
     } catch (error) {
       console.error("Error uploading file:", error);
     }
@@ -48,26 +48,26 @@ const UploadFile = (props) => {
 
   return (
     <form
-      className="container mx-auto h-full flex flex-col justify-center items-center"
+      className="container mx-auto h-full w-full flex flex-col justify-center items-center"
       onSubmit={submitFile}
     >
-      <div className="flex w-full justify-start">
+      <div className="flex w-full justify-center">
         <div
           id="multi-upload-button"
-          className="inline-flex items-center px-4 py-2 bg-sky-700 border border-sky-800 rounded-l font-semibold cursor-pointer text-sm text-white tracking-widest hover:bg-sky-300 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition"
+          className="inline-flex items-center px-4 py-2 cursor-pointer text-sm  tracking-widest rounded-l-lg bg-light-blueBtn hover:bg-light-blueBtnHvr dark:bg-dark-blueBtn dark:hover:bg-dark-blueBtnHvr text-light-text dark:text-dark-text active:bg-gray-900  transition"
           onClick={handleBrowseClick}
         >
           Buscar pdf
         </div>
-        <div className="w-4/12 lg:w-3/12 border border-gray-300 flex items-center justify-between  bg-sky-100">
-          <span id="multi-upload-text" className="p-2"></span>
-          <p>{fileValue ? fileValue.name : errorMessage} </p>
+        <div className="w-4/12 lg:w-3/12 border border-gray-300 flex items-center justify-center bg-light-lightBackground dark:bg-dark-darkBackground">
+
+          <p className="text-light-text dark:text-dark-text" >{fileValue ? fileValue.name : errorMessage} </p>
         </div>
         <button
           type="submit"
-          className="inline-flex items-center px-4 py-2 bg-sky-700 border border-sky-300 rounded-r-lg font-semibold cursor-pointer text-sm text-white tracking-widest hover:bg-sky-300 active:bg-sky-300 focus:outline-none focus:border-sky-300 focus:ring focus:ring-gray-300 disabled:opacity-25 transition"
+          className="inline-flex items-center px-4 py-2 cursor-pointer text-sm  tracking-widest rounded-r-lg bg-light-blueBtn hover:bg-light-blueBtnHvr dark:bg-dark-blueBtn dark:hover:bg-dark-blueBtnHvr text-light-text dark:text-dark-text active:bg-gray-900  transition"
         >
-          LISTO!
+          Listo
         </button>
       </div>
       <input

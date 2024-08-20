@@ -33,12 +33,14 @@ const SubjectCard = (props) => {
           {subject.name}
         </span>
       </h5>
-      <div className="  absolute -top-10 left-0 group-hover:top-0 transition-all z-40 w-full h-10 p-2 flex items-center justify-end rounded-t-lg bg-gradient-to-b from-light-lightBackground to-transparent dark:from-dark-darkBackground">
-        <div className=" flex flex-row justify-start items-center gap-2">
-          <EditSubjectBtn subjectId={subject.id} />
-          <DeleteSubjectBtn subjectId={subject.id} />
+      {role === "teacher" && (
+        <div className="  absolute -top-10 left-0 group-hover:top-0 transition-all z-40 w-full h-10 p-2 flex items-center justify-end rounded-t-lg bg-gradient-to-b from-light-lightBackground to-transparent dark:from-dark-darkBackground">
+          <div className=" flex flex-row justify-start items-center gap-2">
+            <EditSubjectBtn subjectId={subject.id} />
+            <DeleteSubjectBtn subjectId={subject.id} />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

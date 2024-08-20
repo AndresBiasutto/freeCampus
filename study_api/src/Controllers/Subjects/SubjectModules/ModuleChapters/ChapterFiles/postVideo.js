@@ -1,21 +1,21 @@
-const { Video, Module } = require("../../../../../db");
+const { Video, Chapter } = require("../../../../../db");
 
-const postVideo = async (videoUrl, moduleId) => {
-  const module = await Module.findByPk(moduleId);
-  if (!module) {
-    throw new Error('Module not found');
+const postVideo = async (videoUrl, chapterId) => {
+  const chapter = await Chapter.findByPk(chapterId);
+  if (!chapter) {
+    throw new Error('chapter not found');
   }
   const newVideo = await Video.create({
     videoUrl,
-    moduleId,
+    chapterId,
   });
 
-  await module.setVideo(newVideo);
+  await chapter.setVideo(newVideo);
 
-  newVideo.module = {
-    id: module.dataValues.id,
-    name: module.dataValues.name,
-    description: module.dataValues.description,
+  newVideo.chapter = {
+    id: chapter.dataValues.id,
+    name: chapter.dataValues.name,
+    description: chapter.dataValues.description,
   };
 
   return newVideo;

@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 
-const ModuleHeader = ({ module }) => (
-  <h2>{module.name}</h2>
+const ModuleHeader = ({ chapter }) => (
+  <h2>{chapter.name}</h2>
 );
 
 ModuleHeader.propTypes = {
-  module: PropTypes.shape({
+  chapter: PropTypes.shape({
     name: PropTypes.string,
   }).isRequired,
 };

@@ -1,4 +1,4 @@
-const { User, Role, Subject } = require("../../db");
+const { User, Role, Subject, Exam, ScheduleDate } = require("../../db");
 const formatUser = require("../../libs/formatUser");
 
 const findUser = async (id) => {
@@ -11,7 +11,19 @@ const findUser = async (id) => {
       {
         model: Subject,
         as: "enrolledSubjects",
-        attributes: ["name", "id", "creatorId", "description", "image"],
+        attributes: ["name", "id", "creatorId", "description", "image", "dateStart", "dateEnd"],
+        include:[
+          {
+            model: Exam,
+            as: "examDates",
+            attributes: ["id", "name", "date"]
+          },
+          {
+            model: ScheduleDate,
+            as: "scheduleDates",
+            attributes: ["id", "day", "hour", "subjectName"]
+          },
+        ]
       },
     ],
   });

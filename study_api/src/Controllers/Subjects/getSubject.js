@@ -1,4 +1,4 @@
-const { Subject, Module, User, Chapter, File, Video } = require("../../db");
+const { Subject, Module, User, Chapter, File, Video, Exam, ScheduleDate } = require("../../db");
 
 const getSubject = async (id) => {
   const subject = await Subject.findByPk(id, {
@@ -24,6 +24,16 @@ const getSubject = async (id) => {
             ],
           },
         ],
+      },
+      {
+        model: Exam,
+        as: "examDates",
+        attributes: ["id", "name", "date"]
+      },
+      {
+        model: ScheduleDate,
+        as: "scheduleDates",
+        attributes: ["id", "day", "hour", "subjectName"]
       },
       {
         model: User,

@@ -1,23 +1,27 @@
 import PropTypes from "prop-types";
 import AddVideo from "../../../components/ModuleComponents/AddVideo";
 import Video from "../../../components/Video";
+import Spinner from "../../SistemComponents/Spinner";
+import { useSelector } from "react-redux";
 
-const LectureTab = ({ module, moduleId, moduleVideo }) => (
-  <div className="bg-sky-800 rounded pt-4">
-    <p className="text-sky-100">{module.description}</p>
-    <AddVideo moduleId={moduleId} />
+const LectureTab = ({ chapter, chapterId, chapterVideo }) => {
+  const {role}= useSelector(state=> state.auth)
+  return (
 
-    <Video videoUrl={moduleVideo} />
+  <div className="p-4 mb-4 rounded-b-lg w-full flex flex-col items-center justify-center bg-light-background dark:bg-dark-background">
+
+    {role === "teacher" && <AddVideo chapterId={chapterId} chapterVideo={chapterVideo} />}
+     {chapterVideo? <Video videoUrl={chapterVideo} />: <Spinner />}
+    <p className="text-sky-100">{chapter.description}</p>
   </div>
 );
-
+}
 LectureTab.propTypes = {
-  module: PropTypes.shape({
+  chapter: PropTypes.shape({
     description: PropTypes.string,
   }).isRequired,
-  moduleId: PropTypes.string.isRequired,
-  moduleVideo: PropTypes.string.isRequired,
-  role: PropTypes.string.isRequired,
+  chapterId: PropTypes.string.isRequired,
+  chapterVideo: PropTypes.string.isRequired,
 };
 
 export default LectureTab;

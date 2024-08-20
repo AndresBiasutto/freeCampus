@@ -32,7 +32,7 @@ fs.readdirSync(path.join(__dirname, "/models"))
 
 modelDefiners.forEach((model) => model(sequelize));
 
-const { User, Subject, File, Role, Module, Video, Chapter } = sequelize.models;
+const { User, Subject, File, Role, Module, Video, Chapter, Exam, ScheduleDate } = sequelize.models;
 
 // Associations
 User.belongsTo(Role, { foreignKey: "role" });
@@ -50,6 +50,10 @@ File.belongsTo(Chapter, { foreignKey: "chapterId", as: "Chapter" });
 Chapter.hasMany(File, { foreignKey: "chapterId", as: "Files" });
 Chapter.belongsTo(Video, { foreignKey: "videoId" });
 Video.hasOne(Chapter, { foreignKey: "videoId" });
+Exam.belongsTo(Subject, { foreignKey: "subjectId", as: "subject" });
+Subject.hasMany(Exam, { foreignKey: "subjectId", as: "examDates" });
+ScheduleDate.belongsTo(Subject, { foreignKey: "subjectId", as: "subject" });
+Subject.hasMany(ScheduleDate, { foreignKey: "subjectId", as: "scheduleDates" });
 
 module.exports = {
   ...sequelize.models,

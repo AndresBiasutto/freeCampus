@@ -1,12 +1,14 @@
 import { Toast } from "flowbite-react";
 import { BsMailbox } from "react-icons/bs";
+// import Calendar from "../../components/UserComponents/Calendar/Calendar";
+import BigCalendar from "../../components/UserComponents/Calendar/BigCalendar/BigCalendar";
 
 const Dashboard = () => {
   return (
-    <div className=" w-screen h-screen pt-14 flex flex-row justify-center align-center">
-      <div className=" w-full md:w-2/4 bg-dark-background/50 flex flex-col items-center justify-start">
+    <div className=" pt-14 w-screen h-screen flex flex-row justify-center items-start">
+      <div className=" p-4 mt-4 mb-4 rounded-lg w-full md:w-3/5 bg-light-background dark:bg-dark-background flex flex-col items-center justify-start">
         <div className=" w-full flex justify-center items-center">
-          <Toast>
+          <Toast className="fixed top-16 left-1/2 -translate-x-1/2">
             <div className="text-sm font-normal flex flex-row justify-center items-center gap-2">
               <BsMailbox className=" text-red-400" /> Mensajes sin leer
             </div>
@@ -21,11 +23,10 @@ const Dashboard = () => {
             </div>
           </Toast>
         </div>
-        <div className="grid grid-cols-3 gap-4 w-full">
-          <div className="w-full h-full bg-black">👌</div>
-          <div className="w-full h-full bg-black">👌</div>
-          <div className="w-full h-full bg-black">👌</div>
-          <div className="w-full h-full bg-black">👌</div>
+
+        <div className="grid grid-row-2 gap-4 w-full">
+          {/* <Calendar /> */}
+          <BigCalendar />
         </div>
       </div>
     </div>
