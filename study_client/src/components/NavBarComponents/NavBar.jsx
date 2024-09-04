@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { toggleTheme } from "../../redux/actions/actions";
+import { toggleTheme } from "../../redux/actions/authActions";
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import logo from "../../assets/img/logo.svg";
+import campusLogo from "../../assets/img/campusLogo.svg";
 import { CiLight, CiDark } from "react-icons/ci";
 import LogOut from "../AsideBarComponents/LogOut";
 import GoBack from "./Navigation/GoBack";
@@ -10,7 +10,7 @@ import GoForward from "./Navigation/GoForward";
 
 const NavBar = () => {
   const dispatch = useDispatch();
-  const darkMode = useSelector((state) => state.darkMode);
+  const darkMode = useSelector((state) => state.theme.darkMode);
   const { role, image, name, email } = useSelector((state) => state.auth);
   const location = useLocation();
 
@@ -21,7 +21,7 @@ const NavBar = () => {
 
   const shouldShowNavigation = ![
     `/${role}/home`,
-    `/${role}/dashboard`,
+    `/${name}/dashboard`,
     `/${role}/subjects`,
     `/${role}/users`,
   ].includes(location.pathname);
@@ -32,7 +32,11 @@ const NavBar = () => {
       className="  z-50 fixed w-screen transition bg-light-background/95 dark:bg-dark-background/95 text-light-text dark:text-dark-text"
     >
       <Navbar.Brand href="https://flowbite-react.com">
-        <img src={logo} className="mr-3 w-36 sm:h-9" alt="Mari campus logo" />
+        <img
+          src={campusLogo}
+          className="mr-3 w-36 sm:h-9"
+          alt="Mari campus logo"
+        />
       </Navbar.Brand>
       <div className="flex md:order-2 items-center gap-2">
         <div className="flex flex-row-reverse gap-2 justify-center items-center">
@@ -75,28 +79,24 @@ const NavBar = () => {
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
-
-        <Navbar.Link>
           <NavLink
-            to={`/${role}/dashboard`}
+            to={`/${name}/dashboard`}
             className={({ isActive }) =>
               isActive ? "active text-blue-700" : ""
             }
           >
             Dashboard
           </NavLink>
-        </Navbar.Link>
-        <Navbar.Link>
+
           <NavLink
-            to={`/${role}/subjects`}
+            to={`/${name}/subjects`}
             className={({ isActive }) =>
               isActive ? "active text-blue-700" : ""
             }
           >
             Mis materias
           </NavLink>
-        </Navbar.Link>
-        <Navbar.Link>
+
           <NavLink
             to={`/${role}/users`}
             className={({ isActive }) =>
@@ -105,7 +105,6 @@ const NavBar = () => {
           >
             Users
           </NavLink>
-        </Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
   );

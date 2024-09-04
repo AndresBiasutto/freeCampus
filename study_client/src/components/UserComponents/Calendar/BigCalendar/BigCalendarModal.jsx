@@ -23,7 +23,7 @@ const BigCalendarModal = ({ id, openModal, setOpenModal, selectedDate }) => {
 };
 
 BigCalendarModal.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   openModal: PropTypes.bool,
   setOpenModal: PropTypes.func,
   selectedDate: PropTypes.instanceOf(Date),  // Ensure selectedDate is of Date type

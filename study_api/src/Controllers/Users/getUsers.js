@@ -23,6 +23,11 @@ const getUsers = async () => {
               as: "scheduleDates",
               attributes: ["id", "day", "hour", "subjectName"]
             },
+            {
+              model: User,
+              as: "creator",
+              attributes: ["id", "name"],
+            },
           ]
         },
       ],

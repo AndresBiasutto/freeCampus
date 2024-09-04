@@ -43,12 +43,12 @@ export const addModule = (moduleData) => async (dispatch) => {
     dispatch({ type: ADD_MODULE_FAILURE, payload: error });
   }
 };
-export const addChapter = (formData, chapterId) => async (dispatch) => {
+export const addChapter = (formData) => async (dispatch) => {
   try {
     // const response = await axios.post('https://freecampus-back.onrender.com/modules', moduleData);
      const response = await axios.post('modules/chapters', formData);
     dispatch({ type: ADD_CHAPTER_SUCCESS, payload: response.data });
-    dispatch(getOneChapter(chapterId));
+    dispatch(getModules());
   } catch (error) {
     dispatch({ type: ADD_CHAPTER_FAILURE, payload: error });
   }

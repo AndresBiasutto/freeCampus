@@ -1,16 +1,14 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-const UserCard = (props) => {
-
-  const student = props.student;
+const UserCard = ({ student }) => {
   return (
-    <div className=" w-full flex items-center space-x-4">
+    <div className="w-full flex items-center space-x-4">
       <div className="flex-shrink-0">
         <img
           className="w-8 h-8 rounded-full"
           src={student.image}
-          alt="Neil image"
+          alt={`${student.name} image`}
         />
       </div>
       <div className="flex-1 min-w-0">
@@ -22,9 +20,8 @@ const UserCard = (props) => {
         </p>
       </div>
       <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-        <Link to={`/users/${student.id}`}> ver perfil</Link>
-        
-        <button> echar</button>
+        <Link to={`/users/${student.id}`}>ver perfil</Link>
+        <button>echar</button>
       </div>
     </div>
   );
@@ -32,10 +29,10 @@ const UserCard = (props) => {
 
 UserCard.propTypes = {
   student: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
+    id: PropTypes.string,
+    name: PropTypes.string,
+    email: PropTypes.string,
+    image: PropTypes.string,
   }).isRequired,
 };
 

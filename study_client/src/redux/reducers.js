@@ -3,7 +3,7 @@ import {
   LOGOUT,
   LOAD_USER_FROM_STORAGE,
   TOGGLE_THEME,
-} from "./actions/actions";
+} from "./actions/authActions";
 import {
   UPDATE_USER,
   GET_ALL_USERS,
@@ -61,7 +61,7 @@ const initialState = {
   chapter:{}
 };
 
-const authReducer = (state = initialState, action) => {
+const reducers = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return {
@@ -242,4 +242,4 @@ const authReducer = (state = initialState, action) => {
   }
 };
 
-export default authReducer;
+export default reducers;

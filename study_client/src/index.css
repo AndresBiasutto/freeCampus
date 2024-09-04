@@ -56,7 +56,7 @@ html.dark {
 ::-webkit-scrollbar-thumb:hover {
   background: #316060;
 }
-/* @font-face {
+@font-face {
   font-family: "Regular";
   src: local("Ubuntu-Regular"),
        url('/src/assets/fonts/Ubuntu-Regular.ttf') format("truetype");
@@ -80,7 +80,7 @@ html.dark {
   font-family: "Light";
   src: local("Ubuntu-Light"),
        url('/src/assets/fonts/Ubuntu-Light.ttf') format("truetype");
-} */
+}
 
 
 /* -----CALENDAR----- */
@@ -186,3 +186,15 @@ html.dark {
     transform: rotate(-360deg);
   }
 } 
+
+@layer base {
+  h2 {
+    @apply text-2xl font-bold text-light-text dark:text-dark-text font-primaryBold ;
+  }
+  h3 {
+    @apply font-bold text-light-text dark:text-dark-text font-primaryBold ;
+  }
+  p {
+    @apply text-light-text dark:text-dark-text font-primaryRegular;
+  }
+}

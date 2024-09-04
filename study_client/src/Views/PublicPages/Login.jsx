@@ -1,9 +1,8 @@
 import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginSuccess } from "../../redux/actions/actions";
+import { loginSuccess } from "../../redux/actions/authActions";
 import axios from "../../api/axios";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 
 const LOGIN_URL = "users/signin";
 
@@ -16,11 +15,6 @@ const Login = () => {
   const [e_mail, setE_mail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const { role, name, image, id, enrolledSubjects, description, contactNumber, email } = useSelector((store) => store.auth);
-
-  useEffect(() => {
-    console.log(role, name, image, id, enrolledSubjects, description, contactNumber, email);
-  }, [role, name, image, id, enrolledSubjects, description, contactNumber, email]);
 
   useEffect(() => {
     userRef.current.focus();
@@ -63,9 +57,9 @@ const Login = () => {
         } else if (role === "admin") {
           redirectPath = "/admin/home";
         } else if (role === "teacher") {
-          redirectPath = "/teacher/dashboard";
+          redirectPath = `/${name}/dashboard`;
         } else if (role === "student") {
-          redirectPath = "/student/dashboard";
+          redirectPath = `/${name}/dashboard`;
         }
         navigate(redirectPath, { replace: true });
       }
@@ -85,7 +79,7 @@ const Login = () => {
   };
 
   return (
-    <main className="mx-auto flex min-h-screen w-full items-center justify-center bg-gray-900 text-white">
+    <main className="mx-auto flex min-h-screen w-full items-center justify-center bg-gradient-to-br from-light-background to-light-lightBackground text-white">
       <section className="flex w-[30rem] flex-col space-y-10">
         <div className="text-center text-4xl font-medium">Log In</div>
 

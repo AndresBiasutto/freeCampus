@@ -94,9 +94,15 @@ const Schedule = ({ subjectId, scheduleDates, subjectName }) => {
 
 Schedule.propTypes = {
   subjectId: PropTypes.string,
-  scheduleDates: PropTypes.object,
+  scheduleDates: PropTypes.arrayOf(
+    PropTypes.shape({
+      day: PropTypes.string,
+      hour: PropTypes.string,
+      subjectName: PropTypes.string,
+    })
+  ).isRequired,
   subjectName: PropTypes.string,
-  role: PropTypes.string
+  role: PropTypes.string,
 };
 
 export default Schedule;

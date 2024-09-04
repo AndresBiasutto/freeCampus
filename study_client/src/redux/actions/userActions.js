@@ -23,7 +23,7 @@ export const getUserByName = (userName) => {
 export const getOneUser = (id) => {
   return async (dispatch) => {
     try {
-      const apiData = (await axios.get(`users/${id}`)).data;
+      const apiData = (await axios.get(`users/${id}`)).data;      
       dispatch({ type: GET_USER, payload: apiData });
     } catch (error) {
       console.error(`Error fetching user with ID ${id}:`, error);
