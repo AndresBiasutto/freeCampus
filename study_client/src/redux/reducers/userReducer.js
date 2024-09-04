@@ -27,7 +27,6 @@ const userReducer = (state = initialUserState, action) => {
           ...state,
           users: action.payload,
         };
-      case GET_USER_BY_NAME:
       case CLEAR_SEARCH:
         return {
           ...state,
@@ -38,6 +37,11 @@ const userReducer = (state = initialUserState, action) => {
           ...state,
           registerToken: action.payload,
         };
+        case GET_USER_BY_NAME:
+          return {
+            ...state,
+            studentSearch: action.payload,
+          };
       default:
         return state;
     }

@@ -4,9 +4,9 @@ import { getOneUser } from "../redux/actions/userActions";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSubjects } from "../redux/actions/subjectActions";
-import StudentCalendar from "../components/UserComponents/Calendar/StudentCalendar";
-import StudentSchedule from "../components/UserComponents/Calendar/Schedule/StudentSchedule";
-import BigCalendar from "../components/UserComponents/Calendar/BigCalendar/BigCalendar";
+import StudentSchedule from "../components/molecules/ScheduleMolecules/StudentSchedule";
+import StudentCalendar from "../components/molecules/CalendarMolecules/StudentCalendar";
+import BigCalendar from "../components/molecules/CalendarMolecules/BigCalendar";
 
 const Dashboard = () => {
   const dispatch = useDispatch();

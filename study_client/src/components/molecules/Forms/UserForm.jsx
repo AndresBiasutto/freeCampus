@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { getOneUser, updateUser } from '../../redux/actions/userActions';
+import { getOneUser, updateUser } from '../../../redux/actions/userActions';
 
 const UserForm = () => {
   const [name, setName] = useState('');

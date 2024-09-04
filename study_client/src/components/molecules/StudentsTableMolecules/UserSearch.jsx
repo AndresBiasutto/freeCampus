@@ -13,7 +13,7 @@ const UserSearch = (props) => {
   const subjectId= props.id
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
-  const searchResults = useSelector((state) => state.studentSearch);
+  const searchResults = useSelector((state) => state.studentSearch.studentSearch);
 
   useEffect(() => {
     if (!search) {

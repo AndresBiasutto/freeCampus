@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import PropTypes from "prop-types"
 
 const PrivateRoute = ({ children, roles }) => {
   const { isAuthenticated, role } = useSelector((state) => state.auth);
@@ -14,5 +15,10 @@ const PrivateRoute = ({ children, roles }) => {
 
   return children;
 };
+
+PrivateRoute.propTypes={
+  children: PropTypes.node,
+  roles: PropTypes.object
+}
 
 export default PrivateRoute;

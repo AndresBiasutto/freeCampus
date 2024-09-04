@@ -1,17 +1,7 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setScheduleTime } from "../../../../redux/actions/subjectActions";
+import React from "react";
 import PropTypes from "prop-types";
 
-const Schedule = ({ subjectId, scheduleDates, subjectName }) => {
-  const { role} = useSelector((store) => store.auth);
-  const dispatch = useDispatch();
-  const [date, setDate] = useState({
-    day: "",
-    hour: "",
-    subjectId,
-    subjectName,
-  });
+const StudentSchedule = ({ scheduleDates }) => {
   const daysOfWeek = [
     "Lunes",
     "Martes",
@@ -25,17 +15,6 @@ const Schedule = ({ subjectId, scheduleDates, subjectName }) => {
     { length: 24 },
     (_, i) => `${String(i).padStart(2, "0")}:00`
   );
-  const handleClick = (day, hour) => {
-    if (role === "teacher") {
-      const updatedDate = {
-        ...date,
-        day,
-        hour,
-      };
-      setDate(updatedDate);
-      dispatch(setScheduleTime(updatedDate));
-    }
-  };
 
   return (
     <div className="w-full container mx-auto">
@@ -70,19 +49,24 @@ const Schedule = ({ subjectId, scheduleDates, subjectName }) => {
                 className={`border-r border-b border-light-background dark:border-dark-background h-8 hover:bg-light-accent dark:hover:bg-dark-accent cursor-pointer transition
                   ${dayIndex === daysOfWeek.length - 1 ? "border-r-0" : ""} 
                   ${hourIndex === hours.length - 1 ? "border-b-0" : ""}`}
-                onClick={() => handleClick(day, hour)}
               >
-                {scheduleDates.map((date, i) =>
-                  date.day === day && date.hour === hour ? (
-                    <div
-                      key={i}
-                      alt={date.subjectName}
-                      className="w-full h-full flex justify-center items-center text-xsm text-light-text dark:text-dark-text bg-light-background dark:bg-dark-background overflow-hidden "
-                    >
-                      {date.subjectName}
-                    </div>
-                  ) : null
-                )}
+                {scheduleDates &&
+                  scheduleDates.map((dates) =>
+                    dates.map((date, i) =>
+                      date.day &&
+                      date.hour &&
+                      date.day === day &&
+                      date.hour === hour ? (
+                        <div
+                          key={i}
+                          alt={date.subjectName}
+                          className="w-full h-full flex justify-center items-center text-xsm text-light-text dark:text-dark-text bg-light-background dark:bg-dark-background overflow-hidden "
+                        >
+                          {date.subjectName}
+                        </div>
+                      ) : null
+                    )
+                  )}
               </div>
             ))}
           </React.Fragment>
@@ -92,17 +76,9 @@ const Schedule = ({ subjectId, scheduleDates, subjectName }) => {
   );
 };
 
-Schedule.propTypes = {
-  subjectId: PropTypes.string,
-  scheduleDates: PropTypes.arrayOf(
-    PropTypes.shape({
-      day: PropTypes.string,
-      hour: PropTypes.string,
-      subjectName: PropTypes.string,
-    })
-  ).isRequired,
+StudentSchedule.propTypes = {
+  scheduleDates: PropTypes.object,
   subjectName: PropTypes.string,
-  role: PropTypes.string,
 };
 
-export default Schedule;
+export default StudentSchedule;

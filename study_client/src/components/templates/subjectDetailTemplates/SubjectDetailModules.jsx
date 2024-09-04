@@ -1,4 +1,4 @@
-import Spinner from "../../SistemComponents/Spinner";
+import Spinner from "../../atoms/CommonAtoms/Spinner";
 import PropTypes from "prop-types";
 import CreateModuleBtn from "../../atoms/ModuleCardAtoms/buttons/CreateModuleBtn";
 import ModuleCardIndex from "../../molecules/ModuleCard/ModuleCardIndex";

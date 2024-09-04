@@ -1,7 +1,7 @@
 import { Modal } from "flowbite-react";
 import PropTypes from "prop-types";
 import { MdOutlineContentPasteSearch } from "react-icons/md";
-import BigCalendarForm from "./BigCalendarForm";
+import BigCalendarForm from "../Forms/BigCalendarForm";
 
 const BigCalendarModal = ({ id, openModal, setOpenModal, selectedDate }) => {
   return (

@@ -1,5 +1,5 @@
-import Schedule from "../../UserComponents/Calendar/Schedule/Schedule";
-import Spinner from "../../SistemComponents/Spinner";
+import Schedule from "../../molecules/ScheduleMolecules/Schedule";
+import Spinner from "../../atoms/CommonAtoms/Spinner";
 import PropTypes from "prop-types";
 
 

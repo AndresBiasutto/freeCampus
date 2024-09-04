@@ -1,5 +1,5 @@
-import UserSearch from "../../UserComponents/UserSearch/UserSearch"
-import UserCard from "../../UserComponents/UserCard"
+import UserSearch from "../../molecules/StudentsTableMolecules/UserSearch"
+import UserCard from "../../molecules/StudentsTableMolecules/UserCard/UserCard"
 import PropTypes from "prop-types"
 
 const SubjectDetailStudentsTable = ({id, students}) => {

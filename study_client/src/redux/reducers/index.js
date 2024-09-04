@@ -19,7 +19,8 @@ const rootReducer = combineReducers({
   user: userReducer,
   chapter: moduleReducer,
   video: moduleReducer,
-  file: moduleReducer
+  file: moduleReducer,
+  studentSearch: userReducer
 });
 
 export default rootReducer;

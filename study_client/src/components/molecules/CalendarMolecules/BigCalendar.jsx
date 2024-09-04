@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-// BigCalendar.jsx
 import { useEffect, useState } from "react";
 import { Calendar, dayjsLocalizer } from "react-big-calendar";
 import dayjs from "dayjs";

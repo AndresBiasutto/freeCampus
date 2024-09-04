@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import LoginPage from "./Views/PublicPages/Login";
 import UnauthorizedPage from "./Views/PublicPages/UnauthorizedPage";
-import PrivateRoute from "./components/PrivateRoute";
+import PrivateRoute from "./components/atoms/CommonAtoms/PrivateRoute";
 import { loadUserFromStorage } from "./redux/actions/authActions";
 import usePreserveRoute from "./hooks/usePreserveRoute";
 import HomePage from "./Views/PublicPages/HomePage";
 import UserSettings from "./Views/PublicPages/UserSettings";
 import Register from "./Views/PublicPages/Register";
-import NavBar from "./components/NavBarComponents/NavBar";
+import NavBar from "./components/templates/navBarTemplates/NavBar";
 import Dashboard from "./Views/Dashboard";
 import Subjects from "./Views/Subjects";
 import SubjectDetail from "./Views/SubjectDetail";
@@ -76,7 +76,7 @@ const App = () => {
           }
         />
         <Route
-          path="/settings"
+          path={`/${name}/settings`}
           element={
             <PrivateRoute roles={["teacher", "student", "admin"]}>
               <UserSettings />

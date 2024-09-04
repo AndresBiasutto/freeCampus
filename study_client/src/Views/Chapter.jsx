@@ -23,8 +23,8 @@ const Chapter = () => {
   const showTab = (num) => setActiveTab(num);
 
   return (
-    <div className="w-screen h-screen flex flex-row justify-center items-start">
-      <div className="w-full pt-14 flex flex-col justify-center items-center transition bg-light-lightBackground dark:bg-dark-darkBackground">
+    <div className="w-screen pt-14 h-full flex flex-row justify-center items-start">
+      <div className="w-full pt-4 flex flex-col justify-center items-center transition bg-light-lightBackground dark:bg-dark-darkBackground">
         <TabMenu activeTab={activeTab} showTab={showTab} />
         <div className="w-full md:w-3/5">
           {activeTab === 1 && <LectureTab chapter={chapter} chapterId={id} chapterName={chapterName} chapterVideo={chapterVideo} />}

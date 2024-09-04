@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import UserSettingsDetail from "../../components/UserComponents/UserSettingsDetail"
-import UserForm from "../../components/UserComponents/UserForm";
+import UserSettingsDetail from "../../components/templates/userSettingsTemplates/UserSettingsDetail"
+import UserForm from "../../components/molecules/Forms/UserForm";
 import { useSelector } from "react-redux";
 
 const UserSettings = () => {

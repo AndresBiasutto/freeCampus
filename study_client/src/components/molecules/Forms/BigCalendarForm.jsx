@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { MdOutlineContentPasteSearch } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { setExamDate } from "../../../../redux/actions/subjectActions";
+import { setExamDate } from "../../../redux/actions/subjectActions";
 
 // eslint-disable-next-line react/prop-types
 const BigCalendarForm = ({ id, setOpenModal, selectedDate }) => {

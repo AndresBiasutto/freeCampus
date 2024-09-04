@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import AddVideo from "../../molecules/ChapterMolecules/AddVideo";
 import Video from "../../atoms/ChapterAtoms/Video";
-import Spinner from "../../SistemComponents/Spinner";
+import Spinner from "../../atoms/CommonAtoms/Spinner";
 import { useSelector } from "react-redux";
 import ModuleHeader from "./ModuleHeader";
 
@@ -15,8 +15,9 @@ const LectureTab = ({ chapter, chapterId, chapterVideo, chapterName }) => {
         <AddVideo chapterId={chapterId} chapterVideo={chapterVideo} />
         </div>
       )}
+      <p className=" w-full mb-2 text-light-text dark:text-dark-text">{chapter.description}</p>
       {chapterVideo ? <Video videoUrl={chapterVideo} /> : <Spinner />}
-      <p className="text-sky-100">{chapter.description}</p>
+
     </div>
   );
 };

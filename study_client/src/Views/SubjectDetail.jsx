@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getOneSubject } from "../redux/actions/subjectActions";
 import { getModules } from "../redux/actions/moduleActions";
-import Spinner from "../components/SistemComponents/Spinner";
+import Spinner from "../components/atoms/CommonAtoms/Spinner";
 import SubjectDetailModules from "../components/templates/subjectDetailTemplates/SubjectDetailModules";
 import SubjectDetailCalendar from "../components/templates/subjectDetailTemplates/SubjectDetailCalendar";
 import SubjectDetailSchedule from "../components/templates/subjectDetailTemplates/SubjectDetailSchedule";

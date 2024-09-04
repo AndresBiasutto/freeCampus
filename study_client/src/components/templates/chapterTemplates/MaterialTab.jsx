@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import FileCard from "../../molecules/ChapterMolecules/FileCard/FileCardIndex";
 import UploadFile from "../../molecules/ChapterMolecules/UploadFile";
-import Spinner from "../../SistemComponents/Spinner";
+import Spinner from "../../atoms/CommonAtoms/Spinner";
 import { useSelector } from "react-redux";
 import isTeacher from "../../../Libs/isTeacher";
 import ModuleHeader from "./ModuleHeader";
@@ -16,7 +16,7 @@ const MaterialTab = ({ chapterFiles, chapterId, chapterName }) => {
           <UploadFile chapterId={chapterId} />
         </div>
       )}
-      <div className=" grid sm:grid-cols-2 md:grid-cols-3 grid-cols-1 gap-2">
+      <div className="w-full grid sm:grid-cols-2 md:grid-cols-4 grid-cols-1 gap-2">
         {chapterFiles ? (
           chapterFiles.map((file) => <FileCard key={file.id} file={file} />)
         ) : (

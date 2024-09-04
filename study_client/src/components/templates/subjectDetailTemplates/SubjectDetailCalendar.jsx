@@ -1,5 +1,5 @@
-import BigCalendar from "../../UserComponents/Calendar/BigCalendar/BigCalendar";
-import Spinner from "../../SistemComponents/Spinner";
+import BigCalendar from "../../molecules/CalendarMolecules/BigCalendar";
+import Spinner from "../../atoms/CommonAtoms/Spinner";
 import PropTypes from "prop-types";
 
 const SubjectDetailCalendar = ({

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { getFiles } from "../../../redux/actions/fileActions";
 import { addVideo } from "../../../redux/actions/moduleActions";
 import { RiVideoAddLine } from "react-icons/ri";
-import Spinner from "../../SistemComponents/Spinner";
+import Spinner from "../../atoms/CommonAtoms/Spinner";
 import PropTypes from "prop-types";
 
 const AddVideo = ({ chapterId }) => {
@@ -43,7 +43,7 @@ const AddVideo = ({ chapterId }) => {
 
   return (
     <form
-      className="mb-2 mx-auto h-full w-full flex flex-col justify-end items-center"
+      className="mb-2 mx-auto  w-full flex flex-col justify-end items-center"
       onSubmit={submitLink}
     >
       <div className="flex w-full justify-end">

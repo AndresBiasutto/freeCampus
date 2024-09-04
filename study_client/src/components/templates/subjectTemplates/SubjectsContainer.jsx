@@ -1,7 +1,7 @@
 import SubjectCard from "../../molecules/SubjectCard/IndexSubjectCard";
 import PropTypes from "prop-types";
 import CreateSubjectBtn from "../../atoms/SubjectCardAtoms/buttons/CreateSubjectBtn";
-import Spinner from "../../SistemComponents/Spinner";
+import Spinner from "../../atoms/CommonAtoms/Spinner";
 import isTeacher from "../../../Libs/isTeacher";
 
 const SubjectsContainer = (props) => {

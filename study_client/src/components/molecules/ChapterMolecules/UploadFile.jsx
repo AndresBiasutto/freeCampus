@@ -54,14 +54,14 @@ const UploadFile = (props) => {
       <div className="flex w-full justify-end">
         <div
           id="multi-upload-button"
-          className="inline-flex items-center px-4 py-2 cursor-pointer text-sm  tracking-widest rounded-l-lg bg-light-blueBtn hover:bg-light-blueBtnHvr dark:bg-dark-blueBtn dark:hover:bg-dark-blueBtnHvr text-light-text dark:text-dark-text active:bg-gray-900  transition"
+          className=" w-full inline-flex items-center justify-center flex-nowrap px-1 py-2 cursor-pointer text-sm  tracking-widest rounded-l-lg bg-light-blueBtn hover:bg-light-blueBtnHvr dark:bg-dark-blueBtn dark:hover:bg-dark-blueBtnHvr text-light-text dark:text-dark-text active:bg-gray-900  transition"
           onClick={handleBrowseClick}
         >
           Buscar pdf
         </div>
-        <div className="w-1/2 lg:w-3/12 border border-gray-300 flex items-center justify-center bg-light-lightBackground dark:bg-dark-darkBackground">
+        <div className="w-full lg:w-full border border-gray-300 flex items-center justify-center bg-light-lightBackground dark:bg-dark-darkBackground">
 
-          <p className=" text-light-text dark:text-dark-text" >{fileValue ? fileValue.name : errorMessage} </p>
+          <p className=" w-full flex-nowrap text-light-text dark:text-dark-text" >{fileValue ? fileValue.name : errorMessage} </p>
         </div>
         <button
           type="submit"
