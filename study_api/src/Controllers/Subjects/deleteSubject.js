@@ -1,4 +1,4 @@
-const { Subject, Module, Chapter, Exam } = require("../../db");
+const { Subject, Module, Chapter, Exam, ScheduleDate } = require("../../db");
 const deleteFile = require("./SubjectModules/ModuleChapters/ChapterFiles/deleteFile");
 const getSubject = require("./getSubject");
 
@@ -6,13 +6,20 @@ const deleteSubject = async (id) => {
   try {
     const subjectSelected = await getSubject(id);
     console.log(subjectSelected);
+
+    // Eliminar las fechas programadas asociadas a la asignatura
+    await ScheduleDate.destroy({
+      where: { subjectId: id },
+    });
+
     if (subjectSelected.examDates) {
-      await subjectSelected.examDates.forEach((exam) => {
-        Exam.destroy({
+      for (const exam of subjectSelected.examDates) {
+        await Exam.destroy({
           where: { id: exam.id },
         });
-      });
+      }
     }
+
     if (subjectSelected?.Modules) {
       for (const module of subjectSelected.Modules) {
         if (module?.chapters) {

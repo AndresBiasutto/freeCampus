@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createUser } from "../../redux/actions/userActions";
+import Background from "../../components/molecules/CommonMolecules/Background";
+import Container from "../../components/molecules/CommonMolecules/Container";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -65,8 +67,8 @@ const Register = () => {
   };
 
   return (
-    <main className="mx-auto flex min-h-screen w-full items-center justify-around bg-gray-900 text-white">
-      <section className="flex w-[30rem] flex-col space-y-10">
+    <Background>
+      <Container>
         <div className="text-center text-4xl font-medium">Register</div>
 
         <div className="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-indigo-500">
@@ -163,8 +165,8 @@ const Register = () => {
             EXITO!!
           </p>
         )}
-      </section>
-    </main>
+      </Container>
+    </Background>
   );
 };
 

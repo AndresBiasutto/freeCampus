@@ -28,10 +28,5 @@ module.exports = (sequelize) => {
     { timestamps: true }
   );
 
-  // Module.associate = (models) => {
-  //   Module.belongsTo(models.Video, { foreignKey: "moduleId", as: "Module" });
-  //   Module.hasMany(models.File, { foreignKey: 'moduleId', as: 'Files' });
-  // };
-
   return Module;
 };

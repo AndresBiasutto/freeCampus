@@ -5,6 +5,7 @@ import { getOneChapter } from "../redux/actions/moduleActions";
 import TabMenu from "../components/templates/chapterTemplates/TabMenu";
 import LectureTab from "../components/templates/chapterTemplates/LectureTab"
 import MaterialTab from "../components/templates/chapterTemplates/MaterialTab";
+import Background from "../components/molecules/CommonMolecules/Background";
 
 const Chapter = () => {
   const chapter = useSelector((state) => state.chapter.chapter);
@@ -23,7 +24,7 @@ const Chapter = () => {
   const showTab = (num) => setActiveTab(num);
 
   return (
-    <div className="w-screen pt-14 h-full flex flex-row justify-center items-start">
+    <Background>
       <div className="w-full pt-4 flex flex-col justify-center items-center transition bg-light-lightBackground dark:bg-dark-darkBackground">
         <TabMenu activeTab={activeTab} showTab={showTab} />
         <div className="w-full md:w-3/5">
@@ -31,7 +32,7 @@ const Chapter = () => {
           {activeTab === 2 && <MaterialTab chapterFiles={chapterFiles} chapterName={chapterName} chapterId={chapter.id} />}
         </div>
       </div>
-    </div>
+    </Background>
   );
 };
 

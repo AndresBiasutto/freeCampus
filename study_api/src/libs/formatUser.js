@@ -10,7 +10,8 @@ const formatUser = (usr) => {
     created: usr.created,
     password: usr.password,
     token: usr.token? usr.token: "",
-    enrolledSubjects: usr.enrolledSubjects
+    enrolledSubjects: usr.enrolledSubjects,
+    createdSubjects: usr.createdSubjects
   };
   return finalUser;
 };

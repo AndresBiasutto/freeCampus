@@ -5,6 +5,8 @@ import {
     GET_USER,
     CREATE_USER,
     CLEAR_SEARCH,
+    FILTER_USERS,
+    DELETE_USER
   } from "../actions/userActions";
   
   const initialUserState = {
@@ -22,6 +24,12 @@ const userReducer = (state = initialUserState, action) => {
           ...state,
           user: action.payload,
         };
+        case DELETE_USER:
+          return {
+            ...state,
+            // Guardar el mensaje del backend en el estado de `user`
+            user: action.payload,  // El payload contendrá el mensaje de éxito.
+          };
       case GET_ALL_USERS:
         return {
           ...state,
@@ -38,6 +46,11 @@ const userReducer = (state = initialUserState, action) => {
           registerToken: action.payload,
         };
         case GET_USER_BY_NAME:
+          return {
+            ...state,
+            studentSearch: action.payload,
+          };
+        case FILTER_USERS:
           return {
             ...state,
             studentSearch: action.payload,

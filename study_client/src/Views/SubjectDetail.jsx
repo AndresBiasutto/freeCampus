@@ -9,6 +9,7 @@ import SubjectDetailCalendar from "../components/templates/subjectDetailTemplate
 import SubjectDetailSchedule from "../components/templates/subjectDetailTemplates/SubjectDetailSchedule";
 import isTeacher from "../Libs/isTeacher";
 import SubjectDetailStudentsTable from "../components/templates/subjectDetailTemplates/SubjectDetailStudentsTable";
+import Background from "../components/molecules/CommonMolecules/Background";
 
 const SubjectDetail = () => {
   const dispatch = useDispatch();
@@ -29,8 +30,9 @@ const SubjectDetail = () => {
     dispatch(getOneSubject(id));
   }, [dispatch, id]);
 
+
   return (
-    <div className="w-full pt-14 flex flex-col justify-center items-center align-center transition bg-light-lightBackground dark:bg-dark-darkBackground">
+    <Background>
       <SubjectDetailModules
         subjectModules={subjectModules}
         subjectName={subjectName}
@@ -50,12 +52,12 @@ const SubjectDetail = () => {
         examDates={examDates}
         scheduleDates={scheduleDates}
       />
-      {isTeacher(role) ? (
+       {isTeacher(role) ? (
         <SubjectDetailStudentsTable id={id} students={students} />
       ) : (
         <Spinner />
-      )}
-    </div>
+      )} 
+    </Background>
   );
 };
 

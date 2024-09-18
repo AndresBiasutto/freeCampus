@@ -9,17 +9,17 @@ const CreateModuleBtn = ({ subjectId, subjectName }) => {
 
   return (
     <>
-    <div className="w-full flex flex-row justify-between items-center">
-      <h3 className="w-full text-xl font-bold leading-none text-light-text dark:text-dark-text mb-2">
-        {subjectName}
-      </h3>
-      <button
-        className=" w-2/4 h-10 p-2 flex justify-center items-center gap-2 bg-light-blueBtn hover:bg-light-blueBtnHvr dark:bg-dark-blueBtn dark:hover:bg-dark-blueBtnHvr transition rounded-lg text-light-text dark:text-dark-text "
-        onClick={handleToggleModal}
-      >
-        Agregar semestre <LuBookPlus />
-      </button>      
-    </div>
+      <div className="w-full flex flex-row justify-between items-center">
+        <h3 className="w-full text-xl font-bold leading-none text-light-text dark:text-dark-text mb-2">
+          {subjectName}
+        </h3>
+        <button
+          className=" w-2/4 h-10 p-2 mb-4 flex justify-center items-center gap-2 bg-light-blueBtn hover:bg-light-blueBtnHvr dark:bg-dark-blueBtn dark:hover:bg-dark-blueBtnHvr transition rounded-lg text-light-text dark:text-dark-text "
+          onClick={handleToggleModal}
+        >
+          Agregar semestre <LuBookPlus />
+        </button>
+      </div>
 
       <ModalMolecule
         showModal={showModal}

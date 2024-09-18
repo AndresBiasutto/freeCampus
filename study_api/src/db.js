@@ -36,14 +36,18 @@ const { User, Subject, File, Role, Module, Video, Chapter, Exam, ScheduleDate } 
 
 // Associations
 User.belongsTo(Role, { foreignKey: "role" });
+
 User.belongsToMany(Subject, { through: "UserSubject", as: "enrolledSubjects" });
 Subject.belongsToMany(User, { through: "UserSubject", as: "students" });
-File.belongsTo(Module, { foreignKey: "moduleId", as: "Module" });
-Module.hasMany(File, { foreignKey: "moduleId", as: "Files" });
+
+// File.belongsTo(Module, { foreignKey: "moduleId", as: "Module" });
+// Module.hasMany(File, { foreignKey: "moduleId", as: "Files" });
 Subject.hasMany(Module, { foreignKey: "subjectId" });
 Module.belongsTo(Subject, { foreignKey: "subjectId" });
+
 User.hasMany(Subject, { as: "createdSubjects", foreignKey: "creatorId" });
 Subject.belongsTo(User, { as: "creator", foreignKey: "creatorId" });
+
 Module.hasMany(Chapter, { foreignKey: "moduleId", as: "chapters" });
 Chapter.belongsTo(Module, { foreignKey: "moduleId", as: "module" });
 File.belongsTo(Chapter, { foreignKey: "chapterId", as: "Chapter" });

@@ -12,22 +12,43 @@ const {
   getOneModuleHandler,
   postChaptersHandler,
   postVideosHandler,
-  getFilesHandler
+  getFilesHandler,
 } = require("../Handlers/ModulesHandler");
+const hasRole = require("../Middlewares/hasRole");
 
 const modulesRouter = Router();
 
-modulesRouter.get("/", getModulesHandler);
-modulesRouter.post("/", postModulesHandler);
+modulesRouter.get(
+  "/",
+  hasRole(["admin", "teacher", "student"]),
+  getModulesHandler
+);
+modulesRouter.post("/", hasRole(["teacher"]), postModulesHandler);
 // modulesRouter.post("/videos", postVideosHandler)
-modulesRouter.post("/chapters", postChaptersHandler);
-modulesRouter.get("/chapters", getChaptersHandler);
-modulesRouter.get("/chapters/:id", getOneChapterHandler);
-modulesRouter.post("/chapters/videos", postVideosHandler);
+modulesRouter.post("/chapters", hasRole(["teacher"]), postChaptersHandler);
+modulesRouter.get(
+  "/chapters",
+  hasRole(["admin", "teacher", "student"]),
+  getChaptersHandler
+);
+modulesRouter.get(
+  "/chapters/:id",
+  hasRole(["admin", "teacher", "student"]),
+  getOneChapterHandler
+);
+modulesRouter.post("/chapters/videos", hasRole(["teacher"]), postVideosHandler);
 modulesRouter.post("/chapters/files", upload.single("file"), postFileHandler);
-modulesRouter.get("/chapters/files", getFilesHandler);
-modulesRouter.delete("/:id", deleteModuleHandler);
+modulesRouter.get(
+  "/chapters/files",
+  hasRole(["admin", "teacher", "student"]),
+  getFilesHandler
+);
+modulesRouter.delete("/:id", hasRole(["teacher"]), deleteModuleHandler);
 // modulesRouter.put("/id", putSubjectHandler)
-modulesRouter.get("/:id", getOneModuleHandler);
+modulesRouter.get(
+  "/:id",
+  hasRole(["admin", "teacher", "student"]),
+  getOneModuleHandler
+);
 
 module.exports = modulesRouter;

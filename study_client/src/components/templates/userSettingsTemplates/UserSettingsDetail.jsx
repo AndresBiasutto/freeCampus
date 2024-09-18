@@ -1,16 +1,25 @@
 import PropTypes from "prop-types";
 import { useEffect } from "react";
+import Container from "../../molecules/CommonMolecules/Container";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getOneUser } from "../../../redux/actions/userActions";
+import { FaUser } from "react-icons/fa";
+import SendMessage from "../../atoms/AdminAtoms/SendMessage";
+import ChangeRole from "../../atoms/AdminAtoms/ChangeRole";
 
-const UserDetailCard = (props) => {
-  const user = props.user;
-
+const UserDetailCard = () => {
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const { user } = useSelector((state) => state.user);
+  const {role, name}= useSelector(state=> state.auth)
   useEffect(() => {
-    console.log(user);
-  }, [user]);
+    dispatch(getOneUser(id));
+  }, [dispatch, id]);
 
   return (
-    <div className="max-w-md mx-auto h-auto bg-white shadow-lg rounded-lg overflow-hidden">
-      <div className="sm:flex sm:items-center px-6 py-4">
+    <Container>
+      <div className=" w-full sm:flex sm:items-center justify-start px-6 py-4">
         {user?.image ? (
           <img
             className="block mx-auto sm:mx-0 sm:flex-shrink-0 h-24 w-24 rounded-full"
@@ -18,19 +27,8 @@ const UserDetailCard = (props) => {
             alt={user?.name}
           />
         ) : (
-          <div className="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-            <svg
-              className="absolute w-12 h-12 text-gray-400 -left-1"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
+          <div className="relative h-24 w-24 flex justify-center items-center overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+            <FaUser className=" text-5xl " />
           </div>
         )}
 
@@ -39,27 +37,66 @@ const UserDetailCard = (props) => {
 
           <p className="text-sm leading-tight text-gray-600">{user.email}</p>
           <p className="text-sm leading-tight text-gray-600">
-            {user.contactNumber !== "null"
-              ? user.contactNumber
-              : "sin contácto"}
+            {user.contactNumber && user.contactNumber}
           </p>
           <p>{user.role} </p>
         </div>
+        <div className="w-full flex flex-col items-end justify-center gap-2">
+          <SendMessage />
+          {user.role !== "admin" && <ChangeRole />}
+        </div>
       </div>
 
-      <div className="px-6 py-4">
-        <h3 className="text-lg leading-tight font-bold mb-2">
-          Materias que curso:
-        </h3>
-        <ul className="list-disc list-inside text-gray-700 mb-4">
-          {user.enrolledSubjects && user.enrolledSubjects !== 0 ? (
-            user.enrolledSubjects.map((subject) => (
-              <li key={subject.id}>{subject.name}</li>
-            ))
-          ) : (
-            <p>No se han encontrado materias.</p>
-          )}
-        </ul>
+      <div className=" w-full px-6 py-4">
+        {user.role === "student" && (
+          <div>
+            <h3 className="text-lg leading-tight font-bold mb-2">
+              Materias que curso:
+            </h3>
+            <ul className="list-disc list-inside text-gray-700 mb-4">
+              {user.enrolledSubjects && user.enrolledSubjects !== 0 ? (
+                user.enrolledSubjects.map((subject) => (
+                  <li className=" mb-4" key={subject.id}>
+                    <Link
+                      to={`/${role}/${name}/subjects/${subject.id}`}
+                      className="p-2 w-auto flex flex-row justify-start items-center gap-2 rounded-lg bg-light-primary hover:bg-light-accent dark:bg-dark-primary  dark:hover:bg-dark-accent"
+                    >
+                    <img className="h-6 w-6 rounded-md " src={subject.image} />
+                     <p>{subject.name}</p> 
+                    </Link>
+                  </li>
+                ))
+              ) : (
+                <p>No se han encontrado materias.</p>
+              )}
+            </ul>
+          </div>
+        )}
+        {user.role === "teacher" && (
+          <div>
+            <h3 className="text-lg leading-tight font-bold mb-2">
+              Mis materias:
+            </h3>
+            <ul className="list-disc list-inside text-gray-700 mb-4">
+              {user.createdSubjects && user.createdSubjects !== 0 ? (
+                user.createdSubjects.map((subject) => (
+                  <li className=" mb-4" key={subject.id}>
+                    <Link
+                      to={`/${role}/${name}/subjects/${subject.id}`}
+                      className="p-2 w-auto flex flex-row justify-start items-center gap-2 rounded-lg bg-light-primary hover:bg-light-accent dark:bg-dark-primary  dark:hover:bg-dark-accent"
+                    >
+                    <img className="h-6 w-6 rounded-md " src={subject.image} />
+                     <p>{subject.name}</p> 
+                    </Link>
+                  </li>
+                ))
+              ) : (
+                <p>No se han encontrado materias.</p>
+              )}
+            </ul>
+          </div>
+        )}
+
         <h3 className="text-lg leading-tight font-bold mb-2">Sobre mí:</h3>
         <p className="text-sm leading-tight text-gray-600 mb-4">
           {user.description !== "null"
@@ -67,15 +104,15 @@ const UserDetailCard = (props) => {
             : `${user.name}, contános álgo sobre vós!`}
         </p>
       </div>
-    </div>
+    </Container>
   );
 };
 UserDetailCard.propTypes = {
   user: PropTypes.shape({
     image: PropTypes.string,
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     description: PropTypes.string,
-    email: PropTypes.string.isRequired,
+    email: PropTypes.string,
     contactNumber: PropTypes.string,
     role: PropTypes.string,
     enrolledSubjects: PropTypes.arrayOf(
@@ -84,6 +121,6 @@ UserDetailCard.propTypes = {
         name: PropTypes.string,
       })
     ),
-  }).isRequired,
+  }),
 };
 export default UserDetailCard;

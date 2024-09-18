@@ -11,7 +11,7 @@ import GoForward from "../../atoms/NavVarAtoms/buttons/GoForward";
 const NavBar = () => {
   const dispatch = useDispatch();
   const darkMode = useSelector((state) => state.theme.darkMode);
-  const { role, image, name, email } = useSelector((state) => state.auth);
+  const { role, image, name, email, id } = useSelector((state) => state.auth);
   const location = useLocation();
 
   const handleThemeToggle = () => {
@@ -31,10 +31,10 @@ const NavBar = () => {
       fluid
       className="  z-50 fixed w-screen transition bg-light-background/95 dark:bg-dark-background/95 text-light-text dark:text-dark-text"
     >
-      <Link to={`http://localhost:5173/${name}/dashboard`}>
+      <Link to={`http://localhost:5173/${role}/${name}/dashboard`}>
         <img
           src={campusLogo}
-          className="mr-3 w-36 sm:h-9"
+          className="mr-3 w-8 sm:w-16 "
           alt="Mari campus logo"
         />
       </Link>
@@ -58,6 +58,7 @@ const NavBar = () => {
           arrowIcon={false}
           inline
           label={<Avatar alt="User settings" img={image} rounded />}
+          className=" bg-light-primary dark:bg-dark-primary"
         >
           <Dropdown.Header>
             <span className="block text-sm text-light-text dark:text-dark-text">
@@ -69,42 +70,40 @@ const NavBar = () => {
           </Dropdown.Header>
           <Dropdown.Item>
             {" "}
-            <Link to={`${name}/settings`}>Settings</Link>
+            <Link to={`${role}/${name}/settings/${id}`}>Settings</Link>
           </Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item className="relative">
             <LogOut />
-          </Dropdown.Item>
         </Dropdown>
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
+        <NavLink
+          to={`/${name}/dashboard`}
+          className={({ isActive }) => (isActive ? "active text-blue-700" : "")}
+        >
+          Dashboard
+        </NavLink>
+        {role === "admin" && (
           <NavLink
-            to={`/${name}/dashboard`}
+            to={`/${role}/${name}/cpannel`}
             className={({ isActive }) =>
               isActive ? "active text-blue-700" : ""
             }
           >
-            Dashboard
+            C-pannel
           </NavLink>
-
+        )}
+        {role !== "admin" && (
           <NavLink
-            to={`/${name}/subjects`}
+            to={`/${role}/${name}/subjects`}
             className={({ isActive }) =>
               isActive ? "active text-blue-700" : ""
             }
           >
             Mis materias
           </NavLink>
-
-          <NavLink
-            to={`/${role}/users`}
-            className={({ isActive }) =>
-              isActive ? "active text-blue-700" : ""
-            }
-          >
-            Users
-          </NavLink>
+        )}
       </Navbar.Collapse>
     </Navbar>
   );

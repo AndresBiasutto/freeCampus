@@ -1,14 +1,15 @@
-import SubjectCard from "../../molecules/SubjectCard/IndexSubjectCard";
 import PropTypes from "prop-types";
 import CreateSubjectBtn from "../../atoms/SubjectCardAtoms/buttons/CreateSubjectBtn";
 import Spinner from "../../atoms/CommonAtoms/Spinner";
 import isTeacher from "../../../Libs/isTeacher";
+import Container from "../../molecules/CommonMolecules/Container";
+import SubjectCard from "../../molecules/Cards/SubjectCard";
 
 const SubjectsContainer = (props) => {
   const { mySubjects, role, name } = props;
 
   return (
-    <div className=" p-4 mt-4 mb-4 rounded-lg w-full md:w-3/5 bg-light-background dark:bg-dark-background flex flex-col items-center justify-start">
+    <Container className=" p-4 mt-4 mb-4 rounded-lg w-full md:w-3/5 bg-light-background dark:bg-dark-background flex flex-col items-center justify-start">
       <div className=" grid grid-flow-row gap-4 w-full">
         <div className="w-full flex flex-row justify-end items-end">
           {isTeacher(role) && <CreateSubjectBtn />}
@@ -26,7 +27,7 @@ const SubjectsContainer = (props) => {
           <Spinner />
         )}
       </div>
-    </div>
+    </Container>
   );
 };
 

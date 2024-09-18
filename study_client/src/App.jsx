@@ -1,22 +1,28 @@
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import LoginPage from "./Views/PublicPages/Login";
-import UnauthorizedPage from "./Views/PublicPages/UnauthorizedPage";
 import PrivateRoute from "./components/atoms/CommonAtoms/PrivateRoute";
 import { loadUserFromStorage } from "./redux/actions/authActions";
 import usePreserveRoute from "./hooks/usePreserveRoute";
-import HomePage from "./Views/PublicPages/HomePage";
-import UserSettings from "./Views/PublicPages/UserSettings";
-import Register from "./Views/PublicPages/Register";
 import NavBar from "./components/templates/navBarTemplates/NavBar";
-import Dashboard from "./Views/Dashboard";
-import Subjects from "./Views/Subjects";
-import SubjectDetail from "./Views/SubjectDetail";
-import Chapter from "./Views/Chapter";
+import {
+  HomePage,
+  Login,
+  Register,
+  UnauthorizedPage,
+  UserSettings,
+} from "./Views/PublicPages/PublicPagexIndex";
+import {
+  Chapter,
+  Cpannel,
+  Dashboard,
+  SubjectDetail,
+  Subjects,
+} from "./Views/ViewIndex";
+import UserDetail from "./Views/UserDetail";
 
 const App = () => {
-  const { name } = useSelector((state) => state.auth);
+  const { name, role } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -33,26 +39,33 @@ const App = () => {
 
   return (
     <div className="h-full min-h-screen transition bg-light-lightBackground dark:bg-dark-darkBackground">
-      {location.pathname !== "/" &&
-        location.pathname !== "/login" &&
-        location.pathname !== "/register" && <NavBar />}
+      {location.pathname !== "/" && location.pathname !== "/login" && (
+        <NavBar />
+      )}
 
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/*" element={<UnauthorizedPage />} />
         <Route path="/" element={<HomePage />} />
-
+        <Route
+          path={`${role}/${name}/cpannel`}
+          element={
+            <PrivateRoute roles={["admin"]}>
+              <Cpannel />
+            </PrivateRoute>
+          }
+        />
         <Route
           path={`${name}/dashboard`}
           element={
-            <PrivateRoute roles={["teacher", "student"]}>
+            <PrivateRoute roles={["admin", "teacher", "student"]}>
               <Dashboard />
             </PrivateRoute>
           }
         />
         <Route
-          path={`/${name}/subjects`}
+          path={`/${role}/${name}/subjects`}
           element={
             <PrivateRoute roles={["teacher", "student"]}>
               <Subjects />
@@ -60,9 +73,9 @@ const App = () => {
           }
         />
         <Route
-          path={`/${name}/subjects/:id`}
+          path={`/${role}/${name}/subjects/:id`}
           element={
-            <PrivateRoute roles={["teacher", "student"]}>
+            <PrivateRoute roles={["admin","teacher", "student"]}>
               <SubjectDetail />
             </PrivateRoute>
           }
@@ -70,16 +83,24 @@ const App = () => {
         <Route
           path={`/${name}/subjects/module/chapters/:id`}
           element={
-            <PrivateRoute roles={["teacher", "student"]}>
+            <PrivateRoute roles={["admin","teacher", "student"]}>
               <Chapter />
             </PrivateRoute>
           }
         />
         <Route
-          path={`/${name}/settings`}
+          path={`/${role}/${name}/settings/:id`}
           element={
             <PrivateRoute roles={["teacher", "student", "admin"]}>
               <UserSettings />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={`/${role}/${name}/userdetail/:id`}
+          element={
+            <PrivateRoute roles={["admin"]}>
+              <UserDetail />
             </PrivateRoute>
           }
         />

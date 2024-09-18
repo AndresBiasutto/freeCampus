@@ -19,10 +19,10 @@ const ModalMolecule = ({ showModal, handleToggleModal, title, children }) => {
 };
 
 ModalMolecule.propTypes = {
-  showModal: PropTypes.bool.isRequired,
-  handleToggleModal: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
+  showModal: PropTypes.bool,
+  handleToggleModal: PropTypes.func,
+  title: PropTypes.string,
+  children: PropTypes.node,
 };
 
 export default ModalMolecule;

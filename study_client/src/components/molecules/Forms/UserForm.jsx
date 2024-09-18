@@ -53,11 +53,11 @@ const UserForm = () => {
   };
 
   return (
-    <form className=" w-full max-w-sm mx-auto" onSubmit={handleSubmit}>
-      <div className="mb-5">
+    <form className=" w-full mx-auto pt-4" onSubmit={handleSubmit}>
+      <div className="mb-5 w-full">
         <label
           htmlFor="name"
-          className="block mb-2 text-sm font-medium text-gray-900"
+          className="block mb-2 text-sm font-medium text-light-text dark:text-dark-text"
         >
           Cambiar nombre
         </label>
@@ -66,7 +66,7 @@ const UserForm = () => {
           id="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className=" shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+          className=" text-sm rounded-lg w-full p-2.5 "
           placeholder="Ej: Jon Snow"
           required
         />
@@ -75,7 +75,7 @@ const UserForm = () => {
       <div className="mb-5">
         <label
           htmlFor="contactNumber"
-          className="block mb-2 text-sm font-medium text-gray-900"
+          className="block mb-2 text-sm font-medium text-light-text dark:text-dark-text"
         >
           Agregar número de contácto
         </label>
@@ -93,7 +93,7 @@ const UserForm = () => {
       <div className="mb-5">
         <label
           htmlFor="image"
-          className="block mb-2 text-sm font-medium text-gray-900"
+          className="block mb-2 text-sm font-medium text-light-text dark:text-dark-text"
         >
           Cambiar imagen
         </label>
@@ -111,7 +111,7 @@ const UserForm = () => {
       <div className="mb-5">
         <label
           htmlFor="description"
-          className="block mb-2 text-sm font-medium text-gray-900"
+          className="block mb-2 text-sm font-medium text-light-text dark:text-dark-text"
         >
           Contános quien sós
         </label>

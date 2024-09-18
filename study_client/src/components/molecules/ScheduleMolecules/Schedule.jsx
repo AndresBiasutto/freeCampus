@@ -4,7 +4,7 @@ import { setScheduleTime } from "../../../redux/actions/subjectActions";
 import PropTypes from "prop-types";
 
 const Schedule = ({ subjectId, scheduleDates, subjectName }) => {
-  const { role} = useSelector((store) => store.auth);
+  const { role } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const [date, setDate] = useState({
     day: "",
@@ -12,19 +12,16 @@ const Schedule = ({ subjectId, scheduleDates, subjectName }) => {
     subjectId,
     subjectName,
   });
-  const daysOfWeek = [
-    "Lunes",
-    "Martes",
-    "Miércoles",
-    "Jueves",
-    "Viernes",
-    "Sábado",
-    "Domingo",
-  ];
+
+  // Días de la semana: de lunes a sábado
+  const daysOfWeek = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+
+  // Horas: de 06:00 a 23:00
   const hours = Array.from(
-    { length: 24 },
-    (_, i) => `${String(i).padStart(2, "0")}:00`
+    { length: 18 },  // 23 - 6 + 1 = 18 horas
+    (_, i) => `${String(i + 6).padStart(2, "0")}:00`  // Comienza en las 06:00
   );
+
   const handleClick = (day, hour) => {
     if (role === "teacher") {
       const updatedDate = {
@@ -42,7 +39,7 @@ const Schedule = ({ subjectId, scheduleDates, subjectName }) => {
       <h3 className="text-xl font-bold leading-none text-light-text dark:text-dark-text mb-2">
         Horario
       </h3>
-      <div className="w-full p-3 grid grid-cols-8 bg-light-lightBackground dark:bg-dark-darkBackground rounded-lg">
+      <div className="w-full p-3 grid grid-cols-7 bg-light-lightBackground dark:bg-dark-darkBackground rounded-lg">
         {/* Empty cell in the top-left corner */}
         <div></div>
 
@@ -60,14 +57,14 @@ const Schedule = ({ subjectId, scheduleDates, subjectName }) => {
         {hours.map((hour, hourIndex) => (
           <React.Fragment key={hour}>
             {/* Hour column */}
-            <div className="text-left pl-2 font-medium border border-light-background dark:border-dark-background  text-light-text dark:text-dark-text">
+            <div className=" text-left pl-2 font-medium border border-light-background dark:border-dark-background  text-light-text dark:text-dark-text">
               {hour}
             </div>
             {/* Time slots for each day */}
             {daysOfWeek.map((day, dayIndex) => (
               <div
                 key={`${hour}-${day}`}
-                className={`border-r border-b border-light-background dark:border-dark-background h-8 hover:bg-light-accent dark:hover:bg-dark-accent cursor-pointer transition
+                className={` border-r border-b border-light-background dark:border-dark-background h-8 hover:bg-light-accent dark:hover:bg-dark-accent cursor-pointer transition
                   ${dayIndex === daysOfWeek.length - 1 ? "border-r-0" : ""} 
                   ${hourIndex === hours.length - 1 ? "border-b-0" : ""}`}
                 onClick={() => handleClick(day, hour)}

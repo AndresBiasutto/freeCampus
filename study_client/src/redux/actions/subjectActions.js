@@ -13,9 +13,13 @@ export const createSubject = (subject) => ({
   type: CREATE_SUBJECT,
   payload: subject,
 });
-export const getSubjects = () => {
+export const getSubjects = (token) => {
   return async (dispatch) => {
-    const apiData = (await axios.get(`${"subjects"}`)).data;
+    const apiData = (await axios.get(`${"subjects"}`,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })).data;
     dispatch({ type: GET_SUBJECTS, payload: apiData });
   };
 };
@@ -25,11 +29,15 @@ export const getOneSubject = (id)=> {
       dispatch({type: GET_SUBJECT, payload: apiData})
   }
 }
-export const deleteSubject = (subjectId) => {
+export const deleteSubject = (subjectId, token) => {
   return async (dispatch) => {
-    const apiData = (await axios.delete(`subjects/${subjectId}`)).data;
-    dispatch(getSubjects())
-    dispatch({ type: GET_SUBJECTS, payload: apiData });
+    const apiData = (await axios.delete(`subjects/${subjectId}`,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })).data;
+    dispatch(getSubjects(token))
+    dispatch({ type: DELETE_SUBJECT, payload: apiData });
   };
 };
 export const setExamDate = ( calendarData) => {

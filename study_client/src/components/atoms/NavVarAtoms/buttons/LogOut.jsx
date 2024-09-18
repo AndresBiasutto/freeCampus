@@ -25,14 +25,14 @@ const LogOut = () => {
     <div>
       <button
         onClick={toggleModal}
-        className=" w-48 p-2 flex items-center space-x-4 bg-red-300 transition hover:bg-red-400 hover:font-bold rounded-md text-light-text dark:text-dark-text group"
+        className=" w-48 p-2 m-2 flex items-center space-x-4 bg-light-redBtn hover:bg-light-redBtnHvr dark:bg-dark-redBtn dark:hover:bg-dark-redBtnHvr text-light-text dark:text-dark-text rounded-md group"
       >
         <IoIosLogOut />
         <span>Logout</span>
       </button>
       {showModal && (
-        <div className="absolute h-fit w-full z-50 inset-0 flex items-center justify-center">
-          <div className=" w-full bg-light-background p-4 shadow-lg flex justify-around items-center flex-col">
+        <div className=" h-fit w-full z-50 inset-0 flex items-center justify-center">
+          <div className=" w-full bg-light-background dark:bg-dark-background rounded-lg m-2 p-4 shadow-lg flex justify-around items-center flex-col">
             <h2 className=" mb-2 text-dark-text dark:text-light-text">¿Deseas salir?</h2>
             <div className=" w-auto flex flex-row items-center justify-between gap-4">
               <button

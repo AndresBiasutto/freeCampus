@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types"
 
-const SubjectBody = ({subjectId, name, description, creator, userName}) => {
+const SubjectBody = ({subjectId, name, description, creator, userName, role}) => {
   return (
     <Link
-    to={`/${userName}/subjects/${subjectId}`}
+    to={`/${role}/${userName}/subjects/${subjectId}`}
     className="h-full w-full flex flex-row items-start justify-start pr-8 "
   >
     <div className="h-full w-full flex flex-row items-start justify-start ">
@@ -27,7 +27,8 @@ SubjectBody.propTypes={
     name: PropTypes.string,
     description: PropTypes.string,
     creator: PropTypes.string,
-    userName: PropTypes.string
+    userName: PropTypes.string,
+    role: PropTypes.string
 }
 
 export default SubjectBody

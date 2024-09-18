@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {  useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getSubjects } from "../../../redux/actions/subjectActions";
@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 
 const CreateSubjectForm = ({ setOpenModal, id }) => {
   const userId = useSelector((store) => store.auth.id);
+  const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: "",
@@ -14,7 +15,7 @@ const CreateSubjectForm = ({ setOpenModal, id }) => {
     creatorId: userId,
     image: "",
     dateStart: "",
-    dateEnd: ""
+    dateEnd: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -44,14 +45,17 @@ const CreateSubjectForm = ({ setOpenModal, id }) => {
     const formErrors = validate();
     if (Object.keys(formErrors).length === 0) {
       axios
-        .post("http://localhost:3001/subjects", formData)
-        .then((response) => {
-          console.log("Success:", response.data);
+        .post("http://localhost:3001/subjects", formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then(() => {
           setNotification({
             type: "success",
             message: "Form submitted successfully!",
           });
-          dispatch(getSubjects());
+          dispatch(getSubjects(token));
           setOpenModal(false); // Cierra el modal
         })
         .catch((error) => {
@@ -76,7 +80,7 @@ const CreateSubjectForm = ({ setOpenModal, id }) => {
         department: "",
         creatorId: id,
         dateStart: "",
-        dateEnd: ""
+        dateEnd: "",
       });
     }, 1000);
   };
@@ -85,7 +89,10 @@ const CreateSubjectForm = ({ setOpenModal, id }) => {
     <form onSubmit={handleSubmit} className="w-full">
       <div className="space-y-4">
         <div>
-          <label htmlFor="name" className="block mb-1 text-light-text dark:text-dark-text">
+          <label
+            htmlFor="name"
+            className="block mb-1 text-light-text dark:text-dark-text"
+          >
             Nombre
           </label>
           <input
@@ -98,7 +105,10 @@ const CreateSubjectForm = ({ setOpenModal, id }) => {
           {errors.name && <p className="text-red-500 h-3">{errors.name}</p>}
         </div>
         <div>
-          <label htmlFor="description" className="block mb-1 text-light-text dark:text-dark-text">
+          <label
+            htmlFor="description"
+            className="block mb-1 text-light-text dark:text-dark-text"
+          >
             Descripción
           </label>
           <input
@@ -113,7 +123,10 @@ const CreateSubjectForm = ({ setOpenModal, id }) => {
           )}
         </div>
         <div>
-          <label htmlFor="department" className="block mb-1 text-light-text dark:text-dark-text">
+          <label
+            htmlFor="department"
+            className="block mb-1 text-light-text dark:text-dark-text"
+          >
             Cohorte
           </label>
           <input
@@ -128,7 +141,10 @@ const CreateSubjectForm = ({ setOpenModal, id }) => {
           )}
         </div>
         <div>
-          <label htmlFor="image" className="block mb-1 text-light-text dark:text-dark-text">
+          <label
+            htmlFor="image"
+            className="block mb-1 text-light-text dark:text-dark-text"
+          >
             Url de la imagen
           </label>
           <input
@@ -138,11 +154,10 @@ const CreateSubjectForm = ({ setOpenModal, id }) => {
             onChange={handleChange}
             className="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full"
           />
-          {errors.image && (
-            <p className="text-red-500 h-3">{errors.image}</p>)}
+          {errors.image && <p className="text-red-500 h-3">{errors.image}</p>}
         </div>
         <div className=" w-full flex flex-row justify-center items-center gap-4">
-          <div className="w-full" >
+          <div className="w-full">
             <label
               htmlFor="dateStart"
               className="block mb-1 text-light-text dark:text-dark-text"
@@ -160,7 +175,7 @@ const CreateSubjectForm = ({ setOpenModal, id }) => {
               <p className="text-red-500 h-3">{errors.dateStart}</p>
             )}
           </div>
-          <div className="w-full" >
+          <div className="w-full">
             <label
               htmlFor="dateEnd"
               className="block mb-1 text-light-text dark:text-dark-text"
@@ -184,7 +199,7 @@ const CreateSubjectForm = ({ setOpenModal, id }) => {
         type="submit"
         className="w-full flex flex-row justify-center items-center gap-4 mt-4 px-3 md:px-4 py-1 md:py-2 bg-sky-600 border border-sky-600 text-white rounded-lg hover:bg-sky-700"
       >
-        crear 
+        crear
       </button>
       {notification && (
         <div
@@ -202,8 +217,8 @@ const CreateSubjectForm = ({ setOpenModal, id }) => {
 };
 
 CreateSubjectForm.propTypes = {
-  setOpenModal: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired
+  setOpenModal: PropTypes.func,
+  id: PropTypes.string,
 };
 
 export default CreateSubjectForm;

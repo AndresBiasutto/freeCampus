@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginSuccess } from "../../redux/actions/authActions";
 import axios from "../../api/axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const LOGIN_URL = "users/signin";
 
@@ -11,10 +11,12 @@ const Login = () => {
   const userRef = useRef();
   const errRef = useRef();
   const dispatch = useDispatch();
+  const {token}= useSelector(state => state.auth)
 
   const [e_mail, setE_mail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
+
 
   useEffect(() => {
     userRef.current.focus();
@@ -32,7 +34,7 @@ const Login = () => {
         LOGIN_URL,
         JSON.stringify({ e_mail, password }),
         {
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
           withCredentials: true,
         }
       );
@@ -55,7 +57,7 @@ const Login = () => {
         if (role === "Manager") {
           redirectPath = "/manager";
         } else if (role === "admin") {
-          redirectPath = "/admin/home";
+          redirectPath = `/${role}/${name}/cpannel`;
         } else if (role === "teacher") {
           redirectPath = `/${name}/dashboard`;
         } else if (role === "student") {

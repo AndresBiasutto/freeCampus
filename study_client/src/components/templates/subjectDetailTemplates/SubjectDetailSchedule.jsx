@@ -1,25 +1,25 @@
 import Schedule from "../../molecules/ScheduleMolecules/Schedule";
 import Spinner from "../../atoms/CommonAtoms/Spinner";
 import PropTypes from "prop-types";
+import Container from "../../molecules/CommonMolecules/Container";
 
-
-const SubjectDetailSchedule = ({subjectName, examDates, subjectId, scheduleDates}) => {
+const SubjectDetailSchedule = ({ subjectName, examDates, subjectId, scheduleDates }) => {
   return (
-    <div className="p-4 mt-4 mb-4 rounded-lg w-full md:w-3/5 bg-light-background dark:bg-dark-background flex flex-col items-center justify-start">
-    {subjectName && examDates ? (
-      <Schedule subjectName={subjectName} scheduleDates={scheduleDates} subjectId={subjectId} />
-    ) : (
-      <Spinner />
-    )}
-  </div>
-  )
-}
+    <Container>
+      {subjectName && examDates ? (
+        <Schedule subjectName={subjectName} scheduleDates={scheduleDates} subjectId={subjectId} />
+      ) : (
+        <Spinner />
+      )}
+    </Container>
+  );
+};
 
-SubjectDetailSchedule.propTypes= {
-    subjectId: PropTypes.string,
-    subjectName: PropTypes.string,
-    examDates: PropTypes.object,
-    scheduleDates:PropTypes.scheduleDates
-}
+SubjectDetailSchedule.propTypes = {
+  subjectId: PropTypes.string,
+  subjectName: PropTypes.string,
+  examDates: PropTypes.array, 
+  scheduleDates: PropTypes.array, 
+};
 
-export default SubjectDetailSchedule
+export default SubjectDetailSchedule;

@@ -39,6 +39,10 @@ html.dark {
 .dark .active {
   color: #fff; /* Color para modo oscuro */
 }
+
+li{
+  list-style: none;
+}
 ::-webkit-scrollbar {
   width: 5px;
   background: #011b16;

@@ -36,11 +36,11 @@ const SearchList = (props) => {
 
 SearchList.propTypes = {
   user: PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    name: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-  }).isRequired,
-  subjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    name: PropTypes.string,
+    email: PropTypes.string,
+  }),
+  subjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default SearchList;

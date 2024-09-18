@@ -8,8 +8,10 @@ const DeleteModuleForm = ({moduleId, handleToggleModal}) => {
     const dispatch= useDispatch();
 
     const deleteHandler = (moduleId) => {
-        console.log(moduleId);
-         dispatch(deleteModule(moduleId));
+         dispatch(deleteModule(moduleId))
+
+
+
          handleToggleModal();
       };
 

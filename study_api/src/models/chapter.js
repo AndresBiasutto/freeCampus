@@ -22,9 +22,5 @@ module.exports = (sequelize) => {
     }
   }, { timestamps: true });
 
-  Chapter.associate = (models) => {
-    Chapter.hasMany(models.File, { foreignKey: 'chapterId', as: 'Files' });
-  };
-
   return Chapter;
 };

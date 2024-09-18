@@ -30,6 +30,11 @@ const findUser = async (id) => {
           },
         ]
       },
+      {
+        model: Subject,
+        as: "createdSubjects",
+        attributes:["id", "name", "image"]
+      }
     ],
   });
   const formatedUser = formatUser(user);

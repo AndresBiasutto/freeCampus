@@ -5,15 +5,18 @@ import PropTypes from "prop-types";
 import {
   clearUserSearch,
   getUserByName,
-} from "../../../redux/actions/userActions";
+} from "../../../../redux/actions/userActions";
 import { useEffect, useState } from "react";
-import SearchList from "./SearchList";
+import SearchList from "../../StudentsTableMolecules/SearchList";
 
-const UserSearch = (props) => {
-  const subjectId= props.id
+const StudentSearch = (props) => {
+  const subjectId = props.id;
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
-  const searchResults = useSelector((state) => state.studentSearch.studentSearch);
+  const searchResults = useSelector(
+    (state) => state.studentSearch.studentSearch
+  );
+  const {token}= useSelector(state=> state.auth)
 
   useEffect(() => {
     if (!search) {
@@ -23,13 +26,12 @@ const UserSearch = (props) => {
 
   const submitSearch = (e) => {
     e.preventDefault();
-    dispatch(getUserByName(search));
-    console.log(searchResults);
+    dispatch(getUserByName(search, token));
   };
 
   return (
     <div>
-      <form className="flex items-center" onSubmit={submitSearch}>
+      <form className=" w-full flex items-center" onSubmit={submitSearch}>
         <label htmlFor="simple-search" className="sr-only">
           Search
         </label>
@@ -60,7 +62,7 @@ const UserSearch = (props) => {
           <ul className="absolute top-1 bg-gray-50  hover:bg-sky-100 w-full rounded flex flex-col items-start">
             {search &&
               searchResults.map((user) => (
-                <SearchList key= {user.id} user={user} subjectId={subjectId} />
+                <SearchList key={user.id} user={user} subjectId={subjectId} />
               ))}
           </ul>
         ) : (
@@ -72,8 +74,8 @@ const UserSearch = (props) => {
     </div>
   );
 };
-UserSearch.propTypes = {
+StudentSearch.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
-export default UserSearch;
+export default StudentSearch;

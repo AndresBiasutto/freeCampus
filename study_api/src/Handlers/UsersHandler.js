@@ -1,10 +1,10 @@
 const getUsers = require("../Controllers/Users/getUsers");
 const getUserByName = require("../Controllers/Users/getUserByName");
-const postUser = require("../Controllers/Users/postUser");
 const signUp = require("../Controllers/Users/signUp");
 const signIn = require("../Controllers/Users/signIn");
 const findUser = require("../Controllers/Users/findUser");
 const patchUser = require("../Controllers/Users/patchUser");
+const deleteUser = require("../Controllers/Users/deleteUser");
 
 const getUsersHandler = async (req, res) => {
   const searchName = req.query.name;
@@ -16,15 +16,6 @@ const getUsersHandler = async (req, res) => {
   }
 };
 
-const postUserHandler = async (req, res) => {
-  const { image, name, created } = req.body;
-  try {
-    const response = await postUser(image, name, created);
-    res.status(200).json(response);
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
-};
 const patchtUserHandler = async (req, res) => {
   const { id } = req.params;
   const { name, contactNumber, image, description } = req.body;
@@ -56,6 +47,16 @@ const signInUserHandler = async (req, res) => {
   }
 };
 
+const deleteUserHandler= async (req, res)=>{
+  const {id} = req.params;
+  try {
+    const response = await deleteUser(id);
+    res.status(200).json(response)
+  } catch (error) {
+  return res.status(500).json({ error: error.message });
+  }
+}
+
 const getUserHandler = async (req, res) => {
   const { id } = req.params;
   try {
@@ -68,9 +69,9 @@ const getUserHandler = async (req, res) => {
 
 module.exports = {
   getUsersHandler,
-  postUserHandler,
   signUpUserHandler,
   signInUserHandler,
   getUserHandler,
+  deleteUserHandler,
   patchtUserHandler
 };
