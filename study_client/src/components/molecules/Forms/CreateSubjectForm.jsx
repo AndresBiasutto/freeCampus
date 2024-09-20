@@ -45,7 +45,7 @@ const CreateSubjectForm = ({ setOpenModal, id }) => {
     const formErrors = validate();
     if (Object.keys(formErrors).length === 0) {
       axios
-        .post("http://localhost:3001/subjects", formData, {
+        .post("https://freecampus.onrender.com/subjects", formData, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
