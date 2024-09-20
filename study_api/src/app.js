@@ -12,9 +12,9 @@ server.name = "API";
 
 const corsOptions = {
   //origin: 'http://localhost:5173', //frontend local
-  origin: 'https://maricampus.netlify.app', //frontend deploy
+  origin: 'https://main--maricampus.netlify.app', //frontend deploy
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  allowedHeaders: ['Content-Type', 'Authorization', "Access-Control-Allow-Origin"],
   credentials: true,
 };
 server.use(cors(corsOptions))
