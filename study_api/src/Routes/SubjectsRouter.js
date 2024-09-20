@@ -12,18 +12,19 @@ const {
   postScheduleDatesHandler,
   postExamHandler
 } = require("../Handlers/SubjectsHandler");
+const hasRole = require("../Middlewares/hasRole");
 
 const subjectsRouter = Router();
 
-subjectsRouter.get("/", getSubjectsHandler);
-subjectsRouter.get("/StudentSubjects/:id", getStudentSubjectsHandler)
-subjectsRouter.post("/", postSubjectHandler);
-subjectsRouter.post("/examdates", postExamHandler);
-subjectsRouter.post("/scheduledates", postScheduleDatesHandler);
-subjectsRouter.delete("/:id", deleteSubectHandler);
-subjectsRouter.patch("/:id/students", patchSubjectStudentsHandler);
-subjectsRouter.patch("/:id", patchSubject);
-subjectsRouter.get("/:id", getOneSubjectHandler);
-subjectsRouter.delete("/:id/students/:studentId", removeSubjectStudentHandler);
+subjectsRouter.get("/", hasRole(["admin","teacher", "student"]), getSubjectsHandler);
+subjectsRouter.get("/StudentSubjects/:id", hasRole(["teacher"]), getStudentSubjectsHandler)
+subjectsRouter.post("/", hasRole(["teacher"]), postSubjectHandler);
+subjectsRouter.post("/examdates", hasRole(["teacher"]), postExamHandler);
+subjectsRouter.post("/scheduledates", hasRole(["teacher"]), postScheduleDatesHandler);
+subjectsRouter.delete("/:id", hasRole(["teacher"]), deleteSubectHandler);
+subjectsRouter.patch("/:id/students", hasRole(["teacher"]), patchSubjectStudentsHandler);
+subjectsRouter.patch("/:id", hasRole(["teacher"]), patchSubject);
+subjectsRouter.get("/:id", hasRole([ "admin", "teacher"]), getOneSubjectHandler);
+subjectsRouter.delete("/:id/students/:studentId", hasRole(["admin", "teacher"]), removeSubjectStudentHandler);
 
 module.exports = subjectsRouter;
