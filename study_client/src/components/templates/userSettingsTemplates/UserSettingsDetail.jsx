@@ -12,10 +12,10 @@ const UserDetailCard = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { user } = useSelector((state) => state.user);
-  const {role, name}= useSelector(state=> state.auth)
+  const {role, name, token}= useSelector(state=> state.auth)
   useEffect(() => {
-    dispatch(getOneUser(id));
-  }, [dispatch, id]);
+    dispatch(getOneUser(id, token));
+  }, [dispatch, id, token]);
 
   return (
     <Container>

@@ -13,6 +13,7 @@ const {
   postChaptersHandler,
   postVideosHandler,
   getFilesHandler,
+  patchModuleHandler
 } = require("../Handlers/ModulesHandler");
 const hasRole = require("../Middlewares/hasRole");
 
@@ -44,6 +45,7 @@ modulesRouter.get(
   getFilesHandler
 );
 modulesRouter.delete("/:id", hasRole(["teacher"]), deleteModuleHandler);
+modulesRouter.patch("/:id", hasRole(["teacher"]), patchModuleHandler);
 // modulesRouter.put("/id", putSubjectHandler)
 modulesRouter.get(
   "/:id",

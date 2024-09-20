@@ -8,6 +8,7 @@ const postFiles = require("../Controllers/Subjects/SubjectModules/ModuleChapters
 const getFiles = require("../Controllers/Subjects/SubjectModules/ModuleChapters/ChapterFiles/getFiles");
 const getChapters = require("../Controllers/Subjects/SubjectModules/ModuleChapters/getChapters");
 const getChapter = require("../Controllers/Subjects/SubjectModules/ModuleChapters/getChapter");
+const patchModule = require("../Controllers/Subjects/SubjectModules/patchModule");
 
 const getModulesHandler = async (req, res) => {
   try {
@@ -125,6 +126,16 @@ const deleteModuleHandler = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+const patchModuleHandler = async (req, res) => {
+  const { id } = req.params;
+  const moduleData = req.body;
+  try {
+    const response = await patchModule(id, moduleData);
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 module.exports = {
   getModulesHandler,
   postModulesHandler,
@@ -135,5 +146,6 @@ module.exports = {
   getChaptersHandler,
   deleteModuleHandler,
   getOneChapterHandler,
-  getFilesHandler
+  getFilesHandler,
+  patchModuleHandler,
 };

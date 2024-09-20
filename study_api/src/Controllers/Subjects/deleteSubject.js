@@ -5,7 +5,6 @@ const getSubject = require("./getSubject");
 const deleteSubject = async (id) => {
   try {
     const subjectSelected = await getSubject(id);
-    console.log(subjectSelected);
 
     // Eliminar las fechas programadas asociadas a la asignatura
     await ScheduleDate.destroy({

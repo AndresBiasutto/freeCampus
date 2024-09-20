@@ -18,7 +18,7 @@ const SearchList = (props) => {
     );
   };
   SearchList.propTypes={
-    user: PropTypes.array,
+    user: PropTypes.array || PropTypes.object ,
     subjectId: PropTypes.string
   }
   export default SearchList;

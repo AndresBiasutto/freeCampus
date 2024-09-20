@@ -4,7 +4,7 @@ import { LuBookPlus } from "react-icons/lu";
 import ModalMolecule from "../../../molecules/CommonMolecules/ModalMolecule";
 import useToggleModal from "../../../../hooks/useToggleModal";
 
-const CreateModuleBtn = ({ subjectId, subjectName }) => {
+const CreateModuleBtn = ({ subjectId, subjectName, role }) => {
   const { showModal, handleToggleModal } = useToggleModal();
 
   return (
@@ -13,18 +13,20 @@ const CreateModuleBtn = ({ subjectId, subjectName }) => {
         <h3 className="w-full text-xl font-bold leading-none text-light-text dark:text-dark-text mb-2">
           {subjectName}
         </h3>
-        <button
-          className=" w-2/4 h-10 p-2 mb-4 flex justify-center items-center gap-2 bg-light-blueBtn hover:bg-light-blueBtnHvr dark:bg-dark-blueBtn dark:hover:bg-dark-blueBtnHvr transition rounded-lg text-light-text dark:text-dark-text "
-          onClick={handleToggleModal}
-        >
-          Agregar semestre <LuBookPlus />
-        </button>
+        {role === "teacher" && (
+          <button
+            className=" w-2/4 h-10 p-2 mb-4 flex justify-center items-center gap-2 bg-light-blueBtn hover:bg-light-blueBtnHvr dark:bg-dark-blueBtn dark:hover:bg-dark-blueBtnHvr transition rounded-lg text-light-text dark:text-dark-text "
+            onClick={handleToggleModal}
+          >
+            Agregar semestre <LuBookPlus />
+          </button>
+        )}
       </div>
 
       <ModalMolecule
         showModal={showModal}
         handleToggleModal={handleToggleModal}
-        title="borrar Materia"
+        title="Agregar semestre"
       >
         <CreateModuleForm subjectId={subjectId} />
       </ModalMolecule>
@@ -34,5 +36,6 @@ const CreateModuleBtn = ({ subjectId, subjectName }) => {
 CreateModuleBtn.propTypes = {
   subjectId: PropTypes.string,
   subjectName: PropTypes.string,
+  role: PropTypes.string,
 };
 export default CreateModuleBtn;

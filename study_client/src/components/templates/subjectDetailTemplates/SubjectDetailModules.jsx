@@ -12,9 +12,12 @@ const SubjectDetailModules = ({
 }) => {
   return (
     <Container>
-      {role === "teacher" && (
-        <CreateModuleBtn subjectId={subjectId} subjectName={subjectName} />
-      )}
+      <CreateModuleBtn
+        role={role}
+        subjectId={subjectId}
+        subjectName={subjectName}
+      />
+
       {subjectModules ? (
         <ModuleCardIndex subjectModules={subjectModules} />
       ) : (

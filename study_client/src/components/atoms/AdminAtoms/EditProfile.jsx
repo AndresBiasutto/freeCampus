@@ -1,7 +1,7 @@
 import { LiaUserEditSolid } from "react-icons/lia";
 import useToggleModal from "../../../hooks/useToggleModal";
 import ModalMolecule from "../../molecules/CommonMolecules/ModalMolecule";
-import UserForm from "../../molecules/Forms/UserForm";
+import UserForm from "../../molecules/Forms/EditUserSettingsForm";
 import propTypes from "prop-types";
 
 const EditProfile = ({ userId }) => {
@@ -21,7 +21,7 @@ const EditProfile = ({ userId }) => {
         showModal={showModal}
         handleToggleModal={handleToggleModal}
       >
-        <UserForm userId={userId} />
+        <UserForm userId={userId} showModal={showModal} handleToggleModal={handleToggleModal} />
       </ModalMolecule>
     </div>
   );

@@ -8,6 +8,7 @@ import {
   ADD_CHAPTER_FAILURE,
   ADD_CHAPTER_SUCCESS,
   GET_CHAPTER,
+  UPDATE_MODULE
 } from "../actions/moduleActions";
 
 const initialModuleState = {
@@ -24,6 +25,11 @@ const moduleReducer = (state = initialModuleState, action) => {
         modules: action.payload,
       };
     case CREATE_MODULE:
+      return {
+        ...state,
+        module: action.payload,
+      };
+    case UPDATE_MODULE:
       return {
         ...state,
         module: action.payload,

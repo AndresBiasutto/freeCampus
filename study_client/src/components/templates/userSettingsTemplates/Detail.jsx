@@ -15,8 +15,9 @@ const Detail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { user } = useSelector((state) => state.user);
+  const {token} = useSelector( state => state.auth)
   useEffect(() => {
-    dispatch(getOneUser(id));
+    dispatch(getOneUser(id, token));
   }, [dispatch, id]);
 
   return (

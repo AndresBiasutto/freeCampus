@@ -38,7 +38,6 @@ const findUser = async (id) => {
     ],
   });
   const formatedUser = formatUser(user);
-  console.log(formatedUser);
   return formatedUser;
 };
 

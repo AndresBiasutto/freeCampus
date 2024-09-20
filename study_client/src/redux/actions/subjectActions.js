@@ -23,9 +23,13 @@ export const getSubjects = (token) => {
     dispatch({ type: GET_SUBJECTS, payload: apiData });
   };
 };
-export const getOneSubject = (id)=> {
+export const getOneSubject = (id, token)=> {
   return async (dispatch)=>{
-      const apiData= (await axios.get(`subjects/${id}`)).data
+      const apiData= (await axios.get(`subjects/${id}`,{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })).data
       dispatch({type: GET_SUBJECT, payload: apiData})
   }
 }
@@ -61,12 +65,16 @@ export const getSubjectByName= (name)=>{
       dispatch({type: GET_SUBJECT_BY_NAME, payload: apidata})
   }
 }
-export const updateSubject= (subjectId, updateData)=>{
+export const updateSubject= (subjectId, updateData, token)=>{
   return async (dispatch) =>{
     try {
-      const response = await axios.patch(`subjects/${subjectId}`, updateData)
+      const response = await axios.patch(`subjects/${subjectId}`, updateData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       dispatch({ type: UPDATE_SUBJECT, payload: response.data });
-      dispatch(getSubjects())
+      dispatch(getSubjects(token))
     } catch (error) {
       console.error("Error adding student:", error);
     }

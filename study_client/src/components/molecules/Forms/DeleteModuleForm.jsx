@@ -1,14 +1,15 @@
 import { deleteModule } from "../../../redux/actions/moduleActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { MdDeleteOutline } from "react-icons/md";
 import { MdOutlineCancel } from "react-icons/md";
 import PropTypes from "prop-types"
 
 const DeleteModuleForm = ({moduleId, handleToggleModal}) => {
+  const {token}= useSelector(state => state.auth)
     const dispatch= useDispatch();
 
     const deleteHandler = (moduleId) => {
-         dispatch(deleteModule(moduleId))
+         dispatch(deleteModule(moduleId, token))
 
 
 

@@ -66,11 +66,16 @@ export const clearUserSearch = () => {
   };
 };
 
-export const updateUser = (userId, update) => {
+export const updateUser = (userId, update, token) => {
   return async (dispatch) => {
     try {
-      const apiData = (await axios.patch(`users/${userId}`, update)).data;
+      const apiData = (await axios.patch(`users/${userId}`, update, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })).data;
       dispatch({ type: UPDATE_USER, payload: apiData });
+      dispatch(getOneUser(userId, token))
     } catch (error) {
       console.error(`Error fetching user with ID ${userId}:`, error);
     }
@@ -89,7 +94,7 @@ export const deleteUser = (userId, token ) => {
       dispatch({ type: DELETE_USER, payload: apiData });
 
       // Actualizar la lista de usuarios
-      dispatch(getAllUsers());
+      dispatch(getAllUsers(token));
     } catch (error) {
       console.error(`Error deleting user with ID ${userId}:`, error);
     }
@@ -106,7 +111,7 @@ export const createUser = (newUser, token) => {
         })
       ).data;
       dispatch({ type: CREATE_USER, payload: apiData });
-      dispatch(getAllUsers());
+      dispatch(getAllUsers(token));
     } catch (error) {
       console.error(error);
     }

@@ -7,6 +7,8 @@ import { getFiles } from "../../../redux/actions/fileActions";
 const UploadFile = (props) => {
   // eslint-disable-next-line react/prop-types
   const chapterId = props.chapterId;
+  // eslint-disable-next-line react/prop-types
+  const token = props.token;
   const dispatch = useDispatch();
   const [fileValue, setFileValue] = useState(null);
   const [errorMessage, seterrorMessage] = useState("");
@@ -32,11 +34,10 @@ const UploadFile = (props) => {
         },
         withCredentials: true,
       });
-      console.log(fileValue);
       dispatch(uploadFile(fileValue));
       alert("pdf subido correctamente");
       setFileValue(null); // Asegúrate de resetear a null para evitar warnings
-      dispatch(getFiles(chapterId));
+      dispatch(getFiles(chapterId, token));
     } catch (error) {
       console.error("Error uploading file:", error);
     }

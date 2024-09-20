@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import EditProfile from "../../atoms/AdminAtoms/EditProfile";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+
 const AdminButtons = ({ role }) => {
   const location = useLocation();
   const {id}= useSelector(state=> state.auth)

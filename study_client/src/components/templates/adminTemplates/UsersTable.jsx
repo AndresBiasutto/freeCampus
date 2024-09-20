@@ -2,7 +2,7 @@ import UserCard from "../../molecules/Cards/UserCard";
 import PropTypes from "prop-types";
 import Container from "../../molecules/CommonMolecules/Container";
 import CreateUserBtn from "../../atoms/AdminAtoms/CreateUserBtn";
-import SearchUser from "../../molecules/AdminMolecules/SearchUser";
+import SearchUser from "../../molecules/SearchBars/UserSearch/SearchUser";
 
 const UsersTable = ({  users }) => {
   return (
@@ -31,7 +31,7 @@ const UsersTable = ({  users }) => {
 };
 UsersTable.propTypes = {
   id: PropTypes.string,
-  users: PropTypes.array,
+  users: PropTypes.array || PropTypes.object,
 };
 
 export default UsersTable;

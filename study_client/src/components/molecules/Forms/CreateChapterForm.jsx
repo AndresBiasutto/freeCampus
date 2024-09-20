@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { GrChapterAdd } from "react-icons/gr";
 import { addChapter } from "../../../redux/actions/moduleActions";
 import PropTypes from "prop-types"
@@ -7,6 +7,7 @@ import PropTypes from "prop-types"
 const CreateChapterForm = ({handleToggleModal, id}) => {
 
   const dispatch = useDispatch();
+  const {token}= useSelector(state => state.auth)
   const [formData, setFormData] = useState({
     chapter: {
       name: "",
@@ -29,9 +30,6 @@ const CreateChapterForm = ({handleToggleModal, id}) => {
     }));
   };
 
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
 
   const validate = () => {
     let formErrors = {};
@@ -47,7 +45,7 @@ const CreateChapterForm = ({handleToggleModal, id}) => {
     if (Object.keys(formErrors).length === 0) {
       console.log(formData);
 
-      dispatch(addChapter(formData))
+      dispatch(addChapter(formData, token))
         .then(() => {
           setNotification({
             type: "success",

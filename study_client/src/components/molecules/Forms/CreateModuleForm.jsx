@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import {  useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { addModule } from "../../../redux/actions/moduleActions";
 import { LuBookPlus } from "react-icons/lu";
 
@@ -7,6 +7,7 @@ import { LuBookPlus } from "react-icons/lu";
 const CreateModuleForm = ({subjectId}) => {
   // eslint-disable-next-line react/prop-types
   const dispatch = useDispatch();
+  const {token} = useSelector(state => state.auth)
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -25,9 +26,7 @@ const CreateModuleForm = ({subjectId}) => {
       [name]: value,
     });
   };
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
+
 
   const validate = () => {
     let formErrors = {};
@@ -40,7 +39,7 @@ const CreateModuleForm = ({subjectId}) => {
     e.preventDefault();
     const formErrors = validate();
     if (Object.keys(formErrors).length === 0) {
-      dispatch(addModule(formData))
+      dispatch(addModule(formData, token))
         .then(() => {
           setNotification({
             type: "success",

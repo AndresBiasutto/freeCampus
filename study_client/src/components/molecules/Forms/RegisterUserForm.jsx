@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createUser } from "../../../redux/actions/userActions";
 import Background from "../CommonMolecules/Background";
@@ -45,10 +45,6 @@ const RegisterUserForm = () => {
 
     return errors;
   };
-
-  useEffect(() => {
-    console.log(token);
-  }, [token]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -9,13 +9,14 @@ import Background from "../components/molecules/CommonMolecules/Background";
 
 const Chapter = () => {
   const chapter = useSelector((state) => state.chapter.chapter);
+  const {token}= useSelector(state => state.auth)
   const [activeTab, setActiveTab] = useState(1);
   const dispatch = useDispatch();
   const { id } = useParams();
 
   useEffect(() => {
-    dispatch(getOneChapter(id));
-  }, [dispatch, id]);
+    dispatch(getOneChapter(id, token));
+  }, [dispatch, id, token]);
   useEffect(() => {  }, [chapter.Files])  
   const chapterName= chapter.name
   const chapterFiles = chapter?.Files || [];

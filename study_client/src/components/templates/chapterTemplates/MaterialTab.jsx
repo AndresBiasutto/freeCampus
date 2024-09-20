@@ -7,13 +7,13 @@ import isTeacher from "../../../Libs/isTeacher";
 import ModuleHeader from "./ModuleHeader";
 
 const MaterialTab = ({ chapterFiles, chapterId, chapterName }) => {
-  const { role } = useSelector((state) => state.auth);
+  const { role, token } = useSelector((state) => state.auth);
   return (
     <div className="p-4 mb-4 w-full h-auto flex flex-col items-center justify-center bg-light-background dark:bg-dark-background">
       {isTeacher(role) && (
         <div className="w-full flex flex-row justify-between items-center">
           <ModuleHeader chapterName={chapterName} />
-          <UploadFile chapterId={chapterId} />
+          <UploadFile token={token} chapterId={chapterId} />
         </div>
       )}
       <div className="w-full grid sm:grid-cols-2 md:grid-cols-4 grid-cols-1 gap-2">

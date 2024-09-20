@@ -6,7 +6,7 @@ import { RiVideoAddLine } from "react-icons/ri";
 import Spinner from "../../atoms/CommonAtoms/Spinner";
 import PropTypes from "prop-types";
 
-const AddVideo = ({ chapterId }) => {
+const AddVideo = ({ chapterId, token }) => {
   const dispatch = useDispatch();
   const [linkValue, setLinkValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -26,7 +26,7 @@ const AddVideo = ({ chapterId }) => {
 
     try {
       setIsUploading(true); // Empezar a cargar
-      dispatch(addVideo( videoData, chapterId));
+      dispatch(addVideo(videoData, chapterId, token));
       await dispatch(getFiles());
       setLinkValue("");
       setIsUploading(false); // Terminar de cargar
@@ -60,7 +60,8 @@ const AddVideo = ({ chapterId }) => {
           disabled={isUploading} // Deshabilitar el botón durante la carga
         >
           {!linkValue && !isUploading && <RiVideoAddLine />} {/* Icono */}
-          {linkValue && !isUploading && "Agregar video"} {/* Texto si hay link */}
+          {linkValue && !isUploading && "Agregar video"}{" "}
+          {/* Texto si hay link */}
           {isUploading && <Spinner />} {/* Spinner durante la carga */}
         </button>
       </div>
@@ -70,7 +71,8 @@ const AddVideo = ({ chapterId }) => {
 };
 
 AddVideo.propTypes = {
-  chapterId: PropTypes.string.isRequired,
+  chapterId: PropTypes.string,
+  token: PropTypes.string,
 };
 
 export default AddVideo;

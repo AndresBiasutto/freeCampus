@@ -1,9 +1,10 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { updateSubject } from "../../../redux/actions/subjectActions";
 import PropTypes from "prop-types"
 
 const EditSubjectForm = ({subjectId, handleToggleModal, showModal}) => {
+   const {token}= useSelector(state=> state.auth)
     const [formData, setFormData] = useState({
       name: "",
       description: "",
@@ -32,7 +33,7 @@ const EditSubjectForm = ({subjectId, handleToggleModal, showModal}) => {
         }
       });
       if (Object.keys(updateData).length > 0) {
-        dispatch(updateSubject(subjectId, updateData));
+        dispatch(updateSubject(subjectId, updateData,token));
       }
       handleToggleModal(!showModal);
     };

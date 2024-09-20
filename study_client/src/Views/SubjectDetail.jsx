@@ -14,7 +14,7 @@ import Background from "../components/molecules/CommonMolecules/Background";
 const SubjectDetail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { role } = useSelector((store) => store.auth);
+  const { role, token } = useSelector((store) => store.auth);
   const subject = useSelector((state) => state.subject.subject);
   const modules = useSelector((state) => state.modules.modules);
   const students = subject.students;
@@ -26,9 +26,9 @@ const SubjectDetail = () => {
   const scheduleDates = subject?.scheduleDates;
 
   useEffect(() => {
-    dispatch(getModules());
-    dispatch(getOneSubject(id));
-  }, [dispatch, id]);
+    dispatch(getModules(token));
+    dispatch(getOneSubject(id, token));
+  }, [dispatch, id, token]);
 
 
   return (
@@ -37,6 +37,7 @@ const SubjectDetail = () => {
         subjectModules={subjectModules}
         subjectName={subjectName}
         role={role}
+        token= {token}
         subjectId={id}
       />
       <SubjectDetailCalendar

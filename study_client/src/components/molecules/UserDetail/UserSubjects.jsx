@@ -57,8 +57,8 @@ const UserSubjects = ({ role, enrolledSubjects, createdSubjects }) => {
 
 UserSubjects.propTypes = {
   role: PropTypes.string,
-  enrolledSubjects: PropTypes.string,
-  createdSubjects: prompt.string,
+  enrolledSubjects: PropTypes.array,
+  createdSubjects: prompt.array,
 };
 
 export default UserSubjects;

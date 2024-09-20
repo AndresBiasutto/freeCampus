@@ -3,7 +3,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { deleteUser } from "../../../redux/actions/userActions";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const DeleteUserForm = ({ handleToggleModal, userId }) => {
   const dispatch = useDispatch();
@@ -13,17 +13,14 @@ const DeleteUserForm = ({ handleToggleModal, userId }) => {
 
   const deleteHandler = (userId) => {
     dispatch(deleteUser(userId, token));
+    setShowMessage(true); // Mostrar el mensaje después de un tiempo.
     setTimeout(() => {
-      setShowMessage(true); // Mostrar el mensaje después de un tiempo.
+
       setTimeout(() => {
         handleToggleModal(); // Cerrar el modal después de un tiempo.
       }, 2000);
     }, 1000);
   };
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
 
   return (
     <div className="flex items-center justify-center">

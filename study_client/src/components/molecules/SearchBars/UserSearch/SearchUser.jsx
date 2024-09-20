@@ -4,18 +4,18 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   filterUsers,
   clearUserSearch,
-} from "../../../redux/actions/userActions";
-import SearchList from "../StudentsTableMolecules/SearchList";
+} from "../../../../redux/actions/userActions";
+import SearchList from "../../SearchBars/UserSearch/SearchList";
 import { Spinner } from "flowbite-react";
-import useToggleModal from "../../../hooks/useToggleModal";
-import useOutsideClick from "../../../hooks/useOutsideClick"; // Import the hook
+import useToggleModal from "../../../../hooks/useToggleModal";
+import useOutsideClick from "../../../../hooks/useOutsideClick";
 
 const SearchUser = () => {
   const {token}= useSelector(state =>state.auth)
   const [searchTerm, setSearchTerm] = useState("");
-  const [isLoading, setIsLoading] = useState(false); // Estado para el indicador de carga
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
-  const { showModal, handleToggleModal } = useToggleModal(); // Toggle modal
+  const { showModal, handleToggleModal } = useToggleModal();
   const inputRef = useRef(null);
   const listRef = useRef(null);
 
