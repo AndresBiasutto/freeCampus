@@ -10,7 +10,7 @@ const Cpannel = () => {
     const {users}= useSelector(state=> state.users)
     const {token}= useSelector(state=> state.auth)
 
-    useEffect(() => {dispatch(getAllUsers(token))}, [])
+    useEffect(() => {dispatch(getAllUsers(token))}, [dispatch, token])
     
   return (
     <Background>

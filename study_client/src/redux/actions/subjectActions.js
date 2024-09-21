@@ -80,11 +80,15 @@ export const updateSubject= (subjectId, updateData, token)=>{
     }
   }
 }
-export const addUser = (subjectId, student) => {
+export const addUser = (subjectId, student, token) => {
   return async (dispatch) => {
     try {
       const response = await axios.patch(`subjects/${subjectId}/students`, {
         studentsId: [student.studentId]
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       dispatch({ type: ADD_STUDENT, payload: response.data });
       dispatch(getOneSubject(subjectId))

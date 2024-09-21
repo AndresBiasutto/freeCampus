@@ -1,17 +1,18 @@
 import { AiOutlineUserAdd } from "react-icons/ai";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../../../../redux/actions/subjectActions";
 
 const SearchList = (props) => {
   const { user, subjectId } = props;
+  const {token}= useSelector(state=> state.auth)
   const dispatch = useDispatch();
 
   const plusUser = (subjectId, userId) => {
     const user = {
       studentId: userId
     };
-    dispatch(addUser(subjectId, user));
+    dispatch(addUser(subjectId, user, token));
   };
 
   return (
