@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { createUser } from "../../../redux/actions/userActions";
 import Background from "../CommonMolecules/Background";
 
-const RegisterUserForm = () => {
+// eslint-disable-next-line react/prop-types
+const RegisterUserForm = ({ handleToggleModal, showModal }) => {
   const dispatch = useDispatch();
   const token = useSelector((store) => store.auth.token);
   const [name, setName] = useState("");
@@ -68,7 +69,8 @@ const RegisterUserForm = () => {
       setSubmitMessage("usuario agregado correctamente");
     }
     setTimeout(() => {
-        setSubmitMessage("")
+      handleToggleModal(!showModal);
+      setSubmitMessage("");
     }, 2000);
   };
 
@@ -147,9 +149,9 @@ const RegisterUserForm = () => {
           value={roles}
           required
         >
-          <option value="1">Admin</option>
-          <option value="2">Teacher</option>
-          <option value="3">Student</option>
+          <option value="3">Admin</option>
+          <option value="4">Teacher</option>
+          <option value="5">Student</option>
         </select>
         {errors.roles && <p className="text-red-600 text-sm">{errors.roles}</p>}
       </div>

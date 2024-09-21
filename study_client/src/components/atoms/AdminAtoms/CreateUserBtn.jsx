@@ -21,7 +21,7 @@ const CreateUserBtn = ({id}) => {
         showModal={showModal}
         handleToggleModal={handleToggleModal}
       >
-      <RegisterUserForm id={id} handleToggleModal={handleToggleModal} />
+      <RegisterUserForm id={id} handleToggleModal={handleToggleModal} showModal={showModal} />
       </ModalMolecule>
     </>
   );
