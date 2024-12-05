@@ -5,6 +5,7 @@ const signIn = require("../Controllers/Users/signIn");
 const findUser = require("../Controllers/Users/findUser");
 const patchUser = require("../Controllers/Users/patchUser");
 const deleteUser = require("../Controllers/Users/deleteUser");
+const registerUser = require("../Controllers/Users/registerUser");
 
 const getUsersHandler = async (req, res) => {
   const searchName = req.query.name;
@@ -46,6 +47,15 @@ const signInUserHandler = async (req, res) => {
     res.status(404).json({ error: error.message });
   }
 };
+const registerUserHandler = async (req, res) => {
+  const { name, image, e_mail, roles} = req.body;
+  try {
+    const token = await registerUser(name, image, e_mail, roles);
+    res.status(200).json(token);
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+};
 
 const deleteUserHandler= async (req, res)=>{
   const {id} = req.params;
@@ -73,5 +83,6 @@ module.exports = {
   signInUserHandler,
   getUserHandler,
   deleteUserHandler,
-  patchtUserHandler
+  patchtUserHandler,
+  registerUserHandler
 };
