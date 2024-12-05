@@ -6,7 +6,8 @@ import {
     CREATE_USER,
     CLEAR_SEARCH,
     FILTER_USERS,
-    DELETE_USER
+    DELETE_USER,
+    REGISTER_USER
   } from "../actions/userActions";
   
   const initialUserState = {
@@ -41,6 +42,11 @@ const userReducer = (state = initialUserState, action) => {
           studentSearch: action.payload,
         };
       case CREATE_USER:
+        return {
+          ...state,
+          registerToken: action.payload,
+        };
+      case REGISTER_USER:
         return {
           ...state,
           registerToken: action.payload,

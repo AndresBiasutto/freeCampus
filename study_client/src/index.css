@@ -11,11 +11,11 @@ html {
 
 html.light {
   --background-color: theme('colors.light.background');
-  --Lbackground-color: theme('colors.light.lightBackground');
   --text-color: theme('colors.light.text');
   --primary-color: theme('colors.light.primary');
   --secondary-color: theme('colors.light.secondary');
   --accent-color: theme('colors.light.accent');
+  --border-color: theme('colors.light.border');
   --red-btn: theme('colors.light.redBtn');
   --blue-btn: theme('colors.light.blueBtn');
   --red-btn-hvr: theme('colors.light.redBtnHvr');
@@ -24,11 +24,15 @@ html.light {
 
 html.dark {
   --background-color: theme('colors.dark.background');
-  --Dbackground-color: theme('colors.dark.darkBackground');
   --text-color: theme('colors.dark.text');
   --primary-color: theme('colors.dark.primary');
   --secondary-color: theme('colors.dark.secondary');
   --accent-color: theme('colors.dark.accent');
+  --border-color: theme('colors.dark.border');
+  --red-btn: theme('colors.dark.redBtn');
+  --blue-btn: theme('colors.dark.blueBtn');
+  --red-btn-hvr: theme('colors.dark.redBtnHvr');
+  --blue-btn-hvr: theme('colors.dark.blueBtnHvr');
 }
 .active {
   font-weight: bold;
@@ -193,12 +197,12 @@ li{
 
 @layer base {
   h2 {
-    @apply text-2xl font-bold text-light-text dark:text-dark-text font-primaryBold ;
+    @apply text-2xl font-bold text-light-text dark:text-dark-text font-primaryBold text-center;
   }
   h3 {
-    @apply font-bold text-light-text dark:text-dark-text font-primaryBold ;
+    @apply font-bold text-light-text dark:text-dark-text font-primaryBold text-center;
   }
   p {
-    @apply text-light-text dark:text-dark-text font-primaryRegular;
+    @apply text-light-text dark:text-dark-text font-primaryRegular text-center;
   }
 }

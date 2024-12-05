@@ -8,6 +8,7 @@ export const UPDATE_USER = "UPDATE_USER";
 export const CREATE_USER = "CREATE_USER";
 export const FILTER_USERS = "FILTER_USERS";
 export const DELETE_USER = "DELETE_USER";
+export const REGISTER_USER = "REGISTER_USER";
 
 export const getAllUsers = (token) => {
   return async (dispatch) => {
@@ -112,6 +113,19 @@ export const createUser = (newUser, token) => {
       ).data;
       dispatch({ type: CREATE_USER, payload: apiData });
       dispatch(getAllUsers(token));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+export const registerUser = (newUser) => {
+  return async (dispatch) => {
+    try {
+      const apiData = (
+        await axios.post("/users/register", newUser)
+      ).data;
+      dispatch({ type: REGISTER_USER, payload: apiData });
+      // dispatch(getAllUsers(token));
     } catch (error) {
       console.error(error);
     }

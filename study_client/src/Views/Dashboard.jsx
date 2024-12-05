@@ -8,8 +8,10 @@ import StudentSchedule from "../components/molecules/ScheduleMolecules/StudentSc
 import StudentCalendar from "../components/molecules/CalendarMolecules/StudentCalendar";
 import Container from "../components/molecules/CommonMolecules/Container";
 import Background from "../components/molecules/CommonMolecules/Background";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Dashboard = () => {
+  const { logout}= useAuth0()
   const dispatch = useDispatch();
   const { role, id, name, token } = useSelector((store) => store.auth);
   const user = useSelector((store) => store?.user.user);
@@ -48,7 +50,7 @@ const Dashboard = () => {
               role={role}
             />
           )}
-
+          <button onClick={logout} >log out</button>
           {role === "student" && (
             <StudentSchedule scheduleDates={scheduleDates} />
           )}

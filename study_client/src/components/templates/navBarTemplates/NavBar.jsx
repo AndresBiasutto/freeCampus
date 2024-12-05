@@ -7,8 +7,11 @@ import { CiLight, CiDark } from "react-icons/ci";
 import LogOut from "../../atoms/NavVarAtoms/buttons/LogOut";
 import GoBack from "../../atoms/NavVarAtoms/buttons/GoBack";
 import GoForward from "../../atoms/NavVarAtoms/buttons/GoForward";
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 const NavBar = () => {
+const { logout}= useAuth0()
   const dispatch = useDispatch();
   const darkMode = useSelector((state) => state.theme.darkMode);
   const { role, image, name, email, id } = useSelector((state) => state.auth);
@@ -73,6 +76,7 @@ const NavBar = () => {
             <Link to={`${role}/${name}/settings/${id}`}>Settings</Link>
           </Dropdown.Item>
           <Dropdown.Divider />
+          <button onClick={logout} >log out</button>
             <LogOut />
         </Dropdown>
         <Navbar.Toggle />
