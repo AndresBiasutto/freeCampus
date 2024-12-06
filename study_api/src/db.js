@@ -7,11 +7,11 @@ const { DATABASE_URL, //local
         POSTGRE_DB  //deploy
    } = process.env;
 
-const sequelize = new Sequelize(POSTGRE_DB, {
+const sequelize = new Sequelize(DATABASE_URL, {
   dialectOptions: {
-    ssl:{require:true,
-         rejectUnauthorized: false,
-    },
+    // ssl:{require:true,
+    //      rejectUnauthorized: false,
+    // },
   },
   logging: false,
   native: false,

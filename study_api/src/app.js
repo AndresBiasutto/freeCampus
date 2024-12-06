@@ -11,8 +11,8 @@ const server = express();
 server.name = "API";
 
 const corsOptions = {
-  //origin: 'http://localhost:5173', //frontend local
-  origin: 'https://main--maricampus.netlify.app', //frontend deploy
+  origin: 'http://localhost:5173', //frontend local
+  // origin: 'https://main--maricampus.netlify.app', //frontend deploy
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', "Access-Control-Allow-Origin"],
   credentials: true,
