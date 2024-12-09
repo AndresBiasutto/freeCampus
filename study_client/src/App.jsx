@@ -6,20 +6,32 @@ import HomePage from "./Views/PublicPages/HomePage";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import { UnauthorizedPage } from "./Views/PublicPages/PublicPagexIndex";
-import { getAllUsers, registerUser } from "./redux/actions/userActions";
-import { useDispatch, useSelector } from "react-redux";
+import {  registerUser } from "./redux/actions/userActions";
+import { useDispatch, /*useSelector*/ } from "react-redux";
+import ProtectedRoute from "./layouts/ProtectedRoute";
 
 const App = () => {
   const dispatch = useDispatch();
   const { isAuthenticated, getAccessTokenSilently, user } = useAuth0();
-  const users = useSelector((state) => state.user.users);
+  // const users = useSelector((state) => state.user.users);
   // const [emailVerified, setEmailVerified] = useState(false)
-  const [newUser, setNewUser] = useState({
-    name: user?.nickname,
-    image: user?.picture,
-    e_mail: user?.email,
-    role: 3,
-  });
+  const [newUser, setNewUser] = useState({});
+  useEffect(() => {
+    const checkUser = async () => {
+      if (isAuthenticated) {
+          const token = await getAccessTokenSilently();
+          setNewUser({
+            name: user?.nickname,
+            image: user?.picture,
+            e_mail: user?.email,
+            role: 3,
+          })
+          console.log(newUser, token);
+          dispatch(registerUser(newUser, token))
+      }
+    };
+    checkUser();
+  }, [isAuthenticated]);
   // useEffect(() => {
   //   if(isAuthenticated && user.email_verified){
       
@@ -27,42 +39,42 @@ const App = () => {
   
   // }, [isAuthenticated, user.email_verified])
 
-  useEffect(() => {
-    isAuthenticated && dispatch(getAllUsers());
-  }, [dispatch, isAuthenticated]);
-  useEffect(() => {
-    console.log(newUser);
-  }, [newUser]);
+  // useEffect(() => {
+  //   isAuthenticated && dispatch(getAllUsers());
+  // }, [dispatch, isAuthenticated]);
+  // useEffect(() => {
+  //   console.log(newUser);
+  // }, [newUser]);
 
-  useEffect(() => {
-    if (isAuthenticated && user?.email) {
-      const emailExists = users.some((dbUser) => dbUser.email === user.email);
-      setNewUser(emailExists);
-      if (emailExists) {
-        console.log("ya existe");
-      } else {
-        console.log("es nuevo");
-        dispatch(registerUser(newUser));
-      }
-    }
-  }, [isAuthenticated, user, users, newUser, dispatch]);
+  // useEffect(() => {
+  //   if (isAuthenticated && user?.email) {
+  //     const emailExists = users.some((dbUser) => dbUser.email === user.email);
+  //     setNewUser(emailExists);
+  //     if (emailExists) {
+  //       console.log("ya existe");
+  //     } else {
+  //       console.log("es nuevo");
+  //       dispatch(registerUser(newUser));
+  //     }
+  //   }
+  // }, [isAuthenticated, user, users, newUser, dispatch]);
 
-  useEffect(() => {
-    const fetchToken = async () => {
-      if (isAuthenticated) {
-        try {
-          const token = await getAccessTokenSilently();
-          const actualUser = user;
-          console.log("Access Token: ", token);
-          console.log("Actual User: ", actualUser);
-        } catch (error) {
-          console.error("Error fetching access token:", error);
-        }
-      }
-    };
+  // useEffect(() => {
+  //   const fetchToken = async () => {
+  //     if (isAuthenticated) {
+  //       try {
+  //         const token = await getAccessTokenSilently();
+  //         const actualUser = user;
+  //         console.log("Access Token: ", token);
+  //         console.log("Actual User: ", actualUser);
+  //       } catch (error) {
+  //         console.error("Error fetching access token:", error);
+  //       }
+  //     }
+  //   };
 
-    fetchToken();
-  }, [isAuthenticated, getAccessTokenSilently, user]);
+  //   fetchToken();
+  // }, [isAuthenticated, getAccessTokenSilently, user]);
 
   
 
@@ -71,7 +83,8 @@ const App = () => {
       <NavBar />
       <Routes>
         <Route path="/" element={<Landing isNew={!newUser} />} />
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/home" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
+
         <Route path="/*" element={<UnauthorizedPage />} />
       </Routes>
       <LandingFooter />

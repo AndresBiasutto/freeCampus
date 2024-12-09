@@ -24,7 +24,7 @@ const NavOrg = () => {
         <>
           <p>Bienvenido, {user?.name}</p>
           <img
-            src={user?.picture}
+            src={user?.picture} 
             alt="Profile"
             className="rounded-full w-6 h-6"
           />

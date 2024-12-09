@@ -118,11 +118,15 @@ export const createUser = (newUser, token) => {
     }
   };
 };
-export const registerUser = (newUser) => {
+export const registerUser = (newUser, token) => {
   return async (dispatch) => {
     try {
       const apiData = (
-        await axios.post("/users/register", newUser)
+        await axios.post("/users/register", newUser, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
       ).data;
       dispatch({ type: REGISTER_USER, payload: apiData });
       // dispatch(getAllUsers(token));

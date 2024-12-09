@@ -12,18 +12,17 @@ const clientId = import.meta.env.VITE_APP_AUTH_CLIENT_ID;
 // const redirectUri= import.meta.env.VITE_APP_AUTH_REDIRECT_URI
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-<Auth0Provider
-  domain={domain}
-  clientId={clientId}
-  authorizationParams={{
-    redirect_uri: window.location.origin,
-    // scope: "openid profile email",
-  }}
->
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>
-</Auth0Provider>
+  <Auth0Provider
+    domain={domain}
+    clientId={clientId}
+    authorizationParams={{
+      redirect_uri: window.location.origin,
+    }}
+  >
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </Auth0Provider>
 );
